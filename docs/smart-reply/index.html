@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <link href="/logo.ico" rel="icon">
+    <link rel="stylesheet" href="/docsPage.css">
+</head>
+
+<body>
+    <header>
+        <div id="titleGroup">
+            <h1 id="title">宽宽2007作品の帮助文档</h1>
+        </div>
+        <div id="linkGroup">
+            <div id="toMainPage"><a href="https://kuankuan2007.gitee.io" class="mainLink">博客</a></div>
+            <div id="toDocsMainPage"><a href="https://kuankuan2007.gitee.io/docs" class="mainLink">主页</a></div>
+        </div>
+    </header>
+    <div id="docs">
+        <div id="main">
+            <h1>智能回复</h1>
+            <p><del>智障回复</del></p>
+            <h2>致谢</h2>
+            <p>这个人工智能系统基于其他大佬的以下三方库开发</p>
+            <ul>
+                <li>
+                    <p>sklearn:语义识别&amp;决策树</p>
+                </li>
+                <li>
+                    <p>jieba:中文的词语切割</p>
+                </li>
+            </ul>
+            <p>在浅显的了解了基本原理之后本人对以上两个三方库的作者们深感敬佩<del>(反正我是这辈子不可能有这么强的思维的)</del>，感谢你们辛勤的劳作以及大方地将自己的成果给大家使用</p>
+            <h2>基本原理</h2>
+            <p>输入</p>
+            <p>jieba划分词语</p>
+            <p>sklearn.feature_extraction.text.CountVectorizer抓取特征词</p>
+            <p>sklearn.tree.DecisionTreeClassifier决策</p>
+            <p>输出结果</p>
+            <h2>使用方式</h2>
+            <div class="code">
+                <p>with open("model.pkl","rb") as m:</p>
+                <p>modal=pickle.load(m)</p>
+                <p>with open("ai.pkl","rb") as m:</p>
+                <p>ai=pickle.load(m)</p>
+                <p>text=input()</p>
+                <p>text="|".join(jieba.cut(text))</p>
+                <p>text=modal.transform([text])</p>
+                <p>result=ai.predict(aiVare)[0]</p>
+                <p>print(result)</p>
+            </div>
+            <h2>训练方式</h2>
+            <ol>
+                <li>
+                    <p>将pd.DataFrame(pd.read_excel('example.xlsx'))修改成输入的数据表名称</p>
+                </li>
+                <li>
+                    <p>输入表格包括两列:</p>
+                </li>
+                <li>
+                    <p>第一行为"input",以下内容为输入</p>
+                </li>
+                <li>
+                    <p>第一行为"output",以下内容为输入对应的输出</p>
+                </li>
+            </ol>
+            <h2>作者</h2>
+            <p>作者主页<a href="kuankuan2007.gitee.io" title="作者主页">宽宽2007</a></p>
+            <p>本项目在<a href="https://gitee.com/kuankuan2007/smart-reply">苟浩铭/智能回复 (gitee.com)</a>上开源</p>
+            <h2>声明</h2>
+            <p>训练数据来源于网友日常聊天，与本人无关</p>
+        </div>
+        <img src="/logo.png" id="watermark">
+    </div>
+</body>
