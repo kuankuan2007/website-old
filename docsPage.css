@@ -1,0 +1,80 @@
+body{
+    background-color: #c9c9ff;
+}
+header{
+
+    z-index: 2;
+    position:fixed;
+    top: 10px;
+    border-radius: 30px;
+    height: 60px;
+    background-color: #9a9afd;
+    width: 100%;
+}
+#titleGroup{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+#title{
+    color: #0000ff;
+}
+#linkGroup{
+    position: absolute;
+    left: 85%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color:#c9c9ff
+}
+#toDocsMainPage,#toMainPage{
+    margin-top:5px;
+    margin-bottom:5px;
+    position: relative;
+    background-color: #ff4e4e;
+    height: 20px;
+    border-radius: 10px;
+    width: 70px;
+}
+.mainLink{
+    text-align: center;
+    width: 70px;
+    line-height: 20px;
+    position: absolute;
+    color:#c9c9ff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#docs{
+    overflow: hidden;
+    margin-top:110px;
+    margin-bottom:5px;
+    margin-left:10%;
+    margin-right:10%;
+    border-radius: 20px;
+    background-color: #b2b2fa;
+    position: relative;
+    padding: 20px;
+}
+#main{
+    position: relative;
+    z-index:1
+}
+#main p,#main ul{
+    margin-left: 20px;
+}
+#watermark{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter:opacity(10%);
+    z-index:0
+}
+.code{
+    background-color: rgba(255, 0, 0, 0.169);
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 40px;
+}
