@@ -83,6 +83,7 @@ header{
 #title{
     width: 400px;
     color: #0000ff;
+    white-space: nowrap;
 }
 #linkGroup{
     animation-name: linkGroupChane;
