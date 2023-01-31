@@ -72,18 +72,19 @@ header{
     color:#c9c9ff
 }
 #toDocsMainPage,#toMainPage,#toContactInformation{
+    white-space: nowrap;
     margin-top:5px;
     margin-bottom:5px;
     position: relative;
     background-color: #ff4e4e;
     height: 20px;
     border-radius: 10px;
-    width: 70px;
+    width: 80px;
 }
 
 .mainLink{
     text-align: center;
-    width: 70px;
+    width: 80px;
     line-height: 20px;
     position: absolute;
     color:#c9c9ff;
