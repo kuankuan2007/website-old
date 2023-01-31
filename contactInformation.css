@@ -1,3 +1,10 @@
+@keyframes backgroundChane{
+    from{
+        background-color: #ffffff;
+    }to{
+        background-color: #c9c9ff;
+    }
+}
 @keyframes  headerChane{
     from{
         background-color: #ffffff;
@@ -5,6 +12,26 @@
     }to{
         width: 100%;
         background-color: #9a9afd;
+    }
+}
+@keyframes  docsChane{
+    from{
+        background-color: #ffffff;
+    }to{
+        background-color: #b2b2fa;
+    }
+}
+@keyframes  mainChane{
+    from{
+        filter: opacity(0%);
+    }to{
+        filter: opacity(100%);
+    }
+}@keyframes  watermarkChane{
+    from{
+        filter: opacity(100%);
+    }to{
+        filter: opacity(10%);
     }
 }@keyframes linkGroupChane{
     0%{
@@ -15,26 +42,22 @@
     100%{
         filter: opacity(100%);
     }
-}@keyframes furrykuankuanGhange{
-    0%{
-        bottom: -100%;
-    }80%{
-        bottom: 0%;
-    }
-    100%{
-        bottom: -10%;
-    }
-}@keyframes startWordsChange{
+}@keyframes codeChane{
     0%{
         filter: opacity(0%);
-    }80%{
-        filter: opacity(10%);
+        width: 0%;
+    }60%{
+        filter: opacity(0%);
+        width: 0%;
     }
     100%{
         filter: opacity(100%);
+        width: 90%;
     }
 }
 body{
+    animation-name: backgroundChane;
+    animation-duration: 1s;
     background-color: #c9c9ff;
 }
 header{
@@ -58,9 +81,9 @@ header{
     transform: translate(-50%, -50%);
 }
 #title{
-    white-space: nowrap;
     width: 400px;
     color: #0000ff;
+    white-space: nowrap;
 }
 #linkGroup{
     animation-name: linkGroupChane;
@@ -71,7 +94,7 @@ header{
     transform: translate(-50%, -50%);
     color:#c9c9ff
 }
-#toDocsMainPage,#toMainPage,#toContactInformation{
+#toDocsMainPage,#toMainPage{
     margin-top:5px;
     margin-bottom:5px;
     position: relative;
@@ -80,7 +103,6 @@ header{
     border-radius: 10px;
     width: 70px;
 }
-
 .mainLink{
     text-align: center;
     width: 70px;
@@ -91,81 +113,31 @@ header{
     left: 50%;
     transform: translate(-50%, -50%);
 }
-#blogList{
-    width: 100%;
-    height: 102%;
-    position: fixed;
-    overflow-x: scroll;
-    scroll-snap-type: y proximity;
-    top: 0;
-    bottom: 0;
-    left: 0;
-}
-#startWordsBackground{
-    height: 100%;
-    width: 100%;
-    height: 100%;
-    width: 100%;
-    z-index: 1;
-    position: relative;
-}
-#blogList::-webkit-scrollbar{
-    width: 0;
-}
-#blogList:last-child{
-    transform: translate(0,0);
-}
-#headPage{
-    overflow: hidden;
-    height: 100%;
-    position: relative;
-    width: 100%;
-    background-image: url(/mainPageHeader.png);
-    background-size: cover;
-    background-attachment: fixed;
-}#furrykuankuan{
-    animation-name: furrykuankuanGhange;
+#docs{
+    animation-name: docsChane;
     animation-duration: 1s;
-    position: absolute;
-    bottom: -10%;
-    left: 50%;
-    transform: translate(-50%, 0);
-    z-index: 0;
-}
-#startWords{
-    animation-name: startWordsChange;
-    animation-duration: 1s;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 108px;
-    color: #0000ff;
-    text-align: center;
-    white-space: nowrap;
-}
-.docs{
     overflow: hidden;
-    margin-top: 110px;
-    margin-bottom: 5px;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-top:110px;
+    margin-bottom:5px;
+    margin-left:10%;
+    margin-right:10%;
     border-radius: 20px;
     background-color: #b2b2fa;
     position: relative;
     padding: 20px;
-    transform: translate(0, 100px);
 }
-.main{
+#main{
     animation-name: mainChane;
     animation-duration: 1s;
     position: relative;
     z-index:1
 }
-.main p,.main ul,.main ol{
+#main p,#main ul,#main ol{
     margin-left: 20px;
 }
-.watermark{
+#watermark{
+    animation-name: watermarkChane;
+    animation-duration: 1s;
     position: absolute;
     top:50%;
     left: 50%;
@@ -173,12 +145,10 @@ header{
     filter:opacity(10%);
     z-index:0
 }
-.blog{
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-}
 .code{
     overflow: hidden;
+    animation-name: codeChane;
+    animation-duration: 1.5s;
     background-color: rgba(255, 0, 0, 0.169);
     color: #ffffff;
     padding: 20px;
