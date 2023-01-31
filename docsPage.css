@@ -94,7 +94,7 @@ header{
     transform: translate(-50%, -50%);
     color:#c9c9ff
 }
-#toDocsMainPage,#toMainPage{
+#toDocsMainPage,#toMainPage,#toContactInformation{
     margin-top:5px;
     margin-bottom:5px;
     position: relative;
