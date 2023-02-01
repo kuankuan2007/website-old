@@ -189,3 +189,19 @@ header{
     white-space:nowrap;
     text-overflow:ellipsis;
 }
+.main .date{
+    margin-left: auto;
+    font-size: 12px;
+    line-height: 20px;
+    background-color: #aaffbe;
+    height: 20px;
+    width: 150px;
+    text-align: center;
+    border-radius: 10px;
+    white-space: nowrap;
+    color: #3e5c45;
+    position: absolute;
+    transform: translate(-100%,0);
+    right: -160px;
+    top: -43px;
+}
