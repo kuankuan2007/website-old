@@ -157,4 +157,78 @@ header{
     margin-right: 20px;
     white-space:nowrap;
     text-overflow:ellipsis;
+}#nav:hover{
+    width: 300px;
+    background-color: rgba(231, 255, 200, 0.6);
+    border-radius: 20px;
+}
+#nav{
+    overflow: hidden;
+    position: fixed;
+    top: 20%;
+    width: 8px;
+    background-color: rgb(145, 255, 0);
+    z-index: 100;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    font-size: 24px;
+    border-radius: 6px;
+}#nav li{
+    white-space: nowrap;
+    margin: 10px;
+    background-color: rgba(0, 0, 255, 0.36);
+    padding: 10px;
+    border-radius: 20px;
+    list-style: none;
+    overflow: hidden;
+}#nav>ul{
+    padding: 20px;
+}
+#nav a{
+    color: #000000;
+}#nav p{
+    margin: 0;
+    text-align: center
+    
+}::-webkit-scrollbar {
+
+    width: 12px;
+
+    height: 12px;
+
+}
+
+::-webkit-scrollbar-track-piece {
+
+    background-color: transparent;
+
+    -webkit-border-radius: 6px;
+
+}
+
+::-webkit-scrollbar-thumb:vertical {
+
+    height: 12px;
+
+    background-color: #BDBDBD;
+
+    -webkit-border-radius: 6px;
+
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+
+    width: 12px;
+
+    background-color: #BDBDBD;
+
+    -webkit-border-radius: 6px;
+
+}
+
+::-webkit-scrollbar-thumb:vertical:hover,
+::-webkit-scrollbar-thumb:horizontal:hover {
+
+    background-color: #808080;
+
 }
