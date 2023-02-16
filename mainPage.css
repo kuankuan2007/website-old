@@ -1,207 +1,140 @@
-@keyframes  headerChane{
-    from{
+body {
+    animation: backGroundChange 20s infinite;
+}
+@keyframes backGroundChange {
+    0% {
         background-color: #ffffff;
-        width: 0;
-    }to{
-        width: 100%;
-        background-color: #9a9afd;
     }
-}@keyframes linkGroupChane{
-    0%{
-        filter: opacity(0%);
-    }60%{
-        filter: opacity(0%);
-    }
-    100%{
-        filter: opacity(100%);
-    }
-}@keyframes furrykuankuanGhange{
-    0%{
-        bottom: -100%;
-    }80%{
-        bottom: 0%;
-    }
-    100%{
-        bottom: -10%;
-    }
-}@keyframes startWordsChange{
-    0%{
-        filter: opacity(0%);
-    }80%{
-        filter: opacity(10%);
-    }
-    100%{
-        filter: opacity(100%);
-    }
-}
-body{
-    background-color: #c9c9ff;
-}
-header{
-    animation-name: headerChane;
-    animation-duration: 1s;
-    overflow: hidden;
-    z-index: 2;
-    position: fixed;
-    top: 10px;
-    border-radius: 30px;
-    height: 60px;
-    background-color: #9a9afd;
-    width: 100%;
-    left: 50%;
-    transform: translate(-50%, 0);
-}
-#titleGroup{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
-#title{
-    white-space: nowrap;
-    width: 400px;
-    color: #0000ff;
-}
-#linkGroup{
-    animation-name: linkGroupChane;
-    animation-duration: 1s;
-    position: absolute;
-    left: 85%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    color:#c9c9ff
-}
-#toDocsMainPage,#toMainPage,#toContactInformation{
-    white-space: nowrap;
-    margin-top:5px;
-    margin-bottom:5px;
-    position: relative;
-    background-color: #ff4e4e;
-    height: 20px;
-    border-radius: 10px;
-    width: 80px;
-}
 
-.mainLink{
-    text-align: center;
-    width: 80px;
-    line-height: 20px;
+    5% {
+        background-color: #e4e4ff;
+    }
+    30% {
+        background-color: #d2d2ff;
+    }
+
+    50% {
+        background-color: #c9c9ff;
+    }
+
+    80% {
+        background-color: #d2d2ff;
+    }
+    95% {
+        background-color: #e4e4ff;
+    }
+    100% {
+        background-color: #ffffff;
+    }
+}
+@keyframes HelloTitleChange {
+    0% {
+        font-size: 0%;
+        top: 50%;
+        color: #ffffff;
+        background-color: rgba(0,0,255,0);
+    }
+
+    25% {
+        font-size: 96px;
+        top: 50%;
+        color: #0000ff;
+    }
+    75%{
+        font-size: 96px;
+        top: 50%;
+        color: #0000ff;
+        background-color: rgba(0,0,255,0);
+    }100%{
+        font-size: 50px;
+        top: 20%;
+        color: #c9c9ff;
+        background-color: rgba(0,0,255,1);
+    }
+}
+h1#HelloTitil {
+    /* text-align: center; */
+    animation: HelloTitleChange 3s;
     position: absolute;
-    color:#c9c9ff;
-    top: 50%;
+    top: 20%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    text-align: center;
+    transform: translate(-50%,-50%);
+    font-size: 50px;
+    color: #c9c9ff;
+    background-color: #0000ff;
+    white-space: nowrap;
+    padding: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin: 0;
+    border-radius: 60px;
 }
-#blogList{
-    width: 100%;
-    height: 102%;
-    position: fixed;
-    overflow-x: scroll;
-    scroll-snap-type: y proximity;
-    top: 0;
-    bottom: 0;
-    left: 0;
+@keyframes linkBoxChange {
+    0% {
+        opacity: 0.0;
+        top: 60%;
+    }
+
+    62.5% {
+        opacity: 0.0;
+        top: 60%;
+    }
+    75%{
+        opacity: 1.0;
+        top: 45%;
+    }100%{
+        opacity: 1.0;
+        top: 45%;
+    }
 }
-#startWordsBackground{
-    height: 100%;
-    width: 100%;
-    height: 100%;
-    width: 100%;
-    z-index: 1;
-    position: relative;
-}
-#blogList::-webkit-scrollbar{
-    width: 0;
-}
-#blogList:last-child{
-    transform: translate(0,0);
-}
-#headPage{
-    overflow: hidden;
-    height: 100%;
-    position: relative;
-    width: 100%;
-    background-image: url(/mainPageHeader.png);
-    background-size: cover;
-    background-attachment: fixed;
-}#furrykuankuan{
-    animation-name: furrykuankuanGhange;
-    animation-duration: 1s;
+#mainLinkBox{
+    animation: linkBoxChange 4s;
     position: absolute;
-    bottom: -10%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, 0);
-    z-index: 0;
 }
-#startWords{
-    animation-name: startWordsChange;
-    animation-duration: 1s;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 108px;
-    color: #0000ff;
+p.linkContent {
     text-align: center;
-    white-space: nowrap;
+    word-wrap: break-word;
+    word-break: break-all;
+}@keyframes linkGroupChange {
+    0% {
+        background-color: #aeaeff;
+    }
+
+    50% {
+        background-color: rgb(255, 192, 213);
+    }
+    100% {
+        background-color: #aeaeff;
+    }
 }
-.docs{
-    overflow: hidden;
-    margin-top: 110px;
-    margin-bottom: 5px;
-    margin-left: 10%;
-    margin-right: 10%;
+.linkGroup:hover,.linkGroup:focus,.linkGroup:active{
+    transform: scale(1.1);
+}
+.linkGroup {
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    animation: linkGroupChange 10s infinite;
+    float: left;
+    margin: 10px;
+    /* padding: 30px; */
+    /* padding-right: 60px; */
+    /* padding-left: 60px; */
+    background-color: #aeaeff;
+    width: 300px;
+    height: 150px;
+    position: initial;
     border-radius: 20px;
-    background-color: #b2b2fa;
-    position: relative;
-    padding: 20px;
-    transform: translate(0, 100px);
-}
-.main{
-    animation-name: mainChane;
-    animation-duration: 1s;
-    position: relative;
-    z-index:1
-}
-.main p,.main ul,.main ol{
-    margin-left: 20px;
-}
-.watermark{
-    position: absolute;
-    top:50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    filter:opacity(10%);
-    z-index:0
-}
-.blog{
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-}
-.code{
-    overflow: hidden;
-    background-color: rgba(255, 0, 0, 0.169);
-    color: #ffffff;
-    padding: 20px;
-    border-radius: 40px;
-    margin-left: 20px;
-    margin-right: 20px;
-    white-space:nowrap;
-    text-overflow:ellipsis;
-}
-.main .date{
-    margin-left: auto;
-    font-size: 12px;
-    line-height: 20px;
-    background-color: #aaffbe;
-    height: 20px;
-    width: 150px;
+}h2.linkTitle {
     text-align: center;
-    border-radius: 10px;
-    white-space: nowrap;
-    color: #3e5c45;
-    position: absolute;
-    transform: translate(-100%,0);
-    right: -160px;
-    top: -43px;
+    font-size: 36px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}#linkLine{
+    width: 640px;
+}#linkLine>a {
+    color: #000000;
 }

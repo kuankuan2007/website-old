@@ -1,0 +1,207 @@
+@keyframes  headerChane{
+    from{
+        background-color: #ffffff;
+        width: 0;
+    }to{
+        width: 100%;
+        background-color: #9a9afd;
+    }
+}@keyframes linkGroupChane{
+    0%{
+        filter: opacity(0%);
+    }60%{
+        filter: opacity(0%);
+    }
+    100%{
+        filter: opacity(100%);
+    }
+}@keyframes furrykuankuanGhange{
+    0%{
+        bottom: -100%;
+    }80%{
+        bottom: 0%;
+    }
+    100%{
+        bottom: -10%;
+    }
+}@keyframes startWordsChange{
+    0%{
+        filter: opacity(0%);
+    }80%{
+        filter: opacity(10%);
+    }
+    100%{
+        filter: opacity(100%);
+    }
+}
+body{
+    background-color: #c9c9ff;
+}
+header{
+    animation-name: headerChane;
+    animation-duration: 1s;
+    overflow: hidden;
+    z-index: 2;
+    position: fixed;
+    top: 10px;
+    border-radius: 30px;
+    height: 60px;
+    background-color: #9a9afd;
+    width: 100%;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+#titleGroup{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+#title{
+    white-space: nowrap;
+    width: 400px;
+    color: #0000ff;
+}
+#linkGroup{
+    animation-name: linkGroupChane;
+    animation-duration: 1s;
+    position: absolute;
+    left: 85%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color:#c9c9ff
+}
+#toDocsMainPage,#toMainPage,#toContactInformation{
+    white-space: nowrap;
+    margin-top:5px;
+    margin-bottom:5px;
+    position: relative;
+    background-color: #ff4e4e;
+    height: 20px;
+    border-radius: 10px;
+    width: 80px;
+}
+
+.mainLink{
+    text-align: center;
+    width: 80px;
+    line-height: 20px;
+    position: absolute;
+    color:#c9c9ff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#blogList{
+    width: 100%;
+    height: 102%;
+    position: fixed;
+    overflow-x: scroll;
+    scroll-snap-type: y proximity;
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+#startWordsBackground{
+    height: 100%;
+    width: 100%;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    position: relative;
+}
+#blogList::-webkit-scrollbar{
+    width: 0;
+}
+#blogList:last-child{
+    transform: translate(0,0);
+}
+#headPage{
+    overflow: hidden;
+    height: 100%;
+    position: relative;
+    width: 100%;
+    background-image: url(/mainPageHeader.png);
+    background-size: cover;
+    background-attachment: fixed;
+}#furrykuankuan{
+    animation-name: furrykuankuanGhange;
+    animation-duration: 1s;
+    position: absolute;
+    bottom: -10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 0;
+}
+#startWords{
+    animation-name: startWordsChange;
+    animation-duration: 1s;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 108px;
+    color: #0000ff;
+    text-align: center;
+    white-space: nowrap;
+}
+.docs{
+    overflow: hidden;
+    margin-top: 110px;
+    margin-bottom: 5px;
+    margin-left: 10%;
+    margin-right: 10%;
+    border-radius: 20px;
+    background-color: #b2b2fa;
+    position: relative;
+    padding: 20px;
+    transform: translate(0, 100px);
+}
+.main{
+    animation-name: mainChane;
+    animation-duration: 1s;
+    position: relative;
+    z-index:1
+}
+.main p,.main ul,.main ol{
+    margin-left: 20px;
+}
+.watermark{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter:opacity(10%);
+    z-index:0
+}
+.blog{
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+.code{
+    overflow: hidden;
+    background-color: rgba(255, 0, 0, 0.169);
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+.main .date{
+    margin-left: auto;
+    font-size: 12px;
+    line-height: 20px;
+    background-color: #aaffbe;
+    height: 20px;
+    width: 150px;
+    text-align: center;
+    border-radius: 10px;
+    white-space: nowrap;
+    color: #3e5c45;
+    position: absolute;
+    transform: translate(-100%,0);
+    right: -160px;
+    top: -43px;
+}
