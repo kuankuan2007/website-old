@@ -59,7 +59,6 @@ header{
 }
 #title{
     white-space: nowrap;
-    width: 400px;
     color: #0000ff;
 }
 #linkGroup{
@@ -204,11 +203,9 @@ header{
     transform: translate(-100%,0);
     right: -160px;
     top: -43px;
-}
-
-#nav:hover{
+}#nav:hover,#nav:focus,#nav:active{
     width: 300px;
-    background-color: rgba(231, 255, 200, 0.6);
+    background-color: #ffb9b9;
     border-radius: 20px;
 }
 #nav{
@@ -222,10 +219,18 @@ header{
     transition-duration: 0.3s;
     font-size: 24px;
     border-radius: 6px;
-}#nav li{
+}#nav li:hover,#nav li:focus,#nav li:active{
+    transform: scale(1.1);
+    background-color: #ffa5a5;
+}#nav li:hover>a{
+    color:#3b3100
+}
+#nav li{
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
     white-space: nowrap;
     margin: 10px;
-    background-color: rgba(0, 0, 255, 0.36);
+    background-color: #ff9292;
     padding: 10px;
     border-radius: 20px;
     list-style: none;
@@ -234,9 +239,93 @@ header{
     padding: 20px;
 }
 #nav a{
-    color: #000000;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    color: #0000ff;
 }#nav p{
     margin: 0;
     text-align: center
     
+}#nav li:hover #helpSonNav{
+    background-color: #ffa0a0;
+    height: 200px;
+    border-radius: 20px;
+}
+#helpSonNav{
+    margin-left: 20px;
+    z-index: 11;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    height: 8px;
+    border-radius: 6px;
+    margin-top: 10px;
+    background-color: rgb(145, 255, 0);
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding-left: 0;
+    
+}#helpSonNav a{
+    color: #0000ff;
+    font-size: 16px;
+}#helpSonNav li:hover a{
+    color: #3b3100;
+}#helpSonNav ul{
+    padding: 0;
+    margin-left: 0;
+}
+#nav li li{
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    opacity:0;
+}#nav li:hover li{
+    opacity:1;
+}
+#helpSonNav::-webkit-scrollbar {
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    width: 0px;
+
+}#nav li:hover div::-webkit-scrollbar{
+    width: 12px;
+}::-webkit-scrollbar {
+
+    width: 12px;
+
+    height: 12px;
+
+}
+
+::-webkit-scrollbar-track-piece {
+
+    background-color: transparent;
+
+    -webkit-border-radius: 6px;
+
+}
+
+::-webkit-scrollbar-thumb:vertical {
+
+    height: 12px;
+
+    background-color: #BDBDBD;
+
+    -webkit-border-radius: 6px;
+
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+
+    width: 12px;
+
+    background-color: #BDBDBD;
+
+    -webkit-border-radius: 6px;
+
+}
+
+::-webkit-scrollbar-thumb:vertical:hover,
+::-webkit-scrollbar-thumb:horizontal:hover {
+
+    background-color: #808080;
+
 }
