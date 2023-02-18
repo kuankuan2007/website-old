@@ -196,6 +196,7 @@ header{
     -webkit-transition-duration: 0.3s;
     transition-duration: 0.3s;
     color: #0000ff;
+    text-decoration: none;
 }#nav p{
     margin: 0;
     text-align: center
