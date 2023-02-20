@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <link href="/logo.ico" rel="icon">
+    <link rel="stylesheet" href="/words.css">
+    <link rel="stylesheet" href="/font-icos.css">
+    <script>
+        var lastCange=0
+        var lastword="";
+        var returnValue=""
+        function getWords(){
+            var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
+            httpRequest.open('GET', 'https://international.v1.hitokoto.cn?c=a&c=b&c=d&c=e&c=h&c=i&c=k', true); //第二步：打开连接/***发送json格式文件必须设置请求头 ；如下 - */
+            httpRequest.timeout = 10000;
+            httpRequest.ontimeout = function (e) {
+                alert("连接服务器超时");
+            };
+            returnValue="[EMPTY]"
+            httpRequest.send();//发送请求 将json写入send中
+            httpRequest.onreadystatechange = function (res) {//请求后的回调接口，可将请求成功后要执行的程序写在其中
+                if (httpRequest.readyState == 4 && httpRequest.status == 200) {//验证请求是否发送成功
+                    var retsult=eval("("+httpRequest.responseText+")")
+                    if (retsult["from"]!=null){
+                        if (retsult["from_who"]!=null){
+                            retsult["from"]+="·"+retsult["from_who"]
+                        }
+                        retsult["hitokoto"]+="——"+retsult["from"]
+                    }else{
+                        if (retsult["from_who"]!=null){
+                            retsult["hitokoto"]+="——"+retsult["from_who"]
+                        }
+                    }
+                    var s=retsult["hitokoto"]
+                    if (s==lastword){
+                        console.log("same")
+                        setTimeout(getWords,3000)
+                        return;
+                    }
+                    lastword=s
+                    console.log(s)
+                    var time=Date.now()
+                    if (time-lastCange>3000){
+                        setTimeout(deleteWord,0,s)
+                    }else{
+                        setTimeout(deleteWord,lastCange+3000-time,s)
+                    }
+                    
+                }
+            };
+        }function deleteWord(s){
+            document.getElementById("words").innerHTML=document.getElementById("words").innerHTML.slice(0,document.getElementById("words").innerHTML.length-1)
+            if (document.getElementById("words").innerHTML.length==0){
+                setTimeout(addWord,100,s)
+            }else{
+                setTimeout(deleteWord,50,s)
+            }
+        }function addWord(s){
+            if (s.length==0){
+                lastCange=Date.now()
+                setTimeout(getWords,1000)
+            }else{
+                document.getElementById("words").innerHTML=document.getElementById("words").innerHTML+s.slice(0,1)
+                setTimeout(addWord,100,s.slice(1,s.length))
+            }
+            
+        }
+        function wait(){
+            var begin=Date.now()
+            while (true){
+                var time = Date.now();
+                if (time-begin>n){
+                    return
+                }
+            }
+        }
+        window.onload = function(){
+            setTimeout(getWords,0)
+        };
+    </script>
+</head>
+
+<body>
+    <header>
+        <div id="titleGroup">
+            <h1 id="title">宽宽2007·一言</h1>
+        </div>
+    </header>
+    
+    <div id="nav">
+        <ul>
+            <li><a href="/"><p>主页<b class="demo-icon">&#xe800;</b></p></a></li>
+            <li><a href="/blogs/"><p>博客<b class="demo-icon">&#xe801;</b></p></a></li>
+            <li><a href="/docs/"><p>帮助<b class="demo-icon">&#xe802;</b></p></a><div id="helpSonNav">
+                <ul>
+                                    <li><a href="/docs/qq-robot/"><p>QQ机器人(智障宽宽)</p></a></li>
+                <li><a href="/docs/self-made-pvz/"><p>(合作)自制pvz</p></a></li>
+                <li><a href="/docs/dns-speed-measurement/"><p>DNS测速</p></a></li>
+                <li><a href="/docs/ghm-base64-encoder/"><p>GHM-BASE64编码器</p></a></li>
+                <li><a href="/docs/smart-reply/"><p>智能回复</p></a></li>
+                <li><a href="/docs/folder-synchronization/"><p>文件夹同步</p></a></li>
+                <li><a href="/docs/connector/"><p>连点器</p></a></li>
+
+                </ul>
+            </div></li>
+            <li><a href="/words/"><p>一言<b class="demo-icon">&#xe803;</b></p></a></li>
+            <li><a href="/contactInformation/"><p>联系我们<b class="demo-icon">&#xf2b9;</b></p></a></li>
+            <li><a href="https://gitee.com/kuankuan2007"><p>Gitee<b class="demo-icon">&#xf053;</b></p></a></li>
+            <li><a href="https://github.com/kuankuan2007"><p>Github<b class="demo-icon">&#xf056;</b></p></a></li>
+        </ul>
+    </div>
+
+    <p id="words"></p>
+</body>
