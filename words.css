@@ -40,16 +40,24 @@
 }
 body{
     animation: backgroundChane 20s infinite;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }#words{
     font-family: '华文行楷';
     position: absolute;
-    top: 50%;
+    top: 38%;
     text-align: center;
     transform: translate(0,-50%);
     width: 100%;
     animation: wordChane 20s infinite;
     word-break: break-all;
     font-size: 48px;
+}
+#showWav{
+    position: fixed;
+    width: 100%;
+    height: 30%;
+    bottom: 0;
 }
 header{
     transform: translate(-50%, 0);
@@ -76,7 +84,31 @@ header{
     white-space: nowrap;
     color: #0000ff;
 }
-
+#playOrPause:hover{
+    transform: scale(1.1);
+    background-color: rgba(0,0,255,1);
+    color: #cae1ff;
+}
+#playOrPause{
+    font-family: 'fontello';
+    padding: 0px 0px;
+    border-radius: 50px;
+    outline: none;
+    height: 80px;
+    width: 80px;
+    font-size: 40px;
+    line-height: 80px;
+    text-align: center;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    color: #ffffff;
+    background-color: rgba(0,0,255,0.5);
+    border: 0px;
+    cursor: pointer;
+    position: fixed;
+    top: 50px;
+    right: 50px;
+}
 
 
 

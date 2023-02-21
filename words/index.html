@@ -7,12 +7,50 @@
     <link rel="stylesheet" href="/words.css">
     <link rel="stylesheet" href="/font-icos.css">
     <script>
+        var musicEle=""
         var lastCange=0
         var lastword="";
         var returnValue=""
+        var musicDrawer
+        var musicShower
+        let isInited = false
+        let dataArray,analyser
+        function initMusic(){
+            if (isInited){
+                return
+            }
+            const audCtx=new AudioContext;
+            const source=audCtx.createMediaElementSource(musicEle)
+            analyser=audCtx.createAnalyser()
+            source.connect(analyser)
+            analyser.connect(audCtx.destination)
+            analyser.fftSize=512
+            dataArray=new Uint8Array(analyser.frequencyBinCount)
+            isInited=true
+        }
+        function draw(){
+            requestAnimationFrame(draw)
+            const {width, height} =musicShower
+            musicDrawer.clearRect(0,0,width,height)
+            if (!isInited){
+                return
+            }analyser.getByteFrequencyData(dataArray)
+            const len=dataArray.length/2.5
+            const barWidth=(width/len)/2
+            musicDrawer.fillStyle="#0099ff"
+            for (let i=0; i<len; i++){
+                const data=dataArray[i]
+                const barHeight= data / 255 * height
+                const x1=i*barWidth+width/2;
+                const x2=width/2 - (i+1)*barWidth
+                const y=height - barHeight
+                musicDrawer.fillRect(x1,y,barWidth,barHeight)
+                musicDrawer.fillRect(x2,y,barWidth,barHeight)
+            }
+        }
         function getWords(){
             var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
-            httpRequest.open('GET', 'https://international.v1.hitokoto.cn?c=a&c=b&c=d&c=e&c=h&c=i&c=k', true); //第二步：打开连接/***发送json格式文件必须设置请求头 ；如下 - */
+            httpRequest.open('GET', 'https://international.v1.hitokoto.cn?c=a&c=b&c=d&c=e&c=h&c=i&c=k&randomID='+Math.random(), true); //第二步：打开连接/***发送json格式文件必须设置请求头 ；如下 - */
             httpRequest.timeout = 10000;
             httpRequest.ontimeout = function (e) {
                 alert("连接服务器超时");
@@ -75,8 +113,31 @@
                 }
             }
         }
+        function clickToPlay(){
+            if (musicEle.paused){
+                musicEle.play()
+                document.getElementById("playOrPause").setAttribute("value","\ue804")
+            }
+            else{
+                musicEle.pause()
+                document.getElementById("playOrPause").setAttribute("value","\ue805")
+            }
+        }function setStartIcon(){
+            if (musicEle.paused){
+                document.getElementById("playOrPause").setAttribute("value","\ue805")
+            }else{
+                document.getElementById("playOrPause").setAttribute("value","\ue804")
+            }setTimeout(setStartIcon,500)
+        }
         window.onload = function(){
+            
             setTimeout(getWords,0)
+            setTimeout(setStartIcon,500)
+            musicEle=document.getElementById("backgroundMusic")
+            musicEle.onplay=initMusic
+            musicShower=document.getElementById("showWav")
+            musicDrawer=musicShower.getContext("2d")
+            setTimeout(draw,500)
         };
     </script>
 </head>
@@ -87,6 +148,7 @@
             <h1 id="title">宽宽2007·一言</h1>
         </div>
     </header>
+    
     
     <div id="nav">
         <ul>
@@ -111,5 +173,12 @@
         </ul>
     </div>
 
+
+    <audio loop="loop" id="backgroundMusic" autoplay="autoplay">
+        <source src="/music/words.mp3" type="audio/mpeg">
+        <source src="/music/words.ogg" type="audio/ogg">
+    </audio>
+    <canvas id="showWav"></canvas>
+    <input id="playOrPause" onclick="clickToPlay()" type="button" value="">
     <p id="words"></p>
 </body>
