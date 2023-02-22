@@ -30,44 +30,100 @@ body {
 @keyframes HelloTitleChange {
     0% {
         font-size: 0%;
-        top: 50%;
-        color: #ffffff;
-        background-color: rgba(0,0,255,0);
+        color: rgb(255, 255, 255);
     }
 
     25% {
         font-size: 96px;
-        top: 50%;
-        color: #0000ff;
+        color: rgba(0, 0, 255,1);
     }
     75%{
         font-size: 96px;
-        top: 50%;
-        color: #0000ff;
-        background-color: rgba(0,0,255,0);
+        color: rgba(0, 0, 255,1);
     }100%{
         font-size: 50px;
+        color: rgba(201, 201, 255,0);
+    }
+}@keyframes HelloTitleCenterChange {
+    0% {
+        top: 50%;
+    }
+    25% {
+        top: 50%;
+    }
+    75%{
+        top: 50%;
+    }100%{
         top: 20%;
-        color: #c9c9ff;
-        background-color: rgba(0,0,255,1);
+    }
+}@keyframes HelloTitlebgChange {
+    0% {
+        opacity: 0;
+    }
+    75%{
+        opacity: 0;
+    }100%{
+        opacity: 1;
     }
 }
-h1#HelloTitil {
-    /* text-align: center; */
+
+#HelloTitil {
     animation: HelloTitleChange 3s;
-    position: absolute;
-    top: 20%;
-    left: 50%;
+    /* position: absolute; */
+    /* top: 20%; */
+    /* left: 50%; */
     text-align: center;
-    transform: translate(-50%,-50%);
     font-size: 50px;
-    color: #c9c9ff;
-    background-color: #0000ff;
+    color: #9c9cff;
     white-space: nowrap;
     padding: 40px;
     padding-top: 20px;
     padding-bottom: 20px;
     margin: 0;
+    position: relative;
+    z-index: 1;
+}
+@supports (-webkit-background-clip: text) {
+    #HelloTitil {
+        animation: HelloTitleChange 3s;
+        /* position: absolute; */
+        /* top: 20%; */
+        /* left: 50%; */
+        text-align: center;
+        font-size: 50px;
+        color: rgba(0, 0, 255,0);
+        white-space: nowrap;
+        padding: 40px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin: 0;
+        /* border-radius: 60px; */
+        /* opacity: 1; */
+        position: relative;
+        z-index: 1;
+        background-image: linear-gradient( 135deg, #c0c0ff 10%, #9c9cff 100%);
+        /* color: transparent; */
+        -webkit-background-clip: text;
+    }
+}
+
+#center{
+    top: 20%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 100px;
+    animation: HelloTitleCenterChange 3s;
+}#centerBackground{
+    animation: HelloTitlebgChange 3s;
+    opacity: 1;
+    background-image: linear-gradient( 135deg, #a74afd 20%, #0000ff 100%);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
     border-radius: 60px;
 }
 @keyframes linkBoxChange {
@@ -99,42 +155,79 @@ p.linkContent {
     text-align: center;
     word-wrap: break-word;
     word-break: break-all;
-}@keyframes linkGroupChange {
-    0% {
-        background-color: #aeaeff;
-    }
-
-    50% {
-        background-color: rgb(255, 192, 213);
-    }
-    100% {
-        background-color: #aeaeff;
-    }
+    z-index: 1;
+    position: relative;
 }
 .linkGroup:hover,.linkGroup:focus,.linkGroup:active{
     transform: scale(1.1);
 }
+.linkGroup .linkGrouphover{
+    background-image: linear-gradient( 315deg, #faaeed 10%, #e85ff5 100%);
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    transition-timing-function: cubic-bezier(0.34, 0.25, 0.23, 1.03);
+}
+.linkGroup:hover .linkGrouphover,.linkGroup:focus .linkGrouphover,.linkGroup:active .linkGrouphover{
+    opacity: 1;
+}
 .linkGroup {
     -webkit-transition-duration: 0.3s;
     transition-duration: 0.3s;
-    animation: linkGroupChange 10s infinite;
+    
     float: left;
     margin: 10px;
     /* padding: 30px; */
     /* padding-right: 60px; */
     /* padding-left: 60px; */
-    background-color: #aeaeff;
+    background-image: linear-gradient( 135deg, #72b4f2 10%, #8585fd 100%);
     width: 300px;
     height: 150px;
-    position: initial;
+    position: relative;
     border-radius: 20px;
+    overflow: hidden;
 }h2.linkTitle {
     text-align: center;
     font-size: 36px;
     overflow: hidden;
     margin-bottom: 10px;
+    z-index: 1;
+    position: relative;
 }#linkLine{
     width: 640px;
 }#linkLine>a {
     color: #000000;
+}
+@keyframes wavesChange {
+    0% {
+        opacity: 0.0;
+        bottom: -50%;
+    }
+
+    62.5% {
+        opacity: 0.0;
+        bottom: -50%;
+    }
+    75%{
+        opacity: 1.0;
+        bottom: 0%;
+    }100%{
+        opacity: 1.0;
+        bottom: 00%;
+    }
+}
+#waves{
+    animation: wavesChange 4s;
+    position: fixed;
+    width: 100%;
+    z-index: -1;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    left: 0;
 }
