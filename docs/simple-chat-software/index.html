@@ -42,59 +42,22 @@
 
     <div id="docs">
         <div id="main">
-        <h1>智能回复</h1>
-            <p><del>智障回复</del></p>
-            <h2>致谢</h2>
-            <p>这个人工智能系统基于其他大佬的以下三方库开发</p>
-            <ul>
-            <li>
-            <p>sklearn:语义识别&amp;决策树</p>
-            </li>
-            <li>
-            <p>jieba:中文的词语切割</p>
-            </li>
-            </ul>
-            <p>在浅显的了解了基本原理之后本人对以上两个三方库的作者们深感敬佩<del>(反正我是不可能有这么强的思维的)</del>，感谢你们辛勤的劳作以及大方地将自己的成果给大家使用</p>
-            <h2>基本原理</h2>
-            <p>输入</p>
-            <p>jieba划分词语</p>
-            <p>sklearn.feature_extraction.text.CountVectorizer抓取特征词</p>
-            <p>sklearn.tree.DecisionTreeClassifier决策</p>
-            <p>输出结果</p>
-            <h2>使用方式</h2>
-            <p><div class="code"></p>
-            <p>with open("model.pkl","rb") as m:</p>
-            <p>modal=pickle.load(m)</p>
-            <p>with open("ai.pkl","rb") as m:</p>
-            <p>ai=pickle.load(m)</p>
-            <p>text=input()</p>
-            <p>text="|".join(jieba.cut(text))</p>
-            <p>text=modal.transform([text])</p>
-            <p>result=ai.predict(aiVare)[0]</p>
-            <p>print(result)</p>
-            <p></div></p>
-            <h2>训练方式</h2>
-            <ol>
-            <li>
-            <p>将pd.DataFrame(pd.read_excel('example.xlsx'))修改成输入的数据表名称</p>
-            </li>
-            <li>
-            <p>输入表格包括两列:</p>
-            <ol>
-            <li>
-            <p>第一行为"input",以下内容为输入</p>
-            </li>
-            <li>
-            <p>第一行为"output",以下内容为输入对应的输出</p>
-            </li>
-            </ol>
-            </li>
-            </ol>
-            <h2>声明</h2>
-            <p>训练数据来源于网友日常聊天，与本人无关</p>
+        <h1>消息收发简易</h1>
+            <p>自制的，借助服务器互相发送消息的程序</p>
+            <h2>使用说明</h2>
+            <h3>服务端</h3>
+            <p>config.json中配置监听端口、监听地址</p>
+            <p>然后直接运行即可</p>
+            <h3>客户端</h3>
+            <p>在config.json中设置服务器的地址、端口</p>
+            <p>打开后输入用户名（内容随意，不低于2字符）</p>
+            <p>然后就可以多端发送消息啦</p>
+            <h3>注意</h3>
+            <p>客户端60s没有消息视为下线，删除用户（即其他人可以使用该用户名）</p>
+            <p>传输使用aes加密，秘钥为登录时服务端向客户端分发，期间不可修改</p>
             <h2>关于作者</h2>
-            <p>作者主页<a href="kuankuan2007.gitee.io" title="作者主页">宽宽2007</a></p>
-            <p>本项目在<a href="https://gitee.com/kuankuan2007/smart-reply">苟浩铭/智能回复 (gitee.com)</a>上开源</p>
+            <p>作者<a href="kuankuan2007.gitee.io" title="作者主页">宽宽2007</a></p>
+            <p>本项目在<a href="https://gitee.com/kuankuan2007/simple-chat-software/">简易聊天软件: 使用长轮询的，中心化消息软件 (gitee.com)</a>上开源</p>
         </div>
         <img src="/logo.png" id="watermark">
     </div>
