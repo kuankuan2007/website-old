@@ -29,6 +29,19 @@
             dataArray=new Uint8Array(analyser.frequencyBinCount)
             isInited=true
         }
+        function changeMusic(clickEle){
+            var musicName=clickEle.innerHTML.split(">")
+            var musicName=musicName[musicName.length-1]
+            var paused=musicEle.paused
+            if (musicEle.canPlayType("audio/mp3")){
+                musicEle.src="/music/"+musicName+".mp3"
+            }else if(musicEle.canPlayType("audio/ogg")){
+                musicEle.src="/music/"+musicName+".ogg"
+            }
+            if (!paused){
+                musicEle.play()
+            }
+        }
         function draw(){
             requestAnimationFrame(draw)
             const {width, height} =musicShower
@@ -151,6 +164,7 @@
     </header>
     
     
+    
     <div id="nav">
         <ul>
             <li><a href="/"><p>主页<b class="demo-icon">&#xe800;</b></p></a><div class="linkHoverBackGround"></div></li>
@@ -177,11 +191,41 @@
     </div>
 
 
+
     <audio loop="loop" id="backgroundMusic">
-        <source src="/music/words.mp3" type="audio/mpeg">
-        <source src="/music/words.ogg" type="audio/ogg">
+        <source src="/music/α.mp3" id="music1" type="audio/mpeg">
+        <source src="/music/α.ogg" id="music2" type="audio/ogg">
     </audio>
     <canvas id="showWav"></canvas>
-    <input id="playOrPause" onclick="clickToPlay()" type="button" value="">
     <p id="words"></p>
+    <input id="playOrPause" onclick="clickToPlay()" type="button" value="">
+    <div id="soongChoosers">
+        <ul id="songList">
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>α</li>
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>γ</li>
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>δ</li>
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>ε</li>
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>θ</li>
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>ι</li>
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>κ</li>
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>μ²</li>
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>μ¹</li>
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>ν</li>
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>ξ</li>
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>ο</li>
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>π</li>
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>ρ</li>
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>σ</li>
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>τ</li>
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>υ</li>
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>φ²</li>
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>φ¹</li>
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>ω</li>
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>启程</li>
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>星拾夜</li>
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>流连</li>
+    <li onclick="changeMusic(this)" class="musicButton"><div class="setBackgroundChange"></div><b class="demo-icon">&#xe809;</b>雪孩子</li>
+
+        </ul>
+    </div>
 </body>
