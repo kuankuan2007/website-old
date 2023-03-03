@@ -7,6 +7,95 @@
     <link rel="stylesheet" href="/docsPage.css">
     <link rel="stylesheet" href="/font-icos.css">
     <link rel="stylesheet" href="/nav.css">
+    <script>
+        var canvas
+        var context
+        var graph
+        function randint(min,max){
+            return Math.random()*(max+1-min)+min
+        }
+        class Point{
+            constructor(){
+                this.r=6
+                this.x=randint(0,canvas.width-this.r/2)
+                this.y=randint(0,canvas.height-this.r/2)
+                this.speedx=randint(-1,1)
+                this.speedy=randint(-1,1)
+            }
+            draw(){
+                context.beginPath()
+                context.arc(this.x,this.y,this.r,0,2*Math.PI)
+                context.fillStyle="rgb(230,230,255)"
+                context.fill()
+            }
+            move(){
+                this.x+=this.speedx
+                this.y+=this.speedy
+                if (this.x<0){
+                    this.x=-this.x
+                    this.speedy,this.speedx=this.speedx,this.speedy
+                    this.speedx=-this.speedx
+                }if (this.x>canvas.width){
+                    this.x=canvas.width*2-this.x
+                    this.speedy,this.speedx=this.speedx,this.speedy
+                    this.speedx=-this.speedx
+                }if (this.y<0){
+                    this.y=-this.y
+                    this.speedy,this.speedx=this.speedx,this.speedy
+                    this.speedy=-this.speedy
+                }if (this.y>canvas.height){
+                    this.y=canvas.height*2-this.y
+                    this.speedy,this.speedx=this.speedx,this.speedy
+                    this.speedy=-this.speedy
+                }
+            }
+        }
+        class Graph{
+            constructor(pointNumber=40,maxLength=300){
+                this.points=new Array(pointNumber).fill(0).map(()=>new Point)
+                this.maxLength=maxLength
+            }
+            draw(){
+                requestAnimationFrame(drawNext)
+                const {width, height} =canvas
+                context.clearRect(0,0,width,height)
+                for(let i=0;i<this.points.length;i++){
+                    const p1=this.points[i]
+                    p1.move()
+                }
+                for(let i=0;i<this.points.length;i++){
+                    const p1=this.points[i]
+                    p1.draw()
+                    for (let j=i+1;j<this.points.length;j++){
+                        const p2=this.points[j]
+                        const d=Math.sqrt((p1.x-p2.x)**2+(p1.y-p2.y)**2)
+                        if (d>this.maxLength){
+                            continue
+                        }
+                        context.beginPath()
+                        context.moveTo(p1.x,p1.y)
+                        context.lineTo(p2.x,p2.y)
+                        context.closePath()
+                        context.strokeStyle="rgba(230,230,255,"+(1-d/this.maxLength)+")"
+                        context.stroke()
+                    }
+                }
+            }
+        }
+        function drawNext(){
+            canvas.height=window.innerHeight
+            canvas.width=window.innerWidth
+            graph.draw()
+        }
+        window.onload=function(){
+            canvas=document.getElementById("BGLines")
+            canvas.height=window.innerHeight
+            canvas.width=window.innerWidth
+            context=canvas.getContext("2d")
+            graph=new Graph()
+            graph.draw()
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -256,4 +345,5 @@
         </div>
         <img src="/logo.png" id="watermark">
     </div>
+    <canvas id="BGLines"></canvas>
 </body>
