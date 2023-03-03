@@ -18,7 +18,7 @@
     from{
         background-color: #ffffff;
     }to{
-        background-color: #b2b2fa;
+        background-color: rgba(159 159 255/50%);
     }
 }
 @keyframes  mainChane{
