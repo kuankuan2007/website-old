@@ -133,22 +133,20 @@
 
     <div id="docs">
         <div id="main">
-        <h1>消息收发简易</h1>
-            <p>自制的，借助服务器互相发送消息的程序</p>
-            <h2>使用说明</h2>
-            <h3>服务端</h3>
-            <p>config.json中配置监听端口、监听地址</p>
-            <p>然后直接运行即可</p>
-            <h3>客户端</h3>
-            <p>在config.json中设置服务器的地址、端口</p>
-            <p>打开后输入用户名（内容随意，不低于2字符）</p>
-            <p>然后就可以多端发送消息啦</p>
-            <h3>注意</h3>
-            <p>客户端60s没有消息视为下线，删除用户（即其他人可以使用该用户名）</p>
-            <p>传输使用aes加密，秘钥为登录时服务端向客户端分发，期间不可修改</p>
+        <h1>Excel拼音</h1>
+            <p>用于在Excel中将汉字换为拼音的宏</p>
+            <h2>使用</h2>
+            <p>将这个宏加入Excel后，使用函数getpy将字符串转化为拼音</p>
+            <p>拼音取常用拼音，多音字可能会出现错误</p>
+            <p>拼音之间使用空格分隔</p>
+            <h3>e.g.</h3>
+            <p><div class="code"></p>
+            <p>=getpy("宽宽的作品")</p>
+            <p>&gt;&gt;&gt;kuan kuan de zuo pin </p>
+            <p></div></p>
             <h2>关于作者</h2>
-            <p>作者<a href="kuankuan2007.gitee.io" title="作者主页">宽宽2007</a></p>
-            <p>本项目在<a href="https://gitee.com/kuankuan2007/simple-chat-software/">简易聊天软件: 使用长轮询的，中心化消息软件 (gitee.com)</a>上开源</p>
+            <p>作者主页<a href="https://kuankuan2007.gitee.io" title="作者主页">宽宽2007</a></p>
+            <p>本项目在<a href="https://gitee.com/kuankuan2007/excel-pinyin">苟浩铭/Excel拼音 (gitee.com)</a>上开源</p>
         </div>
         <img src="/logo.png" id="watermark">
     </div>
