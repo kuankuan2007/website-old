@@ -139,14 +139,20 @@
             <p>将这个宏加入Excel</p>
             <p>使用函数getpy将字符串转化为拼音</p>
             <p>使用函数getszm将字符串转化为拼音首字母</p>
+            <p>replaceWord参数控制未知字符的替换值</p>
+            <p>emptyWord参数控制空字符的返回值</p>
             <p>拼音取常用拼音，多音字可能会出现错误</p>
             <p>拼音之间使用空格分隔</p>
             <h3>e.g.</h3>
             <p><div class="code"></p>
-            <p>=getpy("宽宽的作品")</p>
-            <p>-&gt;kuan kuan de zuo pin</p>
+            <p>=getpy("这里是宽宽的作品,我是宽宽","^")</p>
+            <p>-&gt;kuan kuan de zuo pin ^ wo shi kuan kuan</p>
+            <p>=getpy("这里是宽宽的作品,我是宽宽")</p>
+            <p>-&gt;kuan kuan de zuo pin ? wo shi kuan kuan</p>
             <p>=getszm("宽宽的作品")</p>
             <p>-&gt;kkdzp</p>
+            <p>=getszm("","?","空")</p>
+            <p>-&gt;空</p>
             <p></div></p>
             <h2>关于作者</h2>
             <p>作者主页<a href="https://kuankuan2007.gitee.io" title="作者主页">宽宽2007</a></p>
