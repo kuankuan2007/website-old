@@ -35,7 +35,7 @@
     }
 }
 body{
-    background-image: linear-gradient( 135deg, #c9c9ff 70%, #b0b0ff 100%);
+    background-color: rgb(181 181 255);
 }
 header{
     animation-name: headerChane;
@@ -151,8 +151,7 @@ header{
     margin-left: 10%;
     margin-right: 10%;
     border-radius: 20px;
-    background-color: #b2b2fa;
-    background-image: linear-gradient( 135deg, #e1c0ff 30%, #7171ff 100%);
+    background-image: linear-gradient( 135deg, rgb(211 182 255 / 64%) 30%, rgb(142 121 255 / 64%) 100%);
     position: relative;
     padding: 20px;
     transform: translate(0, 100px);
@@ -194,7 +193,7 @@ header{
 }
 .docsHoverBgChange {
     opacity: 0;
-    background-image: linear-gradient( 315deg, #ffa9f2 30%, #8f8fff 100%);
+    background-image: linear-gradient( 315deg, rgb(255 129 236 / 72%) 30%, rgb(122 122 255 / 64%) 100%);
     -webkit-transition-duration: 0.5s;
     transition-duration: 0.5s;
     position: absolute;
@@ -263,4 +262,9 @@ header{
 
     background-color: #808080;
 
+}
+#BGWords{
+    position: fixed;
+    top: 0;
+    right: 0;
 }

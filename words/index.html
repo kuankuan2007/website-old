@@ -150,6 +150,8 @@
             musicEle=document.getElementById("backgroundMusic")
             musicEle.onplay=initMusic
             musicShower=document.getElementById("showWav")
+            musicShower.width=window.innerWidth
+            musicShower.height=window.innerHeight*0.3
             musicDrawer=musicShower.getContext("2d")
             setTimeout(draw,500)
         };

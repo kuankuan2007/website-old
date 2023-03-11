@@ -8,6 +8,51 @@
     <link rel="stylesheet" href="/blogs.css">
     <link rel="stylesheet" href="/font-icos.css">
     <link rel="stylesheet" href="/nav.css">
+    <script>
+        var canvas
+        var context
+        var chatIndex
+        function getRandomChar(){
+            const str="0123456789abcdefghijklmnopqrstuvwxyz"
+            return str[Math.floor(Math.random()*str.length)]
+        }
+        function draw(){
+            context.fillStyle = "rgba(181,181,255,0.15)"
+            context.fillRect(0, 0, canvas.width, canvas.height)
+            context.font='10px sans-serif'
+            
+            context.textBaseline = "top"
+            for (let i = 0;i< chatIndex.length;i++){
+                text=getRandomChar()
+                x=i*10
+                y=chatIndex[i]*10
+                context.fillStyle = "rgba(181,181,255,1)"
+                context.fillRect(x,y,10,10)
+                context.fillStyle = "#4a4aff"
+                context.fillText(text,x,y)
+                if (y>canvas.height && Math.random()>0.99){
+                    chatIndex[i]=0
+                }else{
+                    chatIndex[i]++
+                }
+            }
+            setTimeout(draw,20)
+        }
+        window.onload=function(){
+            canvas=document.getElementById("BGWords")
+            canvas.height=window.innerHeight
+            canvas.width=window.innerWidth
+            chatIndex = new Array(Math.floor(window.innerWidth/10)).fill(0);
+            context=canvas.getContext("2d")
+            draw()
+        }
+        function watchWindowSize(){
+            canvas.height=window.innerHeight
+            canvas.width=window.innerWidth
+            chatIndex = new Array(Math.floor(window.innerWidth/10)).fill(0);
+        }
+        window.addEventListener("resize", watchWindowSize)
+    </script>
 </head>
 
 <body>
@@ -16,6 +61,7 @@
             <h1 id="title">宽宽2007个人博客</h1>
         </div>
     </header>
+    <canvas id="BGWords"></canvas>
     
     <div id="nav">
         <ul>

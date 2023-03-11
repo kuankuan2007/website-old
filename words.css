@@ -55,8 +55,6 @@ body{
 }
 #showWav{
     position: fixed;
-    width: 100%;
-    height: 30%;
     bottom: 0;
 }
 header{
