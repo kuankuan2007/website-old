@@ -29,7 +29,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0;
+    z-index: 101;
     opacity: 0;
     -webkit-transition-duration: 0.5s;
     transition-duration: 0.5s;
@@ -65,9 +65,10 @@
     border-radius: 20px;
     list-style: none;
     overflow: hidden;
+    z-index: 103;
 }#nav>ul{
     padding: 20px;
-    z-index: 1;
+    z-index: 102;
     position: relative;
 }
 #nav a{
@@ -76,7 +77,7 @@
     transition-duration: 0.3s;
     color: #0000ff;
     text-decoration: none;
-    z-index: 1;
+    z-index: 120;
 }#nav p{
     margin: 0;
     text-align: center
@@ -88,7 +89,7 @@
 }
 #helpSonNav{
     margin-left: 20px;
-    z-index: 11;
+    z-index: 104;
     -webkit-transition-duration: 0.3s;
     transition-duration: 0.3s;
     height: 8px;
@@ -101,10 +102,10 @@
     
 }
 #helpSonNav li{
-    z-index: 2;
+    z-index: 106;
 }
 #helpSonNav ul{
-    z-index: 3;
+    z-index: 105;
 }
 #helpSonNav a{
     color: #0000ff;
@@ -128,7 +129,147 @@
     -webkit-transition-duration: 0.3s;
     transition-duration: 0.3s;
     width: 0px;
-
 }#nav li:hover div::-webkit-scrollbar{
     width: 12px;
+}
+#phonenav:hover,#phonenav:focus,#phonenav:active{
+    width: 300px;
+    height: 70%;
+    background-color: #ffb9b9;
+    left: 0;
+}
+#phonenav{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: fixed;
+    top: 20%;
+    left: 10px;
+    width: 60px;
+    height: 60px;
+    background-color: rgb(145, 255, 0);
+    background-image: linear-gradient( 135deg, #FCCF31 10%, #F55555 100%);
+    z-index: 100;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    font-size: 24px;
+    border-radius: 30px;
+}
+#phonenav::-webkit-scrollbar {
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    width: 0px;
+}
+#phonenav:hover li,#phonenav:focus li,#phonenav:active li{
+    opacity: 1;
+}
+#phonenav li{
+    opacity: 0;
+}
+#phonenav li:hover,#phonenav li:focus,#phonenav li:active{
+    transform: scale(1.1);
+    background-color: #ffa5a5;
+}
+#phonenav:hover #phonenavHoverBackground,#phonenav:focus #phonenavHoverBackground,#phonenav:active #phonenavHoverBackground{
+    opacity: 1;
+}
+#phonenavHoverBackground{
+    background-image: linear-gradient( 135deg, #FF9D6C 10%, #e42d2d 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    transition-timing-function: cubic-bezier(0.34, 0.25, 0.23, 1.03);
+}
+#phonenav li:hover>a{
+    color:#3b3100
+}
+#phonenav li:hover>.linkHoverBackGround{
+    opacity: 1;
+}
+#phonenav .linkHoverBackGround{
+    background-image: linear-gradient( 135deg, #FFD26F 10%, #3677FF 100%);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 0;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    transition-timing-function: cubic-bezier(0.34, 0.25, 0.23, 1.03);
+}
+#helpNav:hover {
+    transform: scale(1) !important;
+}
+#phonenav li{
+    position: relative;
+    z-index: 103;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    white-space: nowrap;
+    margin: 10px;
+    background-image: linear-gradient( 135deg, #FEB692 10%, #ff6868 100%);
+    padding: 10px;
+    border-radius: 20px;
+    list-style: none;
+    overflow: hidden;
+}#phonenav>ul{
+    padding: 20px;
+    z-index: 102;
+    position: relative;
+}
+#phonenav a{
+    position: relative;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    color: #0000ff;
+    text-decoration: none;
+    z-index: 120;
+}#phonenav p{
+    margin: 0;
+    text-align: center
+    
+}#phonenav li:hover #helpSonPhoneNav{
+    background-color: #ffa0a0;
+}
+#helpSonPhoneNav{
+    margin-left: 20px;
+    z-index: 104;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    border-radius: 6px;
+    margin-top: 10px;
+    overflow: hidden;
+    padding-left: 0;
+}
+#helpSonPhoneNav li{
+    z-index: 106;
+}
+#helpSonPhoneNav ul{
+    z-index: 105;
+}
+#helpSonPhoneNav a{
+    color: #0000ff;
+    font-size: 16px;
+    z-index: 120;
+}#helpSonPhoneNav li:hover a{
+    color: #3b3100;
+}#helpSonPhoneNav ul{
+    padding: 0;
+    margin-left: 0;
+}#helpSonPhoneNav .linkHoverBackGround{
+    background-image: linear-gradient( 135deg, #EECE13 10%, #B210FF 100%);
+}
+#phonenav li li{
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    opacity:0;
+}#phonenav li:hover li{
+    opacity:1;
 }

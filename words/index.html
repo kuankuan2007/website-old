@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/words.css">
     <link rel="stylesheet" href="/font-icos.css">
     <link rel="stylesheet" href="/nav.css">
+    <script src="/isPhone.js" type="text/javascript"></script>
     <script>
         var musicEle=""
         var lastCange=0
@@ -144,7 +145,7 @@
             }setTimeout(setStartIcon,500)
         }
         window.onload = function(){
-            
+            isPhone()
             setTimeout(getWords,0)
             setTimeout(setStartIcon,500)
             musicEle=document.getElementById("backgroundMusic")
@@ -171,7 +172,7 @@
         <ul>
             <li><a href="/"><p>主页<b class="demo-icon">&#xe800;</b></p></a><div class="linkHoverBackGround"></div></li>
             <li><a href="/blogs/"><p>博客<b class="demo-icon">&#xe801;</b></p></a><div class="linkHoverBackGround"></div></li>
-            <li><a href="/docs/"><p>帮助<b class="demo-icon">&#xe802;</b></p></a><div id="helpSonNav">
+            <li id="helpNav"><a href="/docs/"><p>帮助<b class="demo-icon">&#xe802;</b></p></a><div id="helpSonNav">
                 <ul>
                 <li><a href="/docs/qq-robot/"><p>QQ机器人(智障宽宽)</p></a><div class="linkHoverBackGround"></div></li>
                 <li><a href="/docs/self-made-pvz/"><p>(合作)自制pvz</p></a><div class="linkHoverBackGround"></div></li>
