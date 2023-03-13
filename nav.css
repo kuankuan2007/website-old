@@ -9,7 +9,7 @@
     top: 20%;
     width: 14px;
     background-color: rgb(145, 255, 0);
-    background-image: linear-gradient( 135deg, #FCCF31 10%, #F55555 100%);
+    background-image: linear-gradient(to right bottom, #ff7049, #ff525e, #ff2e79, #ff009b, #e900c0);
     z-index: 100;
     -webkit-transition-duration: 0.3s;
     transition-duration: 0.3s;
@@ -23,7 +23,7 @@
     opacity: 1;
 }
 #navHoverBackground{
-    background-image: linear-gradient( 135deg, #FF9D6C 10%, #e42d2d 100%);
+    background-image: linear-gradient(to left top, #ff2392, #ff4478, #ff6462, #ff8154, #ff9c4e);
     position: absolute;
     top: 0;
     left: 0;
@@ -42,7 +42,7 @@
     opacity: 1;
 }
 #nav .linkHoverBackGround{
-    background-image: linear-gradient( 135deg, #FFD26F 10%, #3677FF 100%);
+    background-image: linear-gradient(to right bottom, #ffbd3c, #ffaf3b, #ffa03b, #ff923e, #ff8342, #f38836, #e78c2c, #da9022, #b6a320, #8eb13c, #60bb62, #00c18c);
     position: absolute;
     width: 100%;
     height: 100%;
@@ -60,7 +60,7 @@
     transition-duration: 0.3s;
     white-space: nowrap;
     margin: 10px;
-    background-image: linear-gradient( 135deg, #FEB692 10%, #ff6868 100%);
+    background-image: linear-gradient(to right bottom, #f7f2cb, #cdd8a4, #9cbf83, #65a66a, #008e59);
     padding: 10px;
     border-radius: 20px;
     list-style: none;
@@ -116,7 +116,7 @@
     padding: 0;
     margin-left: 0;
 }#helpSonNav .linkHoverBackGround{
-    background-image: linear-gradient( 135deg, #EECE13 10%, #B210FF 100%);
+    background-image: linear-gradient(to right bottom, #ffbd3c, #ffaf3b, #ffa03b, #ff923e, #ff8342, #ff783f, #ff6d3c, #ff603b, #ff5230, #ff4226, #ff2d1b, #ff0010);
 }
 #nav li li{
     -webkit-transition-duration: 0.3s;
@@ -135,8 +135,9 @@
 #phonenav:hover,#phonenav:focus,#phonenav:active{
     width: 300px;
     height: 70%;
-    background-color: #ffb9b9;
     left: 0;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 #phonenav{
     overflow-x: hidden;
@@ -147,7 +148,7 @@
     width: 60px;
     height: 60px;
     background-color: rgb(145, 255, 0);
-    background-image: linear-gradient( 135deg, #FCCF31 10%, #F55555 100%);
+    background-image: linear-gradient(to left top, #f3507c, #ff7666, #ffa157, #ffcd57, #f9f871);
     z-index: 100;
     -webkit-transition-duration: 0.3s;
     transition-duration: 0.3s;
@@ -162,28 +163,31 @@
 #phonenav:hover li,#phonenav:focus li,#phonenav:active li{
     opacity: 1;
 }
-#phonenav li{
-    opacity: 0;
-}
 #phonenav li:hover,#phonenav li:focus,#phonenav li:active{
     transform: scale(1.1);
     background-color: #ffa5a5;
 }
-#phonenav:hover #phonenavHoverBackground,#phonenav:focus #phonenavHoverBackground,#phonenav:active #phonenavHoverBackground{
+#phonenav:hover #navHoverBackground,#phonenav:focus #navHoverBackground,#phonenav:active #navHoverBackground{
     opacity: 1;
 }
-#phonenavHoverBackground{
-    background-image: linear-gradient( 135deg, #FF9D6C 10%, #e42d2d 100%);
-    position: absolute;
-    top: 0;
+#phonenav #navHoverBackground{
+    background-image: linear-gradient(to right bottom, #f9f871, #fee05c, #ffc74d, #ffae45, #ff9443, #ff8246, #ff704b, #ff5d52, #ff4d5a, #ff3c64, #ff266f, #ff007c);
+    position: fixed;
+    top: 20%;
     left: 0;
-    width: 100%;
-    height: 100%;
+    /* box-sizing: content-box; */
+    width: 300px;
+    height: 70%;
     z-index: 0;
     opacity: 0;
     -webkit-transition-duration: 0.5s;
     transition-duration: 0.5s;
     transition-timing-function: cubic-bezier(0.34, 0.25, 0.23, 1.03);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    /* border-radius: 30px; */
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 #phonenav li:hover>a{
     color:#3b3100
@@ -192,7 +196,7 @@
     opacity: 1;
 }
 #phonenav .linkHoverBackGround{
-    background-image: linear-gradient( 135deg, #FFD26F 10%, #3677FF 100%);
+    background-image: linear-gradient(to left top, #b97a00, #cf534a, #b44a81, #71599e, #005f92);
     position: absolute;
     width: 100%;
     height: 100%;
@@ -208,13 +212,14 @@
     transform: scale(1) !important;
 }
 #phonenav li{
+    opacity: 0;
     position: relative;
     z-index: 103;
     -webkit-transition-duration: 0.3s;
     transition-duration: 0.3s;
     white-space: nowrap;
     margin: 10px;
-    background-image: linear-gradient( 135deg, #FEB692 10%, #ff6868 100%);
+    background-image: linear-gradient(to left top, #ffbd3c, #d2ce44, #a1da64, #6be28d, #00e5ba);
     padding: 10px;
     border-radius: 20px;
     list-style: none;
@@ -235,8 +240,6 @@
     margin: 0;
     text-align: center
     
-}#phonenav li:hover #helpSonPhoneNav{
-    background-color: #ffa0a0;
 }
 #helpSonPhoneNav{
     margin-left: 20px;
@@ -250,6 +253,7 @@
 }
 #helpSonPhoneNav li{
     z-index: 106;
+    background-image: linear-gradient(to left top, #00c18c, #00bcb8, #00b2e2, #00a4fd, #008dff);
 }
 #helpSonPhoneNav ul{
     z-index: 105;
@@ -264,12 +268,5 @@
     padding: 0;
     margin-left: 0;
 }#helpSonPhoneNav .linkHoverBackGround{
-    background-image: linear-gradient( 135deg, #EECE13 10%, #B210FF 100%);
-}
-#phonenav li li{
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    opacity:0;
-}#phonenav li:hover li{
-    opacity:1;
+    background-image: linear-gradient(to left top, #b823e7, #ff00a1, #ff415b, #ff931d, #eece13);
 }
