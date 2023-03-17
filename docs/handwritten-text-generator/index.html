@@ -3,11 +3,11 @@
 
 <head>
     <meta charset="utf-8">
-    <title>宽宽的帮助文档</title>
     <link href="/logo.ico" rel="icon">
     <link rel="stylesheet" href="/docsPage.css">
     <link rel="stylesheet" href="/font-icos.css">
     <link rel="stylesheet" href="/nav.css">
+    <title>宽宽的帮助文档</title>
     <script src="/isPhone.js" type="text/javascript"></script>
     <script>
         var canvas
@@ -100,7 +100,6 @@
         }
     </script>
 </head>
-
 <body>
     <header>
         <div id="titleGroup">
@@ -138,23 +137,24 @@
 
     <div id="docs">
         <div id="main">
-            <h1>主页</h1>
-            <p>你可能正在寻找以下内容</p>
+        <h1>手写体生成器</h1>
+            <p>本程序基于Python的<a href="https://pypi.org/project/handright/" title="Pypi">handright</a>库实现</p>
+            <h2>使用注意事项</h2>
+            <ol>
+            <li>确认你选择的字体支持你是用的语言</li>
+            <li>行间距不得小于字体大小</li>
+            <li>点击"生成"之后，后台会进行计算。直到"生成"按钮再次启用，代表生成完成或出现错误</li>
+            </ol>
+            <h2>参数</h2>
+            <p>理论上中文能看懂吧...</p>
             <ul>
-                <li><p><a href="https://kuankuan2007.gitee.io/docs/qq-robot">QQ机器人(智障宽宽)</a></p></li>
-                <li><p><a href="https://kuankuan2007.gitee.io/docs/self-made-pvz">(合作)自制pvz</a></p></li>
-                <li><p><a href="https://kuankuan2007.gitee.io/docs/dns-speed-measurement">DNS测速</a></p></li>
-                <li><p><a href="https://kuankuan2007.gitee.io/docs/ghm-base64-encoder">GHM-BASE64编码器</a></p></li>
-                <li><p><a href="https://kuankuan2007.gitee.io/docs/smart-reply">智能回复</a></p></li>
-                <li><p><a href="https://kuankuan2007.gitee.io/docs/folder-synchronization">文件夹同步</a></p></li>
-                <li><p><a href="https://kuankuan2007.gitee.io/docs/connector">连点器</a></p></li>
-                <li><p><a href="https://kuankuan2007.gitee.io/docs/simple-chat-software">消息收发简易</a></p></li>
-                <li><p><a href="https://kuankuan2007.gitee.io/docs/excel-pinyin">Excel汉字转拼音</a></p></li>
-                <li><p><a href="https://kuankuan2007.gitee.io/docs/handwritten-text-generator">手写体生成器</a></p></li>
-
+            <li>在Entry中写入新的值之后，按下Enter或使该Entry失去焦点，会被认为确定</li>
+            <li>确定后输入值可行则更新，否则会还原</li>
+            <li>Scale与Entry的值实时联动</li>
             </ul>
             <h2>关于作者</h2>
-            <p>作者<a href="https://kuankuan2007.gitee.io/" title="作者主页">宽宽2007</a></p>
+            <p>作者<a href="https://kuankuan2007.gitee.io" title="作者主页">宽宽2007</a></p>
+            <p>本项目在<a href="https://gitee.com/kuankuan2007/handwritten-text-generator">苟浩铭/手写文本生成器 (gitee.com)</a>上开源</p>
         </div>
         <img src="/logo.png" id="watermark">
     </div>

@@ -188,6 +188,7 @@
     /* border-radius: 30px; */
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
+    display: none;
 }
 #phonenav li:hover>a{
     color:#3b3100
