@@ -135,6 +135,16 @@ header{
 #main p,#main ul,#main ol{
     margin-left: 20px;
 }
+table,
+td,
+th {
+  text-align: center;
+  border: 1px solid #000;
+  border-collapse: collapse;
+}
+#main table{
+    margin-left: 120px;
+}
 #watermark{
     animation-name: watermarkChane;
     animation-duration: 1s;
