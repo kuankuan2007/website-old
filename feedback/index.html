@@ -19,16 +19,16 @@
             }
             var body=""
             if (product!=""){
-                body+="产品\n"+product+"\n\n"
+                body+="# 产品\n"+product+"\n\n"
             }
             if (generalize!=""){
-                body+="描述\n"+generalize+"\n\n"
+                body+="# 描述\n"+generalize+"\n\n"
             }
             if (recirculationStep!=""){
-                body+="复现步骤\n"+recirculationStep+"\n\n"
+                body+="# 复现步骤\n"+recirculationStep+"\n\n"
             }
             if (contactInformation!=""){
-                body+="联系方式\n"+recirculationStep+"\n\n"
+                body+="# 联系方式\n"+contactInformation+"\n\n"
             }
             body=encodeURI(body)
             window.open("mailto:kuankuan@gouhaoming.onmicrosoft.com?subject="+subject+"&body="+body)
