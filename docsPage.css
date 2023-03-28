@@ -156,17 +156,57 @@ th {
     z-index:0
 }
 .code{
+    position: relative;
     overflow: hidden;
     animation-name: codeChane;
     animation-duration: 1.5s;
     background-color: rgba(255, 0, 0, 0.169);
     color: #ffffff;
     padding: 20px;
-    border-radius: 40px;
+    border-radius: 20px;
     margin-left: 20px;
     margin-right: 20px;
     white-space:nowrap;
     text-overflow:ellipsis;
+}
+.codeCopy{
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translate(0,-50%) scale(0.7);
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 28px;
+    color: #7671ff;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 10px;
+    background-image: linear-gradient(to left top, #c297d4, #bda1e1, #b6abec, #afb5f6, #a8bfff);
+    cursor: pointer;
+    overflow: hidden;
+}
+.codeCopy:hover{
+    transform: translate(0,-50%) scale(0.9);
+    color: #ff7171;
+}
+.codeCopy:hover::before{
+    opacity: 1;
+}
+.codeCopy::before{
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    transition-timing-function: cubic-bezier(0.34, 0.25, 0.23, 1.03);
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to left top, #f2d3ff, #cae5ff, #a9f4ff, #b0fdf2, #d8ffd4);
+    opacity: 0;
+    z-index: -1;
 }
 #BGLines{
     position: fixed;

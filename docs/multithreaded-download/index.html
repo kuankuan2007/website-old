@@ -89,6 +89,58 @@
             canvas.width=window.innerWidth
             graph.draw()
         }
+        function createElement(text) {
+            var isRTL = document.documentElement.getAttribute('dir') === 'rtl';
+            var element = document.createElement('textarea');
+            // 防止在ios中产生缩放效果
+            element.style.fontSize = '12pt';
+            // 重置盒模型
+            element.style.border = '0';
+            element.style.padding = '0';
+            element.style.margin = '0';
+            // 将元素移到屏幕外
+            element.style.position = 'absolute';
+            element.style[isRTL ? 'right' : 'left'] = '-9999px';
+            // 移动元素到页面底部
+            let yPosition = window.pageYOffset || document.documentElement.scrollTop;
+            element.style.top = `${yPosition}px`;
+            //设置元素只读
+            element.setAttribute('readonly', '');
+            element.value = text;
+            document.body.appendChild(element);
+            return element;
+        }
+        function copyText(text) {
+            var element = createElement(text);
+            element.select();
+            element.setSelectionRange(0, element.value.length);
+            document.execCommand('copy');
+            element.remove();
+            alert("已复制到剪切板");
+        }
+        function copy(num){
+            var lines=codes[num].innerHTML.split("\n")
+            lines.splice(0,1)
+            lines.splice(length-1,1)
+            
+            var retsult=""
+            for(var i=0;i<lines.length;i++){
+                retsult += lines[i].substring(15,lines[i].length-4)+"\n";
+            }
+            console.log(retsult)
+            copyText(retsult)
+        }
+        var codes=[]
+        function bindCopyCode(){
+            codes=document.getElementsByClassName("code")
+            for (var i=0;i<codes.length;i++){
+                copyButton=document.createElement("p")
+                copyButton.setAttribute("class","codeCopy demo-icon")
+                copyButton.setAttribute("onclick","copy("+i+")")
+                copyButton.innerHTML=""
+                codes[i].appendChild(copyButton)
+            }
+        }
         window.onload=function(){
             isPhone()
             canvas=document.getElementById("BGLines")
@@ -97,6 +149,7 @@
             context=canvas.getContext("2d")
             graph=new Graph()
             graph.draw()
+            bindCopyCode()
         }
     </script>
 </head>
@@ -141,23 +194,23 @@
         <div id="main">
         <h1>多线程下载器(autoDownload)</h1>
             <h2>安装</h2>
-            <p><div class="code"></p>
+            <div class="code">
             <p>pip install autoDownload</p>
-            <p></div></p>
+            </div>
             <h2>使用</h2>
             <h3>import</h3>
-            <p><div class="code"></p>
-            <p>import autoDownload
-            pip install autoDownload</p>
-            <p></div></p>
+            <div class="code">
+            <p>import autoDownload</p>
+            <p>autoDownload.AutoDownload(URL,file,key=value...).start()</p>
+            </div>
             <h3>命令行</h3>
-            <p><div class="code"></p>
+            <div class="code">
             <p>auto-download URL</p>
-            <p></div></p>
+            </div>
             <p>其他参数详见</p>
-            <p><div class="code"></p>
+            <div class="code">
             <p>auto-download -h</p>
-            <p></div></p>
+            </div>
             <h2>关于作者</h2>
             <p>作者<a href="https://kuankuan2007.gitee.io/">宽宽2007</a></p>
             <p>本项目在<a href="https://gitee.com/kuankuan2007/multithreaded-download">多线程下载: 多线程下载文件 (gitee.com)</a>开源</p>
