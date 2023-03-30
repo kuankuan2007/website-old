@@ -134,7 +134,8 @@ header{
     --shrink:calc((var(
     --s) / var(--f) - var(--s))/2 - var(--b));
     outline: calc(var(--b) / var(--f)) solid var(--c1);
-    border-radius: 0 0 calc(var(--s) / 2) calc(var(--s) / 2);
+    border-bottom-right-radius: calc(var(--s) / 2);
+    border-bottom-left-radius: calc(var(--s) / 2);
     outline-offset: var(--shrink);
     position: absolute;
     top: 400px;
@@ -201,7 +202,7 @@ header{
     padding-top: 100px;
     -webkit-mask: linear-gradient(transparent 17%,black 97%, transparent);
     color: #0000ff;
-    mask: linear-gradient(transparent -21%,black 66%, transparent);
+    mask: linear-gradient(transparent 17%,black 97%, transparent);;
 }
 .docs{
     overflow: hidden;
