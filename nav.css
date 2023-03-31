@@ -38,10 +38,10 @@
 #nav li:hover>a{
     color:#3b3100
 }
-#nav li:hover>.linkHoverBackGround{
+#nav li:hover::before{
     opacity: 1;
 }
-#nav .linkHoverBackGround{
+#nav li::before{
     background-image: linear-gradient(to right bottom, #ffbd3c, #ffaf3b, #ffa03b, #ff923e, #ff8342, #f38836, #e78c2c, #da9022, #b6a320, #8eb13c, #60bb62, #00c18c);
     position: absolute;
     width: 100%;
@@ -53,6 +53,7 @@
     -webkit-transition-duration: 0.3s;
     transition-duration: 0.3s;
     transition-timing-function: cubic-bezier(0.34, 0.25, 0.23, 1.03);
+    content: "";
 }
 #nav li{
     position: relative;
@@ -115,7 +116,8 @@
 }#helpSonNav ul{
     padding: 0;
     margin-left: 0;
-}#helpSonNav .linkHoverBackGround{
+}#helpSonNav li::before{
+    content: "";
     background-image: linear-gradient(to right bottom, #ffbd3c, #ffaf3b, #ffa03b, #ff923e, #ff8342, #ff783f, #ff6d3c, #ff603b, #ff5230, #ff4226, #ff2d1b, #ff0010);
 }
 #nav li li{
@@ -193,10 +195,10 @@
 #phonenav li:hover>a{
     color:#3b3100
 }
-#phonenav li:hover>.linkHoverBackGround{
+#phonenav li:hover::before{
     opacity: 1;
 }
-#phonenav .linkHoverBackGround{
+#phonenav li::before{
     background-image: linear-gradient(to left top, #b97a00, #cf534a, #b44a81, #71599e, #005f92);
     position: absolute;
     width: 100%;
@@ -205,6 +207,7 @@
     left: 0;
     opacity: 0;
     z-index: 0;
+    content: "";
     -webkit-transition-duration: 0.3s;
     transition-duration: 0.3s;
     transition-timing-function: cubic-bezier(0.34, 0.25, 0.23, 1.03);
@@ -268,6 +271,6 @@
 }#helpSonPhoneNav ul{
     padding: 0;
     margin-left: 0;
-}#helpSonPhoneNav .linkHoverBackGround{
+}#helpSonPhoneNav li::before{
     background-image: linear-gradient(to left top, #b823e7, #ff00a1, #ff415b, #ff931d, #eece13);
 }
