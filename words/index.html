@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/font-icos.css">
     <link rel="stylesheet" href="/nav.css">
     <script src="/isPhone.js" type="text/javascript"></script>
+    <script src="/messagebox.js" type="text/javascript"></script>
     <script>
         var musicEle=""
         var lastCange=0
@@ -63,45 +64,55 @@
                 musicDrawer.fillRect(x2,y,barWidth,barHeight)
             }
         }
+        function timeoutChoice(num){
+            if (num==0){
+                setTimeout(getWords,100)
+            }
+        }
         function getWords(){
-            var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
-            httpRequest.open('GET', 'https://international.v1.hitokoto.cn?c=a&c=b&c=d&c=e&c=h&c=i&c=k&randomID='+Math.random(), true); //第二步：打开连接/***发送json格式文件必须设置请求头 ；如下 - */
-            httpRequest.timeout = 10000;
-            httpRequest.ontimeout = function (e) {
-                alert("连接服务器超时");
-            };
-            returnValue="[EMPTY]"
-            httpRequest.send();//发送请求 将json写入send中
-            httpRequest.onreadystatechange = function (res) {//请求后的回调接口，可将请求成功后要执行的程序写在其中
-                if (httpRequest.readyState == 4 && httpRequest.status == 200) {//验证请求是否发送成功
-                    var retsult=eval("("+httpRequest.responseText+")")
-                    if (retsult["from"]!=null){
-                        if (retsult["from_who"]!=null){
-                            retsult["from"]+="·"+retsult["from_who"]
+            try{
+                var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
+                httpRequest.open('GET', 'https://international.v1.hitokoto.cn?c=a&c=b&c=d&c=e&c=h&c=i&c=k&randomID='+Math.random(), true); //第二步：打开连接/***发送json格式文件必须设置请求头 ；如下 - */
+                httpRequest.timeout = 10000;
+                httpRequest.ontimeout = function (e) {
+                    showTipsWindows("警告","连接服务器超时，请检查你的网络连接",["重试","关闭"],timeoutChoice);
+                };
+                returnValue="[EMPTY]"
+                httpRequest.send();//发送请求 将json写入send中
+                httpRequest.onreadystatechange = function (res) {//请求后的回调接口，可将请求成功后要执行的程序写在其中
+                    if (httpRequest.readyState == 4 && httpRequest.status == 200) {//验证请求是否发送成功
+                        var retsult=eval("("+httpRequest.responseText+")")
+                        if (retsult["from"]!=null){
+                            if (retsult["from_who"]!=null){
+                                retsult["from"]+="·"+retsult["from_who"]
+                            }
+                            retsult["hitokoto"]+="——"+retsult["from"]
+                        }else{
+                            if (retsult["from_who"]!=null){
+                                retsult["hitokoto"]+="——"+retsult["from_who"]
+                            }
                         }
-                        retsult["hitokoto"]+="——"+retsult["from"]
-                    }else{
-                        if (retsult["from_who"]!=null){
-                            retsult["hitokoto"]+="——"+retsult["from_who"]
+                        var s=retsult["hitokoto"]
+                        if (s==lastword){
+                            console.log("same")
+                            setTimeout(getWords,3000)
+                            return;
                         }
+                        lastword=s
+                        console.log(s)
+                        var time=Date.now()
+                        if (time-lastCange>3000){
+                            setTimeout(deleteWord,0,s)
+                        }else{
+                            setTimeout(deleteWord,lastCange+3000-time,s)
+                        }
+                        
                     }
-                    var s=retsult["hitokoto"]
-                    if (s==lastword){
-                        console.log("same")
-                        setTimeout(getWords,3000)
-                        return;
-                    }
-                    lastword=s
-                    console.log(s)
-                    var time=Date.now()
-                    if (time-lastCange>3000){
-                        setTimeout(deleteWord,0,s)
-                    }else{
-                        setTimeout(deleteWord,lastCange+3000-time,s)
-                    }
-                    
-                }
-            };
+                };
+            }
+            catch{
+                showTipsWindows("警告","请求错误，请检查网络连接，浏览器配置或防火墙配置",["重试","关闭"],timeoutChoice);
+            }
         }function deleteWord(s){
             document.getElementById("words").innerHTML=document.getElementById("words").innerHTML.slice(0,document.getElementById("words").innerHTML.length-1)
             if (document.getElementById("words").innerHTML.length==0){
