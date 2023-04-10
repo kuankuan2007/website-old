@@ -8,11 +8,9 @@ function isPhone(){
     }
 }
 function asPhone(){
-    if (userAgent=navigator.userAgent.toLowerCase().indexOf("mobile")!=-1){
-        try{document.getElementById("nav").setAttribute("id","phonenav")
-            document.getElementById("helpSonNav").setAttribute("id","helpSonPhoneNav")}
-        finally{
-            
-        }
+    try{document.getElementById("nav").setAttribute("id","phonenav")
+        document.getElementById("helpSonNav").setAttribute("id","helpSonPhoneNav")}
+    finally{
+        
     }
 }

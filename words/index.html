@@ -156,6 +156,7 @@
             }setTimeout(setStartIcon,500)
         }
         window.onload = function(){
+            document.getElementById("loading").remove()
             isPhone()
             setTimeout(getWords,0)
             setTimeout(setStartIcon,500)
@@ -171,6 +172,7 @@
 </head>
 
 <body>
+    <img src="/loading.gif" id="loading">
     <header>
         <div id="titleGroup">
             <h1 id="title">宽宽2007·一言</h1>
