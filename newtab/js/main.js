@@ -184,6 +184,8 @@ function search() {
     let value = searchInput.value
     if (value && !(/^ *$/.test(value))) {
         url = (data.searchEngines[searchEngine].url.replace("{question}", encodeURI(value)))
+        data.lastSearchEngine=searchEngine
+        save()
         if (data.searchOpenNewWindow) {
             window.open(url)
         } else {
