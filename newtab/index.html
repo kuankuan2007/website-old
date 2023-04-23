@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="referrer" content="never" />  
+    <link href="/logo.ico" rel="icon">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="/font-icos.css">
+    <script src="/easyForm.js"></script>
+</head>
+
+<body>
+    <header>
+        <ul id="header">
+            <li>
+                <a href="https://kuankuan2007.gitee.io">
+                    <div>
+                        <img src="/logo.png" id="logo">
+                    </div>
+                </a>
+            </li>
+            <li>
+                关于
+                <ul>
+                    <li><a href="https://kuankuan2007.gitee.io"><p>作者</p></a></li>
+                    <li><a href="https://kuankuan2007.gitee.io/contactInformation"><p>联系</p></a></li>
+                </ul>
+            </li>
+            <li>
+                配置
+                <ul>
+                    <li><p onclick="loadData()">导入</p></li>
+                    <li><p onclick="exportData()">导出</p></li>
+                </ul>
+            </li>
+        </ul>
+    </header>
+    <div id="headerBox">
+        <div id="bottonBox">
+            <input type="button" value="&#xe80d" class="demo-icon" id="setButton" onclick="entrySet()">
+            <input type="button" value="退出编辑" id="exitSetButton" onclick="exitSet()">
+            <div style="clear: both;"></div>
+        </div>
+        <div id="searchEnginesSetBox">
+            <p id="searchEnginesSetTitle">设置默认搜索引擎</p>
+            <ul id="searchEnginesSet">
+                <li id="useLastEngine">使用上次配置</li>
+                <li id="newEngine" class="demo-icon">&#xe80e</li>
+            </ul>
+        </div>
+        <div id="searchBox">
+            <input type="search" id="searchInput" placeholder="Search Here!">
+            <div id="selectBox">
+                <p id="searchType" onclick="search()"></p>
+                <div id="searchTypeButtonBox">
+                    <div id="searchTypeButton"></div>
+                </div>
+                <ul id="searchTypeList">
+                </ul>
+                <div style="clear: both;"></div>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+    </div>
+    <div id="headerBG"></div>
+    <div id="linksShower">
+        <div id="linksScroll">
+            <div id="links">
+            </div>
+            <div id="addLink">
+                <p class="demo-icon">&#xe80e</p>
+            </div>
+        </div>
+    </div>
+    <script src="./js/main.js"></script>
+</body>
