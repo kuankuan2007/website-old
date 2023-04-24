@@ -87,6 +87,7 @@ class DialogBox {
         "borderRadius": "10px",
         "maxWidth": "100%",
         "maxHeight": "100%",
+        "minWidth": "40%"
     }
     constructor(obj) {
         this._data = obj
@@ -214,7 +215,8 @@ class EnterBox extends Controler {
         borderRadius: "10px",
         paddingLeft: "10px",
         fontSize: "16px",
-        padding:"2px"
+        padding:"2px",
+        minWidth:"400px"
     }
     constructor(obj) {
         super(obj)
@@ -243,6 +245,9 @@ class GridFrame extends Frame {
         display: "grid",
         gridTemplateRows: "1fr",
         gridGap: "10px",
+        left: "50%",
+        transform: "translate(-50%,0)",
+        width: "fit-content",
     }
     constructor(obj) {
         super(obj)
