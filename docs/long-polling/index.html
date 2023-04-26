@@ -194,29 +194,27 @@
 
     <div id="docs">
         <div id="main">
-        <h1>多线程下载器(autoDownload)</h1>
-            <h2>安装</h2>
+        <h1>长轮询(longPolling)</h1>
             <div class="code">
-            <p>pip install autoDownload</p>
+            <p>pip install longPolling</p>
             </div>
-            <h2>使用</h2>
-            <h3>import</h3>
+            <h2>客户端</h2>
             <div class="code">
-            <p>import autoDownload</p>
-            <p>autoDownload.AutoDownload(URL,file,key=value...).start()</p>
+            <p>import longPolling</p>
+            <p>example=longPolling.client.Client(url, callback)</p>
+            <p>example.login(uername)</p>
             </div>
-            <h3>命令行</h3>
+            <h2>服务端</h2>
             <div class="code">
-            <p>auto-download URL</p>
-            </div>
-            <p>其他参数详见</p>
-            <div class="code">
-            <p>auto-download -h</p>
+            <p>import longPolling</p>
+            <p>example=longPolling.server.Server(host,port)</p>
+            <p>example.send(username,message)auto-download -h</p>
             </div>
             <h2>关于作者</h2>
-            <p>作者<a href="https://kuankuan2007.gitee.io/">宽宽2007</a></p>
-            <p>本项目在<a href="https://gitee.com/kuankuan2007/multithreaded-download">多线程下载: 多线程下载文件 (gitee.com)</a>开源</p>
-            <p>Pypi：<a href="https://pypi.org/project/autoDownload/">autoDownload · PyPI</a></p>
+            <p>作者主页<a href="https://kuankuan2007.gitee.io" title="作者主页">宽宽2007</a></p>
+            <p>pypi  <a href="https://pypi.org/project/longPolling/">longPolling · PyPI</a></p>
+            <p>本项目在<a href="https://gitee.com/kuankuan2007/long-polling">苟浩铭/长轮询 (gitee.com)</a>上开源</p>
+            <p>帮助文档参见<a href="https://kuankuan2007.gitee.io/docs/long-polling">宽宽的帮助文档</a></p>
         </div>
         <img src="/logo.png" id="watermark">
     </div>
