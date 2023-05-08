@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/font-icos.css">
     <link rel="stylesheet" href="/nav.css">
     <script src="/isPhone.js" type="text/javascript"></script>
+    <script src="/connection.js" type="text/javascript"></script>
     <script>
         var canvas
         var context
@@ -47,6 +48,7 @@
             chatIndex = new Array(Math.floor(window.innerWidth/10)).fill(0);
             context=canvas.getContext("2d")
             draw()
+            checkUser()
         }
         function watchWindowSize(){
             canvas.height=window.innerHeight
@@ -61,6 +63,9 @@
     <header>
         <div id="titleGroup">
             <h1 id="title">宽宽2007个人博客</h1>
+        </div>
+        <div id="user">
+            <a class="login" href="/login?from=/blogs/">登录</a>
         </div>
     </header>
     <canvas id="BGWords"></canvas>

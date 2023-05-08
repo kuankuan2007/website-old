@@ -1,32 +1,52 @@
-
 <!DOCTYPE html>
-
 <head>
     <meta charset="utf-8">
-    <title>宽宽的联系方式</title>
+    <title>登录</title>
     <link href="/logo.ico" rel="icon">
-    <link rel="stylesheet" href="/contactInformation.css">
+    <link rel="stylesheet" href="/login.css">
     <link rel="stylesheet" href="/font-icos.css">
+    <link rel="stylesheet" href="/form.css">
     <link rel="stylesheet" href="/nav.css">
     <script src="/isPhone.js" type="text/javascript"></script>
+    <script src="/easyForm.js" type="text/javascript"></script>
     <script src="/connection.js" type="text/javascript"></script>
+    <script src="/form.js" type="text/javascript"></script>
     <script>
-        window.onload = function(){
+        window.onload=function(){
             isPhone()
-            checkUser()
+            getUserName().then((retsult)=>{
+                if (retsult!==null){
+                    location.href="/user"
+                }
+            })
+            initForm()
+            document.getElementById("form").onsubmit=(e)=>{
+                e.preventDefault()
+                var flags=document.getElementById("flags").value
+                var password=document.getElementById("password").value
+                if ( !flags ){
+                    showMessage("请输入账号",function(){
+                        document.getElementById("flags").focus()
+                    })
+                    return
+                }
+                if ( !password ){
+                    showMessage("请输入密码",function(){
+                        document.getElementById("password").focus()
+                    })
+                    return
+                }
+                login(flags,password).then((retsult)=>{
+                    if (retsult===true){
+                        return
+                    }
+                    showMessage("账号或密码错误")
+                })
+            }
         }
     </script>
 </head>
-
 <body>
-    <header>
-        <div id="titleGroup">
-            <h1 id="title">宽宽2007联系方式</h1>
-        </div>
-        <div id="user">
-            <a class="login" href="/login?from=/contactInformation/">登录</a>
-        </div>
-    </header>
     
     <div id="nav">
         <ul>
@@ -59,59 +79,17 @@
         <div id="navHoverBackground"></div>
     </div>
 
-    <div id="docs">
-        <div id="main">
-            <h1>与宽宽2007联系</h1>
-            <h2>注意事项</h2>
-            <ul>
-            <li>
-            <p>不可能做到秒回</p>
-            </li>
-            <li>
-            <p>有事启奏，无事别烦</p>
-            </li>
-            <li>
-            <p>任何地方的联系请先注明来意</p>
-            </li>
-            </ul>
-            <h2>联系方式</h2>
-            <ul>
-            <li>
-            <p>QQ</p>
-            <ul>
-            <li>
-            <p>学习/编程/其他:2163826131</p>
-            </li>
-            <li>
-            <p>furyy:3169748076</p>
-            </li>
-            </ul>
-            </li>
-            <li>
-            <p>微信:gouhaoming2007</p>
-            </li>
-            <li>
-            <p>抖音@kuankuan2007</p>
-            </li>
-            <li>
-            <p>邮箱:</p>
-            <ul>
-            <li>
-            <p>2163826131@qq.com</p>
-            </li>
-            <li>
-            <p>kuankuan@gouhaoming.onmicrosoft.com （不要用QQ邮箱发件，会被判定为垃圾邮件）</p>
-            </li>
-            </ul>
-            </li>
-            <li>
-            <p>Gitee:<a href="https://gitee.com/kuankuan2007">苟浩铭 (kuankuan2007) - Gitee.com</a></p>
-            </li>
-            <li>
-            <p>GitHub:<a href="https://github.com/kuankuan2007">kuankuan2007 (kuankuan2007) (github.com)</a></p>
-            </li>
-            </ul>
+    <header>没有账号?你可以尝试<a href="/signup">注册</a></header>
+    <p id="title"> 登录 </p>
+    <form id="form">
+        <div class="formText">
+            <span>用户</span>
+            <input type="text" id="flags" class="inputText">
         </div>
-        <img src="/logo.png" id="watermark">
-    </div>
+        <div class="formText">
+            <span>密码</span>
+            <input type="password" id="password" class="inputText">
+        </div>
+        <input type="submit" class="inputButton" value="登录">
+    </form>
 </body>

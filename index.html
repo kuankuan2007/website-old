@@ -6,9 +6,18 @@
     <link href="/logo.ico" rel="icon">
     <link rel="stylesheet" href="/mainPage.css">
     <link rel="stylesheet" href="/font-icos.css">
+    <script src="/connection.js" type="text/javascript"></script>
+    <script>
+        window.onload=function(){
+            checkUser()
+        }
+    </script>
 </head>
 
 <body>
+    <div id="user">
+        <a href="/login" class="login">登录</a>
+    </div>
     <div id="center">
         <h1 id="HelloTitil">宽宽的小天地</h1>
         <div id="centerBackground"></div>

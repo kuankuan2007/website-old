@@ -1,0 +1,29 @@
+#title{
+    position: absolute;
+    font-size: 72px;
+    font-weight: bold;
+    left: 50%;
+    top: 20%;
+    margin: 0;
+    transform: translate(-50%,-50%);
+    color: #0000ff;
+}
+#form{
+    position: absolute;
+    left: 50%;
+    top: calc(20% + 200px);
+    transform: translate(-50%,0);
+    width: 35%;
+    max-width: 500px;
+    min-width: 200px;
+}
+body{
+    background-color: #d5d5ff;
+}
+header{
+    font-size: 20px;
+    padding: 10px;
+    background: #c9ffc9;
+    text-align: center;
+    border-radius: 1000px;
+}
