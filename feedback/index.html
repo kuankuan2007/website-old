@@ -5,38 +5,119 @@
     <link rel="stylesheet" href="/font-icos.css">
     <link rel="stylesheet" href="/nav.css">
     <script src="/isPhone.js" type="text/javascript"></script>
+    <script src="/connection.js" type="text/javascript"></script>
     <script>
-        function sendFeedback() {
-            var subject=document.getElementById("subject").value
-            var product=document.getElementById("product").value
-            var generalize=document.getElementById("generalize").value
-            var recirculationStep=document.getElementById("recirculationStep").value
-            var contactInformation=document.getElementById("contactInformation").value
-            if (subject==""){
-                alert("主题是必须的字段")
-                document.getElementById("subject").focus()
-                return
+        var from=0
+        var to=39
+        var boxWidth=300
+        var boxGap=10
+        var nomore=false
+        class Feedback{
+            constructor(data){
+                this.data=data
+                this.ele=document.createElement("div")
+                this.ele.classList.add("item")
+                this.title=document.createElement("h2")
+                this.title.innerText=data.title
+                this.time=document.createElement("p")
+                this.time.innerText=data.time
+                this.time.classList.add("time")
+                this.user=document.createElement("p")
+                this.user.innerText=data.user
+                this.user.classList.add("user")
+                this.statue=document.createElement("p")
+                this.statue.innerText=data.statue
+                this.statue.classList.add("statue")
+                this.statue.classList.add(data.statue)
+                this.link=document.createElement("a")
+                this.link.href=`/feedback/data/?id=${data.id}`
+                this.link.classList.add("item-link")
+                this.link.appendChild(this.ele)
+                this.ele.appendChild(this.title)
+                this.ele.appendChild(this.time)
+                this.ele.appendChild(this.user)
+                this.ele.appendChild(this.statue)
             }
-            var body=""
-            if (product!=""){
-                body+="# 产品\n"+product+"\n\n"
+        }
+        function getNew(){
+            document.getElementById("more").classList.add("disabled")
+            document.getElementById("more").innerText="加载中"
+            getFeadbackList(from,to).then((retsult)=>{
+                if (nomore){
+                    return
+                }
+                if (retsult===null){
+                    showMessage("无法获取更多的反馈")
+                    document.getElementById("add").classList.disabled=true
+                    return
+                }
+                if (retsult.length<to-from+1){
+                    nomore=true
+                    document.getElementById("more").classList.add("disabled")
+                    document.getElementById("more").innerText="暂时没有更多啦"
+                }else{
+                    document.getElementById("more").classList.remove("disabled")
+                    document.getElementById("more").innerText="更多"
+                }
+                from+=retsult.length
+                to+=retsult.length
+                var main=document.getElementById("main")
+                for (var i=0;i<retsult.length;i++){
+                    main.appendChild(new Feedback(retsult[i]).link)
+                }
+                refreshColumns()
+                
+            })
+        }function refreshItem(li,i){
+            if (i<li.length){
+                li[i].children[0].style.animation = "itemin 0.3s"
+                li[i].children[0].style.opacity="1"
+                li[i].children[0].style.pointerEvents="unset"
+                setTimeout(refreshItem,50,li,i+1)
             }
-            if (generalize!=""){
-                body+="# 描述\n"+generalize+"\n\n"
+        }
+        function cal() {
+            var num = Math.max(Math.floor((window.width - 20) / (boxWidth + 25)), 1)
+            var gap = ((window.width - 20) / num - boxWidth - 20)
+            return {
+                num: num,
+                gap: gap
             }
-            if (recirculationStep!=""){
-                body+="# 复现步骤\n"+recirculationStep+"\n\n"
+        }
+        window.onresize = function () {
+            window.width = window.innerWidth
+            window.height = window.innerHeight
+            refreshColumns()
+        }
+        function refreshColumns() {
+            var { num, gap } = cal()
+            var positionList = []
+            var mainbox=document.getElementById("main")
+            for (let i = 0; i < num; i++) {
+                positionList[i] = 80
             }
-            if (contactInformation!=""){
-                body+="# 联系方式\n"+contactInformation+"\n\n"
+            for (let i = 0; i < mainbox.children.length; i++) {
+                var ele = mainbox.children[i].children[0]
+                var index = 0
+                for (var j = 1; j < num; j++) {
+                    if (positionList[j] < positionList[index]) {
+                        index = j
+                    }
+                }
+                ele.style.top = positionList[index] + "px"
+                ele.style.left = index * (boxWidth + 20 + gap) + "px"
+                positionList[index] += parseInt(ele.clientHeight) + boxGap + 20
             }
-            body=encodeURI(body)
-            window.open("mailto:kuankuan@gouhaoming.onmicrosoft.com?subject="+subject+"&body="+body)
-            document.getElementById("mainForm").remove()
-            document.getElementById("thanks-hiden").setAttribute("id","thanks")
+            mainbox.style.width = num * (boxWidth + 20) + (num - 1) * gap + "px"
+            mainbox.style.height = Math.max.apply(null, positionList) + 110 + "px"
+            document.getElementById("more").style.top = Math.max.apply(null, positionList) + 90+ "px"
+            setTimeout(refreshItem,0,mainbox.children,0)
         }
         window.onload=function(){
             isPhone()
+            checkUser()
+            getNew()
+            window.onresize()
         }
     </script>
 </head>
@@ -44,6 +125,9 @@
     <header>
         <div id="titleGroup">
             <h1 id="title">宽宽2007·反馈</h1>
+        </div>
+        <div id="user">
+            <a class="login" href="/login?from=/feedback">登录</a>
         </div>
     </header>
     
@@ -78,29 +162,11 @@
         <div id="navHoverBackground"></div>
     </div>
 
-    <form id="mainForm">
-        <h1 id="main">反馈</h1>
-        <p class="tips">邮件主题*</p>
-        <input name="subject" id="subject" type="text"/>
-        <p class="tips">本次反馈的对象</p>
-        <input name="product" id="product" type="text"></input>
-        <p class="tips">详细描述您的问题/建议</p>
-        <textarea name="generalize" id="generalize"></textarea>
-        <p class="tips">问题的复现步骤</p>
-        <textarea name="recirculationStep" id="recirculationStep"></textarea>
-        <p class="tips">我们如何与您取得联系</p>
-        <input name="contactInformation" id="contactInformation" type="text">
-        <input type="button" name="send" id="send" value="发送" onclick="sendFeedback()">
-    </form>
-    <div id="thanks-hiden">
-        <b class="demo-icon">&#xe80a;</b>
-        <h1>感谢您的反馈</h1>
-        <p>感谢您使用我们的产品，<br>我们将会尽快处理<br>我们衷心的希望您能看到更满意的产品<br>请对我们予以信任</p>
-        <a href="/">
-            <h2>返回主页</h2>
-        </a>
-        <a href="/feedback/">
-            <h2>再次反馈</h2>
-        </a>
+    <div id="list">
+        <a id="add" href="/feedback/new/"><span class="demo-icon">&#xe80e</span>新建</a>
+        <div id="main">
+
+        </div>
+        <p id="more" class="disabled" onclick="getNew()">更多</p>
     </div>
 </body>

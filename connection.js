@@ -2,7 +2,7 @@ async function checkUser(){
     var userButton = document.querySelector("#user a")
     var userName=await getUserName()
     if (userName===null){
-        return
+        return null
     }
     try{
         userButton.classList.remove("login")
@@ -11,6 +11,7 @@ async function checkUser(){
     catch{}
     userButton.setAttribute("href","/user")
     userButton.innerText=userName
+    return userName
 }
 async function getUserName(){
     if (localStorage.getItem("check")===null){
@@ -288,7 +289,7 @@ async function getChangeEmailCode(ele,email,retry=null){
     }return false
 }
 async function checkChangeEmailCode(code){
-    var retsult =await fetch("https://kuankuan.site/user/change/email/check",{
+    var retsult = await fetch("https://kuankuan.site/user/change/email/check",{
         method:'POST',
         headers:{
             "Content-Type":'application/json',
@@ -307,4 +308,89 @@ async function checkChangeEmailCode(code){
     }else if(retsult.status==401){
         showMessage("验证码错误")
     }return false
+}
+async function getFeadbackList(from,to){
+    var retsult =await fetch(`https://kuankuan.site/feedback/list?from=${from}&to=${to}`)
+    if(retsult.status = 200){
+        return await retsult.json()
+    }
+    return null
+}
+async function getFeadbackData(id){
+    var retsult =await fetch(`https://kuankuan.site/feedback/data/${id}`)
+    if(retsult.status = 200){
+        return await retsult.json()
+    }
+    return null
+}
+async function getRights(){
+    if (localStorage.getItem("check")==null){
+        return null
+    }
+    var retsult =await fetch(`https://kuankuan.site/user/rights`,{
+        headers:{
+            check:localStorage.getItem("check")
+        }
+    })
+    if(retsult.status = 200){
+        return parseInt(await retsult.text())
+    }
+    return null
+}
+async function saveFeedback(statue,reply){
+    var retsult = await fetch("https://kuankuan.site/feedback/update",{
+        method: "POST",
+        headers:{
+            "Content-Type":'application/json',
+            "check":localStorage.getItem("check"),
+        },
+        body:JSON.stringify({
+            id:parseInt(getQueryVariable("id")),
+            statue:statue,
+            reply:reply
+        })
+    })
+    if (retsult.status = 200){
+        showMessage("保存成功")
+    }else{
+        showMessage("保存失败:"+retsult.status + " " + await retsult.statusText)
+    }
+}
+async function delFeedback(statue,reply){
+    var retsult = await fetch("https://kuankuan.site/feedback/delete",{
+        method: "POST",
+        headers:{
+            "Content-Type":'application/json',
+            "check":localStorage.getItem("check"),
+        },
+        body:JSON.stringify({
+            id:parseInt(getQueryVariable("id")),
+        })
+    })
+    if (retsult.status = 200){
+        showMessage("删除成功")
+    }else{
+        showMessage("删除失败:"+retsult.status + " " + await retsult.statusText)
+    }
+}
+async function newFeedback(title,content,recirculationStep){
+    var retsult = await fetch("https://kuankuan.site/feedback/new",{
+        method: "POST",
+        headers:{
+            "Content-Type":'application/json',
+            "check":localStorage.getItem("check"),
+        },
+        body:JSON.stringify({
+            title:title,
+            content:content,
+            recirculationStep:recirculationStep
+        })
+    })
+    if (retsult.status == 200){
+        location.href="/feedback/data?id="+await retsult.text()
+    }else{
+        if (retsult.status==403){
+            location.href="/login?from=/feedback/new"
+        }
+    }
 }

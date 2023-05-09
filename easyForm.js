@@ -89,7 +89,7 @@ class DialogBox {
         "maxHeight": "100%",
         "minWidth": "40%"
     }
-    constructor(obj) {
+    constructor(obj,onclose=null) {
         this._data = obj
         Object.assign(this.style, this._data.css)
         this._frame = new Frame(this._data.content)
@@ -163,7 +163,7 @@ class DialogBox {
         if (!this._data.hiddenCloseButton){
             this._center.appendChild(this._close)
         }
-        
+        this.onclose=onclose
         this.refresh()
         document.body.appendChild(this._ele)
     }
@@ -181,6 +181,9 @@ class DialogBox {
     }
     remove(){
         this._ele.remove()
+        if (typeof this.onclose==="function"){
+            this.onclose()
+        }
     }
     get retsult() {
         return this._frame.retsult
@@ -260,7 +263,7 @@ class GridFrame extends Frame {
         super.refresh()
     }
 }
-function showMessage(msg) {
+function showMessage(msg,onclose=null) {
     new DialogBox({
         title: "提示",
         parent: this,
@@ -279,7 +282,7 @@ function showMessage(msg) {
                 }
             ]
         }
-    })
+    },onclose)
 }
 // a = new DialogBox({
 //     title: "你好呀",

@@ -54,3 +54,9 @@ header{
     left: 50%;
     transform: translate(-50%,0);
 }
+#logout{
+    background: #ff0000;
+}
+#logout:hover{
+    background: #ff4b4b;
+}

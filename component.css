@@ -1,0 +1,85 @@
+.selectButton {
+    font-size: 2em;
+    transform: translate(0, -15%);
+    position: absolute;
+    cursor: pointer;
+    transition: 0.3s;
+    color: #888888;
+}
+.selectButton:hover{
+    transform: translate(0, -15%) scale(1.2);
+    color: #0000ff;
+}
+ul#searchTypeList::-webkit-scrollbar {
+    width: 0;
+}
+ul.selectList::-webkit-scrollbar{
+    width: 0;
+}
+ul.selectList {
+    position: absolute;
+    margin: 0;
+    list-style-type: none;
+    scrollbar-width: none;
+    width: max-content;
+    padding: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    margin-top: 5px;
+    transition: 0.3s;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow-x: auto;
+    overflow-y: scroll;
+    max-height: 0px;
+}
+.selectButton:hover + ul.selectList,ul.selectList:hover{
+    max-height: 100px;
+    padding: 10px;
+}
+ul.selectList li {
+    padding: 5px;
+    padding-top: 0px;
+    border-radius: 10px;
+    padding-bottom: 0px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+ul.selectList li.choice{
+    background-color: #80ffb5;
+}
+ul.selectList li:hover{
+    background-color: #b4b4ff;
+    transform: scale(1.2);
+}
+
+textarea.markdownEditor{
+    resize: none;
+    display: block;
+    width: calc(100% - 20px);
+    outline: none;
+    border: none;
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: unset;
+    transition: 0.3s;
+}
+.markdownShower{
+    height: max(calc(100% - 40px),0px);
+    position: relative;
+    padding: 20px;
+    border-radius: 10px;
+    background: #b9b9ff;
+    font-size: 20px;
+    transition: 0.3s;
+}
+.markdown{
+    position: relative;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 10px;
+    transition: 0.3s;
+}

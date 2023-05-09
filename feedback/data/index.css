@@ -1,0 +1,221 @@
+@keyframes  headerChane{
+    0%{
+        background-color: #ffffff;
+        width: 0;
+    }100%{
+        width: 100%;
+        background-color: #8A8AFF;
+    }
+}
+@keyframes linkGroupChane{
+    0%{
+        filter: opacity(0%);
+    }60%{
+        filter: opacity(0%);
+    }
+    100%{
+        filter: opacity(100%);
+    }
+}
+
+body{
+    background-color: #c9c9ff;
+}
+header{
+    animation-name: headerChane;
+    animation-duration: 1s;
+    overflow: hidden;
+    z-index: 2;
+    position: fixed;
+    top: 10px;
+    border-radius: 30px;
+    height: 60px;
+    background-color: #8A8AFF;
+    width: 100%;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+#titleGroup{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+#title{
+    color: #0000ff;
+    white-space: nowrap;
+}
+#linkGroup{
+    animation-name: linkGroupChane;
+    animation-duration: 1s;
+    position: absolute;
+    left: 85%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color:#c9c9ff
+}
+div#user a {
+    animation: linkGroupChane 1s;
+    font-size: 24px;
+    margin: 0;
+    padding: 10px;
+    border-radius: 1000px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: block;
+    text-decoration-line: none;
+    transition: 0.3s;
+    color: #ffffff;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translate(0,-50%);
+}
+div#user a.login{
+    background: linear-gradient(to right bottom, #ff0000, #ff0033, #ff0055, #ff0074, #ff0091);
+}
+div#user a::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    border-radius: 1000px;
+    opacity: 0;
+    transition: 0.3s;
+}
+div#user a:hover::after{
+    opacity: 1;
+}
+div#user a:hover{
+    transform: scale(1.05) translate(0,-50%);
+}
+div#user a.login::after{
+    background-image: linear-gradient(to left top, #ff0000, #ff3e00, #ff5b00, #ff7100, #ff8500);
+}
+div#user a.user::after{
+    background-image: linear-gradient(to right bottom, #5546ff, #9647f8, #c24bf1, #e354ea, #ff62e4);
+}
+div#user a.user{
+    background: linear-gradient(to right bottom, #004eff, #8541f3, #bb2fe3, #e118d1, #ff00bd);
+}
+#main{
+    position: absolute;
+    top: 80px;
+    margin-bottom: 100pxs;
+    width: 90%;
+    left: 50%;
+    transform: translate(-50%,0);
+    background-color: #9595ff;
+    padding: 20px;
+    border-radius: 20px;
+}
+#dataTitle{
+    font-size: 36px;
+    display: inline;
+}
+#dataContent{
+    padding: 30px;
+    border-radius: 10px;
+    background: #b9b9ff;
+    font-size: 20px;
+}
+#dataRecirculationStep{
+    padding: 30px;
+    border-radius: 10px;
+    background: #b9b9ff;
+    font-size: 20px;
+}
+#dataRecirculationStep.empty{
+    background-color: transparent;
+    color:#3f3f3f;
+}
+#dataRecirculationStep.empty::after{
+    content: "作者没有提供复现步骤";
+}
+#dataReply{
+    padding: 30px;
+    border-radius: 10px;
+    background: #b9b9ff;
+    font-size: 20px;
+}#dataReply.empty{
+    background-color: transparent;
+    color:#3f3f3f;
+}#dataReply.empty::after{
+    content: "管理员暂未予以回复";
+}
+#dataStatue{
+    padding-left: 10px;
+    padding-right: 10px;
+    background: #0000ff;
+    border-radius: 1000px;
+    position: absolute;
+    margin-left: 10px;
+    display: inline;
+}#dataStatue.select{
+    padding-right: 30px;
+}
+#dataStatue.Waiting{
+    background-image: linear-gradient(to right bottom, #42d600, #8ab200, #a98d00, #b66600, #b33e00);
+}
+#dataStatue.A1{
+    background-image: linear-gradient(to right bottom, #0000ff, #7a00ff, #af00ff, #d900ff, #fe00ff);
+}
+#dataStatue.A2{
+    background-image: linear-gradient(to right bottom, #4f4fff, #8d52ff, #b856ff, #dd5dff, #fe66ff);
+}
+#dataStatue.A3{
+    background-image: linear-gradient(to right bottom, #7c7cff, #a481ff, #c686ff, #e48cff, #fe94ff);
+}
+#dataStatue.B1{
+    background-image: linear-gradient(to right bottom, #ff007a, #ff1162, #ff2a49, #ff422e, #ff5800);
+}
+#dataStatue.B2{
+    background-image: linear-gradient(to right bottom, #ff429d, #ff4c83, #ff5d6b, #ff7155, #ff8544);
+}
+#dataStatue.B3{
+    background-image: linear-gradient(to right bottom, #ff7cbb, #ff82a5, #ff8c91, #ff9982, #ffa778);
+}
+#dataStatue.Finish{
+    background-image: linear-gradient(to right bottom, #ff0000, #ff2900, #ff3d00, #ff4b00, #ff5800);
+}
+#save{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    color: #0000ff;
+    cursor: pointer;
+    background: #c9c9ff;
+    margin: 0;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 1000px;
+    transition: 0.3s;
+}
+#save:hover,#delete:hover{
+    background: #9494ff;
+    color: #ff0000;
+    transform: scale(1.2);
+}
+#delete{
+    position: absolute;
+    top: 10px;
+    right: 70px;
+    font-size: 30px;
+    color: #0000ff;
+    cursor: pointer;
+    background: #c9c9ff;
+    margin: 0;
+    padding: 5px;
+    padding-left: 7px;
+    padding-right: 7px;
+    border-radius: 1000px;
+    transition: 0.3s;
+}
+code {
+    border-radius: 10px;
+}
