@@ -165,6 +165,10 @@ class DialogBox {
         }
         this.onclose=onclose
         this.refresh()
+        try{
+            document.activeElement.blur()
+        }catch{}
+        
         document.body.appendChild(this._ele)
     }
     refresh() {
