@@ -77,5 +77,6 @@ class MarkdownEditor{
     refresh(){
         this.shower.innerHTML=this.converter.makeHtml(this.value)
         hljs.highlightAll()
+        MathJax.typeset()
     }
 }

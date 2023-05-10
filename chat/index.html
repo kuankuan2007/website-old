@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+    <link href="/logo.ico" rel="icon">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="/font-icos.css">
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/component.css">
+    <link rel="stylesheet" href="/heighlight/styles/monokai-sublime.min.css">
+    <script src="/easyForm.js" type="text/javascript"></script>
+    <script src="/isPhone.js" type="text/javascript"></script>
+    <script src="/connection.js" type="text/javascript"></script>
+    <script src="/showdown.js" type="text/javascript"></script>
+    <script src="/component.js" type="text/javascript"></script>
+    <script src="/heighlight/highlight.min.js" type="text/javascript"></script>
+    <script src="/socket.io.min.js" type="text/javascript"></script>
+
+    <script>
+        var converter = new showdown.Converter({
+            parseImgDimensions:true,
+            headerLevelStart:3,
+            simplifiedAutoLink:true,
+            excludeTrailingPunctuationFromURLs:true,
+            strikethrough:true,
+            tables:true,
+            tasklists:true,
+            simpleLineBreaks:true,
+            openLinksInNewWindow:true,
+        })
+        window.onload=function(){
+            isPhone()
+            checkUser().then((retsult)=>{
+                if (retsult===null){
+                    location.href="/login?from=/chat"
+                    return
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div id="titleGroup">
+            <h1 id="title">宽宽2007·反馈</h1>
+        </div>
+        <div id="user">
+            <a class="login" href="/login?from=/feedback">登录</a>
+        </div>
+    </header>
+    
+
+    
+    
+</body>
