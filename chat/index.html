@@ -12,8 +12,7 @@
     <script src="/showdown.js" type="text/javascript"></script>
     <script src="/component.js" type="text/javascript"></script>
     <script src="/heighlight/highlight.min.js" type="text/javascript"></script>
-    <script src="/socket.io.min.js" type="text/javascript"></script>
-
+    <script src="/mathjax.min.js"></script>
     <script>
         var converter = new showdown.Converter({
             parseImgDimensions:true,
@@ -26,6 +25,182 @@
             simpleLineBreaks:true,
             openLinksInNewWindow:true,
         })
+        var messageList={
+        }
+        function showMenu(e, buttons, parent) {
+            if (window.menu) {
+                window.menu.remove()
+            }
+            window.onMenu = e.target
+            window.menu = document.createElement("ul")
+            e.preventDefault()
+            window.menu.classList.add("menu")
+            window.menu.style.left = e.pageX + "px"
+            window.menu.style.top = e.pageY + "px"
+            for (let i in buttons) {
+                ele = document.createElement("li")
+                ele.innerText = i
+                ele.addEventListener("click", e => {
+                    buttons[i].call(parent, e)
+                    window.menu.remove()
+                })
+                ele.addEventListener("contextmenu", e => { e.preventDefault() })
+                window.menu.appendChild(ele)
+            }
+            document.body.appendChild(window.menu)
+        }
+        class Message{
+            constructor(id,user,statue,message,time){
+                this.id = id;
+                this.user = user;
+                this.statue = statue;
+                this.time = time
+                this.message=message
+                this.refresh()
+            }
+            
+            refresh(){
+                if (this.statue==0){
+                    this.ele=document.createElement("div")
+                    this.infoBox=document.createElement("div")
+                    this.infoBox.innerText=this.time+" · "+this.user
+                    this.infoBox.classList.add("infoBox")
+                    this.messageBox=document.createElement("div")
+                    this.messageBox.innerHTML=converter.makeHtml(this.message.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script.*>/gi, ''))
+                    this.messageBox.classList.add("messageBox")
+                    this.ele.appendChild(this.infoBox)
+                    this.ele.appendChild(this.messageBox)
+                    if (this.user!==window.user){
+                        this.ele.classList.add("message")
+                        this.ele.style.transform="translate(-100%,-60%) scale(0)"
+                        this.ele.style.opacity="0"
+                        setTimeout(()=>{
+                            this.ele.style.transform="translate(0px,0px) scale(1)"
+                            this.ele.style.opacity="1"
+                        },0)
+                    }else{
+                        this.ele.classList.add("selfMessage")
+                        this.ele.style.transform="translate(-100%,60%) scale(0)"
+                        this.ele.style.opacity="0"
+                        setTimeout(()=>{
+                            this.ele.style.transform="translate(0px,0px) scale(1)"
+                            this.ele.style.opacity="1"
+                        },0)
+                    }
+                    this.ele.addEventListener("contextmenu",(e)=>{this.contextmenu.call(this,e)})
+                    hljs.highlightAll()
+                    MathJax.typeset()
+                }else{
+                    this.ele=document.createElement("p")
+                    this.ele.classList.add("recall")
+                    this.ele.style.transform="translate(0px,-60%)"
+                    this.ele.style.opacity="0"
+                    setTimeout(()=>{
+                        this.ele.style.transform="translate(0px,0px)"
+                        this.ele.style.opacity="1"
+                    },0)
+                    if (this.user===this.message){
+                        this.ele.innerText=this.user+"撤回了一条消息"
+                    }else{
+                        this.ele.innerText=this.message+"撤回了一条"+this.user+"的消息"
+                    }
+                }
+            }
+            contextmenu(e){
+                console.log(this)
+                if (this.user===window.user || window.rights===1){
+                    showMenu(e, {
+                        "撤回": this.doRecall,
+                        "删除": this.remove
+                    }, this)
+                }
+            }
+            doRecall(){
+                chatConnect.send(JSON.stringify({
+                    type:"recall",
+                    id:this.id,
+                    check:localStorage.getItem("check")
+                }))
+            }
+            remove(){
+                this.ele.remove()
+            }
+            recall(user){
+                this.message=user
+                this.statue=1
+                this.refresh()
+            }
+        }
+        var chatConnect
+        var sendText
+        var from = 0
+        var to = 20
+        function  getMore(){
+            document.getElementById("more").classList.add("disabled")
+            document.getElementById("more").innerText="加载中"
+            chatConnect.send(JSON.stringify({
+                check:localStorage.getItem("check"),
+                type:"history",
+                from:from,
+                to:to
+            }))
+        }
+        function onmessage(e){
+            var  data= JSON.parse(e.data)
+            var messagesScroll=document.getElementById("messagesScroll")
+            var messages=document.getElementById("messages")
+            if (data.type==="history"){
+                if(data.data.length!=0){
+                    document.getElementById("more").classList.remove("disabled")
+                    document.getElementById("more").innerText="更多"
+                }else{
+                    document.getElementById("more").classList.add("disabled")
+                    document.getElementById("more").innerText="没有更多啦"
+                }
+                for (var i=0;i<data.data.length;i++){
+                    var newMessage=new Message(data.data[i].id,data.data[i].user,data.data[i].statue,data.data[i].message,data.data[i].time)
+                    console.log(newMessage)
+                    messagesScroll.prepend(newMessage.ele)
+                    messageList[data.data[i].id]=newMessage
+                }
+                if (from==0){
+                    messages.scrollTop = messages.scrollHeight;
+                }
+                from=data.to+1
+                to=from+20
+            }
+            if (data.type==="message"){
+                var newMessage=new Message(data.id,data.user,data.statue,data.message,data.time)
+                messageList[data.id]=newMessage
+                messagesScroll.appendChild(messageList[data.id].ele)
+                hljs.highlightAll()
+                MathJax.typeset()
+                if((messages.scrollHeight - messages.clientHeight - messages.scrollTop)<500){
+                    messages.scrollTop = messages.scrollHeight;
+                }
+                
+                from+=1
+                to+=1
+            }
+            if (data.type==="recall"){
+                var temp=messageList[data.id].ele
+                messageList[data.id].recall(data.user)
+                messagesScroll.insertBefore(messageList[data.id].ele,temp)
+                temp.remove()
+            }
+        }
+        function send(e){
+            var value=sendText.value
+            if (/^\s*$/.test(value)){
+                return
+            }
+            chatConnect.send(JSON.stringify({
+                "check":localStorage.getItem("check"),
+                "message": sendText.value,
+                "type":"send"
+            }))
+            sendText.value=""
+        }
         window.onload=function(){
             isPhone()
             checkUser().then((retsult)=>{
@@ -33,21 +208,72 @@
                     location.href="/login?from=/chat"
                     return
                 }
+                chatConnect=new WebSocket("wss://kuankuan.site/chat/ws")
+                chatConnect.onmessage=onmessage
+                chatConnect.onopen=getMore
+                document.getElementById("sendButton").addEventListener("click",send)
+                window.user=retsult
             })
+            getRights().then((retsult)=>{
+                window.rights=retsult
+            })
+            sendText=new MarkdownEditor()
+            document.getElementById("send").insertBefore(sendText.ele,document.getElementById("dosend"))
         }
     </script>
 </head>
 <body>
     <header>
         <div id="titleGroup">
-            <h1 id="title">宽宽2007·反馈</h1>
+            <h1 id="title">宽宽2007·聊天</h1>
         </div>
         <div id="user">
             <a class="login" href="/login?from=/feedback">登录</a>
         </div>
     </header>
     
+    <div id="nav">
+        <ul>
+            <li><a href="/"><p>主页<b class="demo-icon">&#xe800;</b></p></a></li>
+            <li><a href="/blogs/"><p>博客<b class="demo-icon">&#xe801;</b></p></a></li>
+            <li id="helpNav"><a href="/docs/"><p>帮助<b class="demo-icon">&#xe802;</b></p></a><div id="helpSonNav">
+                <ul>
+                <li><a href="/docs/qq-robot/"><p>QQ机器人(智障宽宽)</p></a></li>
+                <li><a href="/docs/self-made-pvz/"><p>(合作)自制pvz</p></a></li>
+                <li><a href="/docs/dns-speed-measurement/"><p>DNS测速</p></a></li>
+                <li><a href="/docs/ghm-base64-encoder/"><p>GHM-BASE64编码器</p></a></li>
+                <li><a href="/docs/smart-reply/"><p>智能回复</p></a></li>
+                <li><a href="/docs/folder-synchronization/"><p>文件夹同步</p></a></li>
+                <li><a href="/docs/connector/"><p>连点器</p></a></li>
+                <li><a href="/docs/simple-chat-software/"><p>消息收发简易</p></a></li>
+                <li><a href="/docs/excel-pinyin/"><p>Excel汉字转拼音</p></a></li>
+                <li><a href="/docs/handwritten-text-generator/"><p>手写体生成器</p></a></li>
+                <li><a href="/docs/multithreaded-download/"><p>多线程下载</p></a></li>
+                <li><a href="/docs/long-polling/"><p>长轮询</p></a></li>
 
+                </ul>
+            </div></li>
+            <li><a href="/words/"><p>一言<b class="demo-icon">&#xe803;</b></p></a></li>
+            <li><a href="/contactInformation/"><p>联系我们<b class="demo-icon">&#xf2b9;</b></p></a></li>
+            <li><a href="/feedback/"><p>反馈<b class="demo-icon">&#xf2b6;</b></p></a></li>
+            <li><a href="/chat/"><p>聊天<b class="demo-icon">&#xe813;</b></p></a></li>
+            <li><a href="https://gitee.com/kuankuan2007"><p>Gitee<b class="demo-icon">&#xf053;</b></p></a></li>
+            <li><a href="https://github.com/kuankuan2007"><p>Github<b class="demo-icon">&#xf056;</b></p></a></li>
+        </ul>
+        <div id="navHoverBackground"></div>
+    </div>
+
+    <div id="center">
+        <div id="messages">
+            <p id="more" class="disabled" onclick="getMore()">加载中</p>
+            <div id="messagesScroll">
+                
+            </div>
+        </div>
+        <div id="send">
+            <div id="dosend"><span id="sendButton">发送</span></div>
+        </div>
+    </div>
     
     
 </body>
