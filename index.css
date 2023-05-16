@@ -1,0 +1,294 @@
+#start{
+    position: relative;
+    height: calc(100vh - 50px);
+    width: 100%;
+}
+body{
+    margin: 0;
+    background: #000014;
+    color: #ffffff;
+    scrollbar-width: 0px;
+    scroll-behavior: smooth;
+    transition: 0.3s;
+    position: relative;
+    text-align: center;
+}
+body::-webkit-scrollbar{
+    /* width: 0px; */
+}
+#startCenter h1{font-size: 72px;word-break: keep-all;}
+#nav{
+    height: 50px;
+    position: sticky;
+    top: 0px;
+    z-index: 1000;
+}
+#topMenu{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, max-content));
+    grid-template-rows: 50px;
+}
+#topMenu li{
+    margin: 0;
+    font-size: 24px;
+    text-align: center;
+    line-height: 50px;
+    position: relative;
+}
+#topMenu li p::after{
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    left: 100%;
+    background: linear-gradient(180deg,transparent 20%,#282828 60%,transparent);
+    color: transparent;
+}
+@keyframes startCenterIn{
+    from{
+        transform: scale(0) translate(-50%,-50%);
+    }
+    to{
+        transform: scale(1) translate(-50%,-50%);
+    }
+}
+div#startCenter {
+    animation: startCenterIn 0.3s;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(1);
+    transform-origin:  left top;
+    text-align: center;
+    max-width: 80%;
+}
+
+#startCenter p {
+    font-size: 20px;
+    word-break: keep-all;
+}
+
+div#eleBox {
+    height: 200vh;
+}
+
+#topMenu p {
+    margin: 0;
+}
+
+#topMenu a {
+    color: unset;
+    text-decoration: none;
+}
+#root{
+    position: relative;
+}
+div#colorBlocks {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.colorblock {
+    position: absolute;
+    border-radius: 10%;
+    transition: 0.5s;
+}
+p#signBox {
+    opacity: 0;
+    pointer-events: none;
+}
+p#sign {
+    margin-top: 0;
+    width: 100%;
+    position: absolute;
+}
+@keyframes signPointerShine{
+    from{
+        opacity: 0;
+    }to{
+        opacity: 1;
+    }
+}
+p#sign::after{
+    animation: signPointerShine 0.5s alternate infinite cubic-bezier(0.96, 0, 0.17, 1.01);
+    content: "|";
+    position: absolute;
+    width: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.1s;
+}
+p#sign.finish::after{
+    animation: unset;
+}
+#elePlay{
+    height: 100vh;
+    position: sticky;
+    top: 0;
+}
+#fixed{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+.colorblockRoot{
+    transition: 0.3s;
+    transition-timing-function: cubic-bezier(0.23, -0.18, 0, 1.28);;
+}
+#eleCenter{
+    display: grid;
+    grid-template-columns: repeat(4, 200px);
+    grid-template-rows: repeat(2, 150px);
+    top: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,calc(-50% + 100px));
+    padding: 40px;
+    background: rgb(33 0 123 / 50%);
+    border-radius: 40px;
+}
+
+p.eleIcon {
+    color: #ffffff;
+    font-size: 48px;
+    text-align: center;
+    position: absolute;
+    margin: 0;
+    padding: 10px;
+    width: 50px;
+    line-height: 50px;
+    border-radius: 10px;
+    left: 50%;
+    top: 20px;
+    transform: translate(-50%,0);
+}
+
+.eles {
+    position: relative;
+}
+
+p.eleTitle {
+    position: absolute;
+    top: 105px;
+    margin: 0;
+    font-size: 24px;
+    text-align: center;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+#eleLogo{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100px;
+    background: #ffffff;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: 20px;
+    padding-right: 20px;
+    z-index: 10;
+    border-radius: 20px;
+}
+#eleTitle{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,calc(-50% - 200px));
+    font-size: 48px;
+}
+.elesPage{
+    height: 100vh;
+    position: relative;
+}
+.elseBG{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+div#user {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 2000;
+}
+div#user a {
+    font-size: 24px;
+    margin: 0;
+    padding: 10px;
+    border-radius: 1000px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: block;
+    text-decoration-line: none;
+    transition: 0.3s;
+    color: #ffffff;
+}
+div#user a.login{
+    background: linear-gradient(to right bottom, #ff0000, #ff0033, #ff0055, #ff0074, #ff0091);
+}
+div#user a::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    border-radius: 1000px;
+    opacity: 0;
+    transition: 0.3s;
+}
+div#user a:hover::after{
+    opacity: 1;
+}
+div#user a:hover{
+    transform: scale(1.2);
+}
+div#user a.login::after{
+    background-image: linear-gradient(to left top, #ff0000, #ff3e00, #ff5b00, #ff7100, #ff8500);
+}
+div#user a.user::after{
+    background-image: linear-gradient(to right bottom, #5546ff, #9647f8, #c24bf1, #e354ea, #ff62e4);
+}
+div#user a.user{
+    background: linear-gradient(to right bottom, #004eff, #8541f3, #bb2fe3, #e118d1, #ff00bd);
+}
+.elseMain{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: rgba(0,0,0,0.8);
+    padding: 40px;
+    border-radius: 20px;
+}
+.elseMain h1{
+    font-size: 48px;
+    text-align: left;
+    margin: 0;
+}.elseMain p{
+    font-size: 24px;
+    line-height: 200%;
+    padding: 20px;
+    padding-left: 40px;
+    text-align: left;
+}
+.elseMain p::first-letter{
+    font-size: 2em;
+    float: left;
+    margin: 0 .1em 0 0;
+}
