@@ -169,7 +169,7 @@
                 animations.push(blockList.eles[i].animation)
             }
             animations.push(new ScrollAnimation([document.getElementById("eleCenter")],{transform:"translate(-50%,calc(-50% + 100px)) scale({0})",opacity:"{1}"},window.innerHeight,window.innerHeight*1.5,[[0,1],[0,1]]))
-            animations.push(new ScrollAnimation([document.getElementById("eleTitle")],{transform:"translate(-50%,calc(-50% - 200px)) scale({0})",opacity:"{1}"},window.innerHeight,window.innerHeight*1.5,[[0,1],[0,1]]))
+            animations.push(new ScrollAnimation([document.getElementById("eleTitle")],{transform:"translate(-50%,calc(-50% - 300px)) scale({0})",opacity:"{1}"},window.innerHeight,window.innerHeight*1.5,[[0,1],[0,1]]))
             li=document.querySelectorAll(".elesPage .elseBG")
             for(i=0;i<li.length;i++){
                 for (var j=0;j<Math.max(window.innerHeight,window.innerWidth)/50;j++){
@@ -235,6 +235,10 @@
                             <p class="eleTitle">聊天</p>
                         </div>
                         <div class="eles" num="1">
+                            <a href="/chatgpt/"><p class="demo-icon eleIcon" style="background-color: #570000;">&#xf18d;</p></a>
+                            <p class="eleTitle">ChatGPT</p>
+                        </div>
+                        <div class="eles" num="0">
                             <a href="https://gitee.com/kuankuan2007"><p class="demo-icon eleIcon" style="background-color: #ff0000;">&#xf053;</p></a>
                             <p class="eleTitle">Gitee</p>
                         </div>

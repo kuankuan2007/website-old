@@ -148,7 +148,7 @@ p#sign.finish::after{
 #eleCenter{
     display: grid;
     grid-template-columns: repeat(4, 200px);
-    grid-template-rows: repeat(2, 150px);
+    grid-template-rows: repeat(3, 150px);
     top: 50%;
     position: absolute;
     left: 50%;
@@ -204,7 +204,7 @@ p.eleTitle {
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%,calc(-50% - 200px));
+    transform: translate(-50%,calc(-50% - 300px));
     font-size: 48px;
 }
 .elesPage{

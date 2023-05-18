@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+    <link href="/logo.ico" rel="icon">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="/font-icos.css">
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/component.css">
+    <link rel="stylesheet" href="/heighlight/styles/monokai-sublime.min.css">
+    <script src="/easyForm.js" type="text/javascript"></script>
+    <script src="/isPhone.js" type="text/javascript"></script>
+    <script src="/connection.js" type="text/javascript"></script>
+    <script src="/showdown.js" type="text/javascript"></script>
+    <script src="/component.js" type="text/javascript"></script>
+    <script src="/heighlight/highlight.min.js" type="text/javascript"></script>
+    <script src="/mathjax.min.js"></script>
+    <script>
+        var converter = new showdown.Converter({
+            parseImgDimensions:true,
+            headerLevelStart:2,
+            simplifiedAutoLink:true,
+            excludeTrailingPunctuationFromURLs:true,
+            strikethrough:true,
+            tables:true,
+            tasklists:true,
+            simpleLineBreaks:true,
+            openLinksInNewWindow:true,
+        })
+        var messageList=[]
+        var gptConnect
+        var sendText
+        class Message{
+            constructor(user){
+                this.ele=document.createElement("div")
+                this.ele.classList.add("message")
+                this.infoBox=document.createElement("div")
+                this.infoBox.classList.add("infoBox")
+                this.infoBox.innerText=user
+                this.shower=document.createElement("div")
+                this.shower.classList.add("messageBox")
+                var value=""
+                this.ele.appendChild(this.infoBox)
+                this.ele.appendChild(this.shower)
+                Object.defineProperty(this,"value",{
+                    get:()=>{
+                        return value
+                    },
+                    set:(v)=>{
+                        value=v
+                        this.refresh()
+                    }
+                })
+            }
+            refresh(){
+                this.shower.innerHTML=converter.makeHtml(this.value)
+                this.shower.querySelectorAll("code").forEach(hljs.highlightElement)
+                MathJax.typeset()
+            }
+        }
+        class UserMessage extends Message{
+            constructor(message){
+                super(window.user)
+                this.value=message
+                this.ele.classList.remove("message")
+                this.ele.classList.add("selfMessage")
+            }
+        }
+        function getLastNode(dom){
+            const children=dom.childNodes
+            for(let i=children.length-1;i>=0;i--){
+                const node=children[i]
+                if(node.nodeType===Node.TEXT_NODE && /\S/.test(node.nodeValue)){
+                    node.nodeValue=node.nodeValue.replace(/\s+$/,"")
+                    return node
+                }else if(node.nodeType===Node.ELEMENT_NODE){
+                    const last=getLastNode(node);
+                    if (last){
+                        return last
+                    }
+                }
+            }
+            return null
+        }
+        class GPTMessage extends Message{
+            constructor(){
+                super("ChatGPT")
+                this.loading=document.createElement("img")
+                this.loading.src="/loading.gif"
+                this.loading.classList.add("loading")
+                this.ele.appendChild(this.loading)
+                this.shower.style.display="none"
+                this.cursor=document.createElement("div")
+                this.cursor.classList.add("cursor")
+                this.cursor.style.display="none"
+                this.ele.appendChild(this.cursor)
+            }
+            add(text){
+                this.cursor.style.display="block"
+                this.loading.style.display="none"
+                this.shower.style.display="block"
+                this.value+=text
+                const position=this.shower.getBoundingClientRect()
+                document.getElementById("messages").scrollTop=document.getElementById("messages").scrollHeight
+                const lastValue=getLastNode(this.shower)
+                const textNode=document.createTextNode("\u200b")
+                console.log(lastValue.parentElement)
+                if (lastValue){
+                    lastValue.parentElement.appendChild(textNode)
+                }else{
+                    this.shower.appendChild(textNode)
+                }
+                const range=document.createRange()
+                range.setStart(textNode,0)
+                range.setEnd(textNode,0)
+                const rect=range.getBoundingClientRect()
+                const pos={
+                    x:rect.left-position.left,
+                    y:rect.top-position.top
+                }
+                this.cursor.style.top=(pos.y+21)+"px"
+                this.cursor.style.left=(pos.x+20)+"px"
+            }
+            end(){
+                this.cursor.style.display="none"
+            }
+        }
+        var Messages=[]
+        function onmessage(e){
+            data=JSON.parse(e.data)
+            if (data.type===undefined){
+                messageList[messageList.length-1].add(data.text)
+            }
+            else if (data.type==="END"){
+                messageList[messageList.length-1].end()
+                document.getElementById("sendButton").classList.remove("disabled")
+            }
+            else if (data.type==="ERROR"){
+                messageList[messageList.length-1].value=`ERROR ${data.content}`
+                messageList[messageList.length-1].end()
+                document.getElementById("sendButton").classList.remove("disabled")
+            }
+        }
+        function send(e){
+            var value=sendText.value
+            if (/^\s*$/.test(value)){
+                return
+            }
+            var users=new UserMessage(value)
+            document.getElementById("messagesScroll").appendChild(users.ele)
+            var gpt=new GPTMessage()
+            document.getElementById("messagesScroll").appendChild(gpt.ele)
+            messageList.push(users,gpt)
+            sendText.value=""
+            document.getElementById("sendButton").classList.add("disabled")
+            gptConnect.send(JSON.stringify({
+                check:localStorage.getItem("check"),
+                question:value
+            }))
+        }
+        window.onload=function(){
+            isPhone()
+            checkUser().then((retsult)=>{
+                if (retsult===null){
+                    location.href="/login?from=/chatgpt"
+                    return
+                }
+                gptConnect=new WebSocket("wss://kuankuan.site/chatgpt")
+                gptConnect.onmessage=onmessage
+                document.getElementById("sendButton").addEventListener("click",send)
+                window.user=retsult
+            })
+            getRights().then((retsult)=>{
+                window.rights=retsult
+            })
+            sendText=new MarkdownEditor()
+            document.getElementById("send").insertBefore(sendText.ele,document.getElementById("dosend"))
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div id="titleGroup">
+            <h1 id="title">宽宽2007·聊天</h1>
+        </div>
+        <div id="user">
+            <a class="login" href="/login?from=/feedback">登录</a>
+        </div>
+    </header>
+
+    
+    <div id="nav">
+        <ul>
+            <li><a href="/"><p>主页<b class="demo-icon">&#xe800;</b></p></a></li>
+            <li><a href="/blogs/"><p>博客<b class="demo-icon">&#xe801;</b></p></a></li>
+            <li id="helpNav"><a href="/docs/"><p>帮助<b class="demo-icon">&#xe802;</b></p></a><div id="helpSonNav">
+                <ul>
+                <li><a href="/docs/qq-robot/"><p>QQ机器人(智障宽宽)</p></a></li>
+                <li><a href="/docs/self-made-pvz/"><p>(合作)自制pvz</p></a></li>
+                <li><a href="/docs/dns-speed-measurement/"><p>DNS测速</p></a></li>
+                <li><a href="/docs/ghm-base64-encoder/"><p>GHM-BASE64编码器</p></a></li>
+                <li><a href="/docs/smart-reply/"><p>智能回复</p></a></li>
+                <li><a href="/docs/folder-synchronization/"><p>文件夹同步</p></a></li>
+                <li><a href="/docs/connector/"><p>连点器</p></a></li>
+                <li><a href="/docs/simple-chat-software/"><p>消息收发简易</p></a></li>
+                <li><a href="/docs/excel-pinyin/"><p>Excel汉字转拼音</p></a></li>
+                <li><a href="/docs/handwritten-text-generator/"><p>手写体生成器</p></a></li>
+                <li><a href="/docs/multithreaded-download/"><p>多线程下载</p></a></li>
+                <li><a href="/docs/long-polling/"><p>长轮询</p></a></li>
+
+                </ul>
+            </div></li>
+            <li><a href="/words/"><p>一言<b class="demo-icon">&#xe803;</b></p></a></li>
+            <li><a href="/contactInformation/"><p>联系我们<b class="demo-icon">&#xf2b9;</b></p></a></li>
+            <li><a href="/feedback/"><p>反馈<b class="demo-icon">&#xf2b6;</b></p></a></li>
+            <li><a href="/chat/"><p>聊天<b class="demo-icon">&#xe813;</b></p></a></li>
+            <li><a href="/chat/"><p>ChatGPT<b class="demo-icon">&#xf18d;</b></p></a></li>
+            <li><a href="https://gitee.com/kuankuan2007"><p>Gitee<b class="demo-icon">&#xf053;</b></p></a></li>
+            <li><a href="https://github.com/kuankuan2007"><p>Github<b class="demo-icon">&#xf056;</b></p></a></li>
+        </ul>
+        <div id="navHoverBackground"></div>
+    </div>
+
+
+    <div id="center">
+        <div id="messages">
+            <div id="messagesScroll">
+                <div class="message"">
+                    <div class="infoBox">System</div>
+                    <div class="messageBox"><p>Welcom to ChatGPT</p></div>
+                </div>
+            </div>
+        </div>
+        <div id="send">
+            <div id="dosend"><span id="sendButton">发送</span></div>
+        </div>
+    </div>
+    
+</body>
