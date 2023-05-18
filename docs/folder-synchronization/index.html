@@ -7,11 +7,26 @@
     <link rel="stylesheet" href="/docsPage.css">
     <link rel="stylesheet" href="/font-icos.css">
     <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/heighlight/styles/monokai-sublime.min.css">
     <title>宽宽的帮助文档</title>
     <script src="/isPhone.js" type="text/javascript"></script>
     <script src="/easyForm.js" type="text/javascript"></script>
     <script src="/connection.js" type="text/javascript"></script>
+    <script src="/heighlight/highlight.min.js" type="text/javascript"></script>
+    <script src="/mathjax.min.js"></script>
+    <script src="/showdown.js" type="text/javascript"></script>
     <script>
+        var converter = new showdown.Converter({
+            parseImgDimensions:true,
+            headerLevelStart:1,
+            simplifiedAutoLink:true,
+            excludeTrailingPunctuationFromURLs:true,
+            strikethrough:true,
+            tables:true,
+            tasklists:true,
+            simpleLineBreaks:true,
+            openLinksInNewWindow:true,
+        })
         var canvas
         var context
         var graph
@@ -120,25 +135,17 @@
             element.remove();
             showMessage("已复制到剪切板");
         }
-        function copy(num){
-            var lines=codes[num].innerHTML.split("\n")
-            lines.splice(0,1)
-            lines.splice(length-1,1)
-            
-            var retsult=""
-            for(var i=0;i<lines.length;i++){
-                retsult += lines[i].substring(15,lines[i].length-4)+"\n";
-            }
-            console.log(retsult)
-            copyText(retsult)
+        function copy(){
+            var text=this.parentElement.innerText
+            text=text.substr(0, text.length-1)
+            copyText(text)
         }
-        var codes=[]
         function bindCopyCode(){
-            codes=document.getElementsByClassName("code")
+            codes=document.querySelectorAll("code")
             for (var i=0;i<codes.length;i++){
-                copyButton=document.createElement("p")
+                var copyButton=document.createElement("p")
                 copyButton.setAttribute("class","codeCopy demo-icon")
-                copyButton.setAttribute("onclick","copy("+i+")")
+                copyButton.addEventListener("click",copy)
                 copyButton.innerHTML=""
                 codes[i].appendChild(copyButton)
             }
@@ -151,8 +158,16 @@
             context=canvas.getContext("2d")
             graph=new Graph()
             graph.draw()
-            bindCopyCode()
             checkUser()
+            fetch("index.md").then((retsult)=>{
+                retsult.text().then((retsult)=>{
+                    document.getElementById("main").innerHTML=converter.makeHtml(retsult)
+                    hljs.highlightAll()
+                    MathJax.typeset()
+                    bindCopyCode()
+                })
+            })
+            
         }
     </script>
 </head>
@@ -200,107 +215,6 @@
 
     <div id="docs">
         <div id="main">
-        <h1>文件夹比对</h1>
-            <h2>目的</h2>
-            <p>自动比对、同步两个文件夹</p>
-            <h2>说明</h2>
-            <p>这个项目是本人很早以前写的工具包文件夹自动更新程序的升级版</p>
-            <p>理论上支持任意两个文件夹，不确定有没有bug</p>
-            <h2>扫描完成后的指令</h2>
-            <p>命令格式:<strong>命令/空格/选择器</strong></p>
-            <ul>
-            <li>
-            <p>命令有如下几种(不分大小写):</p>
-            <ul>
-            <li>
-            <p>copy:将符合选择器的项目移入Copy</p>
-            </li>
-            <li>
-            <p>none:将符合选择器的项目移入None</p>
-            </li>
-            <li>
-            <p>delete:将符合选择器的项目移入Delete</p>
-            </li>
-            <li>
-            <p>以上三个命令不会对[Copyed,Deleted,Errow]中的项目进行操作</p>
-            </li>
-            <li>
-            <p>help:显示此帮助菜单</p>
-            </li>
-            <li>
-            <p>exit 退出程序</p>
-            </li>
-            <li>
-            <p>choo:仅展示选择器结果，不进行操作</p>
-            </li>
-            <li>
-            <p>execute:按每个项目的类别进行操作</p>
-            </li>
-            <li>
-            <p>cls:清屏</p>
-            </li>
-            </ul>
-            </li>
-            <li>
-            <p>选择器(区分大小写)：</p>
-            <ul>
-            <li>
-            <p>选择器本质是一个集合，以{}包括</p>
-            </li>
-            <li>
-            <p><strong>有如下特殊定义(以#开头全部大写)</strong>：</p>
-            <ul>
-            <li>
-            <p>#ALL:全集</p>
-            </li>
-            <li>
-            <p>#ROOTPATH("s"):根目录是s的项目组成的集合</p>
-            </li>
-            <li>
-            <p>#WAY("s"):处理方式是s的项目组成的集合</p>
-            </li>
-            <li>
-            <p>#NAME("s"):名字是s的项目组成的集合</p>
-            </li>
-            <li>
-            <p>#TYPE("s"):种类是s的项目组成的集合</p>
-            </li>
-            </ul>
-            </li>
-            </ul>
-            </li>
-            <li>
-            <p>集合的运算:</p>
-            <ul>
-            <li>
-            <p>A交B A&amp;B</p>
-            </li>
-            <li>
-            <p>A并B A|B</p>
-            </li>
-            <li>
-            <p>B关于A的补集 A^B</p>
-            </li>
-            </ul>
-            </li>
-            <li>
-            <p>示例:</p>
-            <ul>
-            <li>
-            <p>{0,1,2,3}编号为1、2、3的项目</p>
-            </li>
-            <li>
-            <p>#NAME("\py3.8") 名字为\py3.8\的项目</p>
-            </li>
-            <li>
-            <p>#ALL^#NAME("\py3.8") 名字不是\py3.8\的项目</p>
-            </li>
-            </ul>
-            </li>
-            </ul>
-            <h2>关于作者</h2>
-            <p>作者主页<a href="kuankuan2007.gitee.io" title="作者主页">宽宽2007</a></p>
-            <p>本项目在<a href="https://gitee.com/kuankuan2007/folder-synchronization">文件夹同步: 自动同步两个文件夹的文件 (gitee.com)</a>上开源</p>
         </div>
         <img src="/logo.png" id="watermark">
     </div>

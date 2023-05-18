@@ -7,11 +7,26 @@
     <link rel="stylesheet" href="/docsPage.css">
     <link rel="stylesheet" href="/font-icos.css">
     <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/heighlight/styles/monokai-sublime.min.css">
     <title>宽宽的帮助文档</title>
     <script src="/isPhone.js" type="text/javascript"></script>
     <script src="/easyForm.js" type="text/javascript"></script>
     <script src="/connection.js" type="text/javascript"></script>
+    <script src="/heighlight/highlight.min.js" type="text/javascript"></script>
+    <script src="/mathjax.min.js"></script>
+    <script src="/showdown.js" type="text/javascript"></script>
     <script>
+        var converter = new showdown.Converter({
+            parseImgDimensions:true,
+            headerLevelStart:1,
+            simplifiedAutoLink:true,
+            excludeTrailingPunctuationFromURLs:true,
+            strikethrough:true,
+            tables:true,
+            tasklists:true,
+            simpleLineBreaks:true,
+            openLinksInNewWindow:true,
+        })
         var canvas
         var context
         var graph
@@ -120,25 +135,17 @@
             element.remove();
             showMessage("已复制到剪切板");
         }
-        function copy(num){
-            var lines=codes[num].innerHTML.split("\n")
-            lines.splice(0,1)
-            lines.splice(length-1,1)
-            
-            var retsult=""
-            for(var i=0;i<lines.length;i++){
-                retsult += lines[i].substring(15,lines[i].length-4)+"\n";
-            }
-            console.log(retsult)
-            copyText(retsult)
+        function copy(){
+            var text=this.parentElement.innerText
+            text=text.substr(0, text.length-1)
+            copyText(text)
         }
-        var codes=[]
         function bindCopyCode(){
-            codes=document.getElementsByClassName("code")
+            codes=document.querySelectorAll("code")
             for (var i=0;i<codes.length;i++){
-                copyButton=document.createElement("p")
+                var copyButton=document.createElement("p")
                 copyButton.setAttribute("class","codeCopy demo-icon")
-                copyButton.setAttribute("onclick","copy("+i+")")
+                copyButton.addEventListener("click",copy)
                 copyButton.innerHTML=""
                 codes[i].appendChild(copyButton)
             }
@@ -151,8 +158,16 @@
             context=canvas.getContext("2d")
             graph=new Graph()
             graph.draw()
-            bindCopyCode()
             checkUser()
+            fetch("index.md").then((retsult)=>{
+                retsult.text().then((retsult)=>{
+                    document.getElementById("main").innerHTML=converter.makeHtml(retsult)
+                    hljs.highlightAll()
+                    MathJax.typeset()
+                    bindCopyCode()
+                })
+            })
+            
         }
     </script>
 </head>
@@ -200,51 +215,6 @@
 
     <div id="docs">
         <div id="main">
-        <h1>GHM-BASE64编码器</h1>
-            <p>帮助网络文化的传播</p>
-            <h2>GHM-BASE64文件格式</h2>
-            <p>默认后缀为 <strong>.GHMBASE64</strong></p>
-            <p>可以标注文件名、数据类型等</p>
-            <h3>标识符说明</h3>
-            <ul>
-            <li>
-            <p>#开头的行是标注行,不能解码</p>
-            </li>
-            <li>
-            <p>头部标识 <strong>#SAVING WITH GHM-BASE64</strong></p>
-            </li>
-            <li>
-            <p>类型标识符</p>
-            <ul>
-            <li>
-            <p>文件 <strong>#FILE[|文件名]</strong></p>
-            </li>
-            <li>
-            <p>文本 <strong>#TEXT</strong></p>
-            </li>
-            </ul>
-            </li>
-            <li>
-            <p>尾部标识符 <strong>#END OF DOCUMENT</strong></p>
-            </li>
-            </ul>
-            <h3>参考格式:</h3>
-            <div class="code">
-            <p>#SAVING WITH GHM-BASE64 <mark>头部标注行</mark></p>
-            <p>#FILE|example.png                  <mark>名字叫example.png的文件</mark></p>
-            <p>ABC                                              <mark>数据块1</mark></p>
-            <p>#FILE                                            <mark>未指定名字的文件将会在解码时询问</mark></p>
-            <p>ABC                                              <mark>数据块2</mark></p>
-            <p>#TEXT                                          <mark>纯文本</mark></p>
-            <p>ABC                                              <mark>数据块3</mark></p>
-            <p>#END OF DOCUMENT              <mark>尾部标注行</mark></p>
-            </div>
-            <h2>软件使用</h2>
-            <p>支持文本、选择文件、拖拽文件、拖拽文件给exe(作为启动参数)打开</p>
-            <p>文件会要求选择保存文件夹</p>
-            <h2>关于作者</h2>
-            <p>作者<a href="kuankuan2007.gitee.io" title="作者主页">宽宽2007</a></p>
-            <p>本项目在<a href="https://gitee.com/kuankuan2007/ghm-base64-encoder">苟浩铭/ghm-base64编码器 (gitee.com)</a>上开源</p>
         </div>
         <img src="/logo.png" id="watermark">
     </div>

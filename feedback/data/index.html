@@ -87,6 +87,8 @@
                 document.getElementById("dataStatue").classList.add(retsult.statue)
                 document.getElementById("dataUser").innerText=retsult.user
                 document.getElementById("dataTime").innerText=retsult.time
+                hljs.highlightAll()
+                MathJax.typeset()
                 window.data=retsult
                 getRights().then((retsult)=>{
                     console.log(retsult)
