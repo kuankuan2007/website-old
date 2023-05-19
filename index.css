@@ -28,7 +28,7 @@ body::-webkit-scrollbar{
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, max-content));
+    grid-template-columns: repeat(auto-fit, minmax(0px, max-content));
     grid-template-rows: 50px;
 }
 #topMenu li{
@@ -37,6 +37,8 @@ body::-webkit-scrollbar{
     text-align: center;
     line-height: 50px;
     position: relative;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 #topMenu li p::after{
     content: '';
@@ -44,7 +46,7 @@ body::-webkit-scrollbar{
     width: 2px;
     height: 100%;
     left: 100%;
-    background: linear-gradient(180deg,transparent 20%,#282828 60%,transparent);
+    background: linear-gradient(180deg,transparent ,#ffffff ,transparent);
     color: transparent;
 }
 @keyframes startCenterIn{

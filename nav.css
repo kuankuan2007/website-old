@@ -138,13 +138,32 @@
     width: 300px;
     height: 70%;
     left: 0;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+}
+#phonenav:hover,#phonenav:focus,#phonenav:active{
+    width: 300px;
+    height: 70%;
+}
+#phonenav:not(.moving):hover,#phonenav:not(.moving):focus,#phonenav:not(.moving):active{
+    top: 20% !important;
+}
+#phonenav.unover{
+    transition: 0s;
+    opacity: 0;
+}
+#phonenav.unover ul{
+    opacity: 0;
+}
+#phonenav.moving{
+    opacity: 1;
+    width: 60px;
+    height: 60px;
+    background: rgba(0,0,0,0.5);
+    transition: 100ms;
 }
 #phonenav{
     overflow-x: hidden;
     overflow-y: scroll;
-    position: fixed;
+    position: absolute;
     top: 20%;
     left: 10px;
     width: 60px;
@@ -156,6 +175,7 @@
     transition-duration: 0.3s;
     font-size: 24px;
     border-radius: 30px;
+    scrollbar-width: none;
 }
 #phonenav::-webkit-scrollbar {
     -webkit-transition-duration: 0.3s;
