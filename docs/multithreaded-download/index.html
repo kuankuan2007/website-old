@@ -150,6 +150,18 @@
                 codes[i].appendChild(copyButton)
             }
         }
+        function exportData() {
+            const blob = new Blob([window.docs], {
+                type: 'text/plain'
+            })
+            const objectURL = URL.createObjectURL(blob)
+            const aTag = document.createElement('a')
+            aTag.href = objectURL
+            aTag.download = "readme.md"
+            aTag.click()
+            aTag.remove()
+            URL.revokeObjectURL(objectURL)
+        }
         window.onload=function(){
             isPhone()
             canvas=document.getElementById("BGLines")
@@ -161,6 +173,7 @@
             checkUser()
             fetch("index.md").then((retsult)=>{
                 retsult.text().then((retsult)=>{
+                    window.docs=retsult
                     document.getElementById("main").innerHTML=converter.makeHtml(retsult)
                     hljs.highlightAll()
                     MathJax.typeset()
@@ -206,7 +219,7 @@
             <li><a href="/contactInformation/"><p>联系我们<b class="demo-icon">&#xf2b9;</b></p></a></li>
             <li><a href="/feedback/"><p>反馈<b class="demo-icon">&#xf2b6;</b></p></a></li>
             <li><a href="/chat/"><p>聊天<b class="demo-icon">&#xe813;</b></p></a></li>
-            <li><a href="/chat/"><p>ChatGPT<b class="demo-icon">&#xf18d;</b></p></a></li>
+            <li><a href="/chatgpt/"><p>ChatGPT<b class="demo-icon">&#xf18d;</b></p></a></li>
             <li><a href="https://gitee.com/kuankuan2007"><p>Gitee<b class="demo-icon">&#xf053;</b></p></a></li>
             <li><a href="https://github.com/kuankuan2007"><p>Github<b class="demo-icon">&#xf056;</b></p></a></li>
         </ul>
@@ -216,6 +229,7 @@
     <div id="docs">
         <div id="main">
         </div>
+        <p class="demo-icon download" onclick="exportData()">&#xf02e;</p>
         <img src="/logo.png" id="watermark">
     </div>
     <canvas id="BGLines"></canvas>

@@ -22,11 +22,11 @@
             return Math.random()*(max+1-min)+min
         }
         class ColorBlock{
-            constructor(){
-                this.size = randNumber(0,Math.min(window.innerHeight,window.innerWidth)/6)
+            constructor(h=window.innerHeight,w=window.innerWidth){
+                this.size = randNumber(0,Math.min(h,w)/6)
                 this.color = {r:randNumber(0,255),g:randNumber(0,255),b:randNumber(0,255)}
-                this.left = randNumber(-this.size/2,window.innerWidth/2.5)+Math.floor(Math.random()*2)*window.innerWidth*0.6
-                this.top = randNumber(-this.size/2,window.innerHeight/2.5)+Math.floor(Math.random()*2)*window.innerHeight*0.6
+                this.left = randNumber(-this.size/2,w/2.5)+Math.floor(Math.random()*2)*w*0.6
+                this.top = randNumber(-this.size/2,h/2.5)+Math.floor(Math.random()*2)*h*0.6
                 // this.rotate=randNumber(0,360)
                 // this.rotateX=randNumber(-60,60)
                 // this.rotateY=randNumber(-60,60)
@@ -73,20 +73,34 @@
             }
         }
         class ColorBlockEles extends ColorBlock{
-            constructor(){
-                super()
+            constructor(h=window.innerHeight,w=window.innerWidth){
+                super(h,w)
                 document.getElementById("eleBG").appendChild(this.root)
+                this.refreshAnimation()
+                
+            }
+            refreshAnimation(){
                 this.animation=new ScrollAnimation([this.ele],{transform:"translate({0}px,{1}px)"},window.innerHeight,window.innerHeight*2,[[0,1/(window.innerWidth/2-this.left)*-30*window.innerWidth],[0,1/(window.innerHeight/2-this.top)*-30*window.innerHeight]])
             }
         }
         class ColorBlockElse extends ColorBlock{
-            constructor(pageNum){
-                super()
-                this.top+=(pageNum+3)*window.innerHeight
+            constructor(pageNum,h=window.innerHeight,w=window.innerWidth){
+                super(h,w)
+                this.pageNum=pageNum
                 this.refresh()
                 document.getElementById("colorBlocks").appendChild(this.root)
             }
+            refresh(){
+                this.ele.style.left = this.left + "px"
+                this.ele.style.top = (this.top+(this.pageNum+3)*window.innerHeight) + "px"
+                this.ele.style.width = this.size + "px"
+                this.ele.style.height = this.size + "px"
+                this.ele.style.backgroundColor = `rgb(${this.color.r},${this.color.g},${this.color.b})`
+                this.ele.style.transform = `rotate(${this.rotate}deg) rotateX(${this.rotateX}deg) rotateY(${this.rotateY}deg)`
+            }
         }
+        var lastSizeX
+        var lastSizeY
         var sign= "如果说，青春如烟，仅此一场，放肆冲动，我会将什么故事写在过去散在风中。即便此刻两手空空，即便隐隐作痛，要记得时而抬起头，仰望星空，拥抱彩虹。"
         var blockList={
             start:[],
@@ -95,7 +109,11 @@
         }
         Object.defineProperty(blockList,"all",{
             get:()=>{
-                return blockList.start.concat(blockList.eles).concat(blockList.ends);
+                var li = blockList.start.concat(blockList.eles);
+                for (var i=0; i<blockList.ends.length; i++){
+                    li = li.concat(blockList.ends[i]);
+                }
+                return li;
             }
         })
         function pointInsert(s){
@@ -133,7 +151,124 @@
             }
         }
         var animations=[]
+        
+        function refreshAnimation(){
+            animations.splice(0,animations.length);
+            animations.push(new ScrollAnimation([document.getElementById("eleLogo")],{transform:"translate(-50%,calc(-50% - {0}px)) scale({1})",opacity:"{2}"},window.innerHeight*0.8,window.innerHeight*1.3,[[0,window.innerHeight/2],[1,2],[1,0]]))
+            var li=document.querySelectorAll("#eleCenter .eles")
+            var fatherPosition=document.getElementById("elePlay").getBoundingClientRect();
+            document.getElementById("eleCenter").style.transform=""
+            for (var i = 0; i<li.length;i++){
+                li[i].style.transform=""
+                var position=li[i].getBoundingClientRect();
+                var centerPosition={
+                    x:position.x+position.width/2,
+                    y:position.y+position.height/2-fatherPosition.y
+                }
+                animations.push(new ScrollAnimation([li[i]],{transform:"translate({0}px,{1}px) scale({2})",opacity:"{3}"},window.innerHeight+100+parseInt(li[i].getAttribute("num"))*200,window.innerHeight*1.5+100+parseInt(li[i].getAttribute("num"))*200,[[window.innerWidth/2-centerPosition.x,0],[window.innerHeight/2+100-centerPosition.y,0],[0.2,1],[0,1]]))
+            }
+            for (i=0;i<blockList.eles.length;i++){
+                blockList.eles[i].refreshAnimation()
+                animations.push(blockList.eles[i].animation)
+            }
+            animations.push(new ScrollAnimation([document.getElementById("eleCenter")],{transform:"translate(-50%,calc(-50% + 100px)) scale({0})",opacity:"{1}"},window.innerHeight,window.innerHeight*1.5,[[0,1],[0,1]]))
+            animations.push(new ScrollAnimation([document.getElementById("eleTitle")],{transform:"translate(-50%,calc(-50% - 300px)) scale({0})",opacity:"{1}"},window.innerHeight,window.innerHeight*1.5,[[0,1],[0,1]]))
+            setTimeout(onscroll,0)
+        }
+        window.onresize=(e)=>{
+            var nowHeight=window.innerHeight
+            var nowWidth=window.innerWidth
+            var ky=nowHeight/lastSizeY
+            var kx=nowWidth/lastSizeX
+            var ks=Math.min(nowHeight,nowWidth)/Math.min(lastSizeX,lastSizeY)
+            
+            var num=Math.floor(Math.max(nowHeight,nowWidth)/50)
+            if (num<blockList.start.length){
+                for (var i=num;i<blockList.start.length;i++){
+                    blockList.start[i].ele.style.opacity="0"
+                    setTimeout((ele)=>{
+                        ele.root.remove()
+                    },300,blockList.start[i])
+                }
+                blockList.start.splice(num,blockList.start.length-num)
+            }else{
+                for (var i=blockList.start.length;i<num;i++){
+                    var now=new ColorBlock(lastSizeY,lastSizeX)
+                    document.getElementById("colorBlocks").appendChild(now.root)
+                    now.ele.style.opacity="0"
+                    setTimeout((now)=>{
+                        now.ele.style.opacity="1"
+                    },0,now)
+                    blockList.start.push(now)
+                }
+            }
+            if (num<blockList.eles.length){
+                for (var i=num;i<blockList.eles.length;i++){
+                    blockList.eles[i].ele.style.opacity="0"
+                    setTimeout((ele)=>{
+                        ele.root.remove()
+                    },300,blockList.eles[i])
+                }
+                blockList.eles.splice(num,blockList.eles.length-num)
+            }else{
+                for (var i=blockList.eles.length;i<num;i++){
+                    var now=new ColorBlockEles(lastSizeY,lastSizeX)
+                    now.ele.style.opacity="0"
+                    setTimeout((now)=>{
+                        now.ele.style.opacity="1"
+                    },0,now)
+                    blockList.eles.push(now)
+                }
+            }
+            for (var n=0;n<blockList.ends.length;n++){
+                var li=blockList.ends[n]
+                if (num<li.length){
+                    for (var i=num;i<li.length;i++){
+                        li[i].ele.style.opacity="0"
+                        setTimeout((ele)=>{
+                            ele.root.remove()
+                        },300,li[i])
+                    }
+                    li.splice(num,li.length-num)
+                }else{
+                    for (var i=li.length;i<num;i++){
+                        var now=new ColorBlockElse(n,lastSizeY,lastSizeX)
+                        now.ele.style.opacity="0"
+                        setTimeout((now)=>{
+                            now.ele.style.opacity="1"
+                        },0,now)
+                        li.push(now)
+                    }
+                }
+            }
+            setTimeout(()=>{
+                var li=blockList.all
+                for (var i=0;i<li.length;i++){
+                    li[i].top*=ky
+                    li[i].left*=kx
+                    li[i].size*=ks
+                    li[i].refresh()
+                }
+                lastSizeX=nowWidth
+                lastSizeY=nowHeight
+                setTimeout(refreshAnimation(),0)
+            },0)
+            
+        }
+        function onscroll(e){
+            var different=document.getElementById("fixed").scrollTop-lastSroll
+            var all=blockList.all
+            for (var i=0;i<all.length;i++){
+                all[i].scroll(different)
+            }
+            lastSroll=document.getElementById("fixed").scrollTop
+            for (var i=0;i<animations.length;i++){
+                animations[i].change(lastSroll)
+            }
+        }
         window.onload = function(){
+            lastSizeX=window.innerWidth
+            lastSizeY=window.innerHeight
             checkUser()
             setTimeout(()=>{document.getElementById("fixed").style.overflowY="scroll"},300)
             for (var i=0;i<Math.max(window.innerHeight,window.innerWidth)/50;i++){
@@ -144,38 +279,15 @@
             }
             document.getElementById("signBox").innerText=sign
             setTimeout(pointInsert,300,sign)
-            document.getElementById("fixed").addEventListener("scroll",function(e){
-                var different=document.getElementById("fixed").scrollTop-lastSroll
-                var all=blockList.all
-                for (var i=0;i<all.length;i++){
-                    all[i].scroll(different)
-                }
-                lastSroll=document.getElementById("fixed").scrollTop
-                for (var i=0;i<animations.length;i++){
-                    animations[i].change(lastSroll)
-                }
-            })
-            animations.push(new ScrollAnimation([document.getElementById("eleLogo")],{transform:"translate(-50%,calc(-50% - {0}px)) scale({1})",opacity:"{2}"},window.innerHeight*0.8,window.innerHeight*1.3,[[0,window.innerHeight/2],[1,2],[1,0]]))
-            var li=document.querySelectorAll("#eleCenter .eles")
-            for (var i = 0; i<li.length;i++){
-                var position=li[i].getBoundingClientRect();
-                var centerPosition={
-                    x:position.x+position.width/2,
-                    y:position.y-window.innerHeight+position.height/2
-                }
-                animations.push(new ScrollAnimation([li[i]],{transform:"translate({0}px,{1}px) scale({2})",opacity:"{3}"},window.innerHeight+100+parseInt(li[i].getAttribute("num"))*200,window.innerHeight*1.5+100+parseInt(li[i].getAttribute("num"))*200,[[window.innerWidth/2-centerPosition.x,0],[window.innerHeight/2+100-centerPosition.y,0],[0.2,1],[0,1]]))
-            }
-            for (i=0;i<blockList.eles.length;i++){
-                animations.push(blockList.eles[i].animation)
-            }
-            animations.push(new ScrollAnimation([document.getElementById("eleCenter")],{transform:"translate(-50%,calc(-50% + 100px)) scale({0})",opacity:"{1}"},window.innerHeight,window.innerHeight*1.5,[[0,1],[0,1]]))
-            animations.push(new ScrollAnimation([document.getElementById("eleTitle")],{transform:"translate(-50%,calc(-50% - 300px)) scale({0})",opacity:"{1}"},window.innerHeight,window.innerHeight*1.5,[[0,1],[0,1]]))
+            document.getElementById("fixed").addEventListener("scroll",onscroll)
             li=document.querySelectorAll(".elesPage .elseBG")
             for(i=0;i<li.length;i++){
+                blockList.ends.push([])
                 for (var j=0;j<Math.max(window.innerHeight,window.innerWidth)/50;j++){
-                    blockList.eles.push(new ColorBlockElse(i))
+                    blockList.ends[i].push(new ColorBlockElse(i))
                 }
             }
+            refreshAnimation()
         }
     </script>
 </head>
