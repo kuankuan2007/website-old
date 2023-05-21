@@ -293,3 +293,10 @@ img.loading {
     height: 20px;
     background: #000000;
 }
+textarea.markdownEditor{
+    max-height: 50vh;
+}
+.markdownShower{
+    max-height: 50vh;
+    overflow: scroll;
+}

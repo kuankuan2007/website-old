@@ -266,3 +266,10 @@ code{
 .menu>li:hover {
     background: #b4b4ff;
 }
+textarea.markdownEditor{
+    max-height: 50vh;
+}
+.markdownShower{
+    max-height: 50vh;
+    overflow: scroll;
+}
