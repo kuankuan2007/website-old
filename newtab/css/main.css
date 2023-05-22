@@ -220,6 +220,7 @@ div#searchBox {
     appearance: none;
     float: left;
     transition: 0.3s;
+    padding-right: 40px;
 }
 
 div#searchTypeButton {

@@ -298,9 +298,6 @@ class UISearchEngine {
                                 attributes: {
                                     type: "text"
                                 },
-                                css: {
-                                    paddingLeft: 0
-                                },
                                 name: "button",
                                 value: this._data.button
                             },
@@ -311,9 +308,6 @@ class UISearchEngine {
                                 type: EnterBox,
                                 attributes: {
                                     type: "url"
-                                },
-                                css: {
-                                    paddingLeft: 0
                                 },
                                 name: "url",
                                 value: this._data.url
@@ -409,9 +403,7 @@ newEngine.onclick = e => {
                             attributes: {
                                 type: "text"
                             },
-                            css: {
-                                paddingLeft: 0
-                            },
+                            
                             name: "button",
                             value: "自定义搜索引擎"
                         },
@@ -424,9 +416,7 @@ newEngine.onclick = e => {
                                 type: "url",
                                 placeholder: "用\"{question}\"代替搜索内容"
                             },
-                            css: {
-                                paddingLeft: 0
-                            },
+                            
                             name: "url",
                             value: ""
                         },
@@ -565,9 +555,6 @@ class UILink {
                                 attributes: {
                                     type: "text"
                                 },
-                                css: {
-                                    paddingLeft: 0
-                                },
                                 name: "background",
                                 value: this._data.background
                             },
@@ -579,9 +566,6 @@ class UILink {
                                 attributes: {
                                     type: "color"
                                 },
-                                css: {
-                                    paddingLeft: 0
-                                },
                                 name: "titleColor",
                                 value: this._data.titleColor
                             },
@@ -592,9 +576,6 @@ class UILink {
                                 type: EnterBox,
                                 attributes: {
                                     type: "color"
-                                },
-                                css: {
-                                    paddingLeft: 0
                                 },
                                 name: "contentColor",
                                 value: this._data.contentColor
@@ -676,9 +657,7 @@ function newLink() {
                             attributes: {
                                 type: "text"
                             },
-                            css: {
-                                paddingLeft: 0
-                            },
+                            
                             name: "background",
                             value: `rgb(${randint(0, 255)},${randint(0, 255)},${randint(0, 255)})`
                         },
@@ -690,9 +669,7 @@ function newLink() {
                             attributes: {
                                 type: "color"
                             },
-                            css: {
-                                paddingLeft: 0
-                            },
+                            
                             name: "titleColor",
                             value: randColor()
                         },
@@ -704,9 +681,7 @@ function newLink() {
                             attributes: {
                                 type: "color"
                             },
-                            css: {
-                                paddingLeft: 0
-                            },
+                            
                             name: "contentColor",
                             value: randColor()
                         }, {
@@ -795,9 +770,7 @@ headerBox.onclick = e => {
                             attributes: {
                                 type: "text"
                             },
-                            css: {
-                                paddingLeft: 0
-                            },
+                            
                             name: "background",
                             value: data.headerBG
                         },
@@ -854,9 +827,7 @@ linksShower.onclick = e => {
                             attributes: {
                                 type: "text"
                             },
-                            css: {
-                                paddingLeft: 0
-                            },
+                            
                             name: "background",
                             value: data.linkboxBG
                         },
@@ -868,9 +839,7 @@ linksShower.onclick = e => {
                             attributes: {
                                 type: "number"
                             },
-                            css: {
-                                paddingLeft: 0
-                            },
+                            
                             name: "width",
                             value: data.boxWidth
                         },
@@ -882,9 +851,7 @@ linksShower.onclick = e => {
                             attributes: {
                                 type: "number"
                             },
-                            css: {
-                                paddingLeft: 0
-                            },
+                            
                             name: "gap",
                             value: data.boxGap
                         },

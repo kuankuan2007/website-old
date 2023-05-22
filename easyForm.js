@@ -1,14 +1,29 @@
 class Controler {
     style = {}
+    hoverStyle={}
     constructor(obj) {
         this._data = obj
         Object.assign(this.style, this._data.css)
+        Object.assign(this.hoverStyle, this._data.hoverStyle)
     }
     update(obj) {
         this._data = obj
         this.refresh()
     }
     refresh() {
+        this._ele.addEventListener('mouseenter', (e)=>{
+            for (var i in this.hoverStyle){
+                this._ele.style[i] = this.hoverStyle[i]
+            }
+        })
+        this._ele.addEventListener('mouseleave', (e)=>{
+            for (var i in this.hoverStyle){
+                this._ele.style[i] = ""
+            }
+            for (var i in this.style){
+                this._ele.style[i] = this.style[i]
+            }
+        })
         if (this._data.attributes) {
             for (let key in this._data.attributes) {
                 this._ele.setAttribute(key, this._data.attributes[key])
@@ -68,6 +83,10 @@ class _DialogBoxButtons{
         fontSize: "16px",
         color: "#ffffff",
         cursor: "pointer",
+        transition:"0.3s"
+    }
+    hoverStyle={
+        transform:"scale(1.2)"
     }
     constructor(name,style={}){
         this._ele=document.createElement("input")
@@ -77,6 +96,19 @@ class _DialogBoxButtons{
         for (let i in this.style){
             this._ele.style[i]=this.style[i]
         }
+        this._ele.addEventListener("mouseenter",()=>{
+            for (var i in this.hoverStyle){
+                this._ele.style[i]=this.hoverStyle[i]
+            }
+        })
+        this._ele.addEventListener("mouseleave",()=>{
+            for (var i in this.hoverStyle){
+                this._ele.style[i]=""
+            }
+            for (let i in this.style){
+                this._ele.style[i]=this.style[i]
+            }
+        })
     }
 }
 class DialogBox {
@@ -100,12 +132,20 @@ class DialogBox {
         this._ele.style.left = "0px"
         this._ele.style.width = "100%"
         this._ele.style.height = "100%"
-        this._ele.style.backgroundColor = "rgba(0,0,0,0.5)"
+        this._ele.style.transition="0.3s"
+        this._ele.style.backgroundColor = "rgba(0,0,0,0.0)"
         this._center = document.createElement("div")
         this._center.style.position = "absolute"
         this._center.style.top = "50%"
         this._center.style.left = "50%"
-        this._center.style.transform = "translate(-50%,-50%)"
+        this._center.style.transform = "translate(-50%,50%)"
+        this._center.style.opacity = "0"
+        this._center.style.transition="0.3s"
+        setTimeout(()=>{
+            this._center.style.transform = "translate(-50%,-50%)"
+            this._center.style.opacity = "1"
+            this._ele.style.backgroundColor="rgba(0,0,0,0.5)"
+        },0)
         this._ele.appendChild(this._center)
         this._title = new Frame({
             css:{
@@ -117,7 +157,8 @@ class DialogBox {
                     text: this._data.title,
                     css: {
                         fontSize: "24px",
-                        margin: "10px"
+                        margin: "10px",
+                        fontWeight: "bold"
                     }
                 },
                 {
@@ -125,7 +166,7 @@ class DialogBox {
                     children: [],
                     css: {
                         "height": "5px",
-                        "backgroundColor": "#0000ff",
+                        "background": "linear-gradient(60deg,#0000ff 20%,#ff00ff 40%, transparent)",
                         "borderRadius": "5px",
                     }
                 }
@@ -159,7 +200,10 @@ class DialogBox {
         this._close.style.position="absolute"
         this._close.style.top="5px"
         this._close.style.right="5px"
+        this._close.style.transition="0.3s"
         this._close.addEventListener("click", ()=>{this.remove()})
+        this._close.addEventListener("mouseenter", (e)=>{this._close.style.transform="scale(1.3)"})
+        this._close.addEventListener("mouseleave", (e)=>{this._close.style.transform="scale(1)"})
         if (!this._data.hiddenCloseButton){
             this._center.appendChild(this._close)
         }
@@ -198,7 +242,12 @@ class DialogBox {
 }
 class TextBox extends Controler {
     style={
-        margin:"5px"
+        margin:"5px",
+        transition:"0.3s",
+        cursor:"default"
+    }
+    hoverStyle={
+        color:"#0000ff"
     }
     get retsult() {
     }
@@ -216,17 +265,24 @@ class TextBox extends Controler {
 }
 class EnterBox extends Controler {
     style={
-        background: "#b4b4ff",
+        background: "rgb(208 208 255)",
         outline: "none",
         border: "none",
-        borderRadius: "10px",
-        paddingLeft: "10px",
+        borderRadius: "5px",
+        padding: "10px",
         fontSize: "16px",
-        padding:"2px",
-        minWidth:"400px"
+        minWidth:"400px",
+        transition:"0.3s"
+    }
+    hoverStyle={
+        background: "rgb(171 171 255)"
     }
     constructor(obj) {
         super(obj)
+        if (obj.attributes && obj.attributes.type==="color") {
+            this.style.padding=""
+            this.style.height="36px"
+        }
         this._ele = document.createElement("input")
         this._data = obj
         if (this._data.value){
