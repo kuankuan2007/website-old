@@ -145,7 +145,7 @@ class DialogBox {
             this._center.style.transform = "translate(-50%,-50%)"
             this._center.style.opacity = "1"
             this._ele.style.backgroundColor="rgba(0,0,0,0.5)"
-        },0)
+        },50)
         this._ele.appendChild(this._center)
         this._title = new Frame({
             css:{
@@ -228,7 +228,15 @@ class DialogBox {
         }
     }
     remove(){
-        this._ele.remove()
+        
+        setTimeout(()=>{
+            this._center.style.transform = "translate(-50%,-150%)"
+            this._center.style.opacity = "0"
+            this._ele.style.backgroundColor="rgba(0,0,0,0)"
+            setTimeout(()=>{
+                this._ele.remove()
+            },300)
+        },0)
         if (typeof this.onclose==="function"){
             this.onclose()
         }

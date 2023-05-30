@@ -134,7 +134,9 @@
                 document.getElementById("sendButton").classList.remove("disabled")
             }
             else if (data.type==="ERROR"){
-                messageList[messageList.length-1].value=`ERROR ${data.content}`
+                messageList[messageList.length-1].value=`ERROR: ${data.content}`
+                messageList[messageList.length-1].add("")
+                showMessage(`ERROR: ${data.content}`)
                 messageList[messageList.length-1].end()
                 document.getElementById("sendButton").classList.remove("disabled")
             }
