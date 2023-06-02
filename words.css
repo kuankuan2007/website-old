@@ -53,6 +53,22 @@ body{
     word-break: break-all;
     font-size: 48px;
 }
+@keyframes signPointerShine{
+    from{
+        opacity: 0;
+    }to{
+        opacity: 1;
+    }
+}
+#words.onChange::after{
+    animation: signPointerShine 0.5s alternate infinite cubic-bezier(0.96, 0, 0.17, 1.01);
+    content: "|";
+    position: absolute;
+    width: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.1s;
+}
 #loading{
     position: fixed;
     width: 200px;
