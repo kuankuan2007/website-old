@@ -1,10 +1,10 @@
-# <mark>警告:本项目已经废弃，其功能被doFolder替代</mark>
+# 文件夹比对
 
-+ [宽宽的帮助文档 (gitee.io)](https://kuankuan2007.gitee.io/docs/do-folder/)
-+ [文件夹管理: 基于python的文件夹管理库 (gitee.com)](https://gitee.com/kuankuan2007/do-folder)
-+ [doFolder · PyPI](https://pypi.org/project/doFolder/)
+## <mark>警告:本项目已经废弃，其功能被doFolder替代</mark>
 
-# ~~文件夹比对~~
+- [宽宽的帮助文档 (gitee.io)](https://kuankuan2007.gitee.io/docs/do-folder/)
+- [文件夹管理: 基于python的文件夹管理库 (gitee.com)](https://gitee.com/kuankuan2007/do-folder)
+- [doFolder · PyPI](https://pypi.org/project/doFolder/)
 
 ## 目的
 

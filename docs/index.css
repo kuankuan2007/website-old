@@ -1,0 +1,249 @@
+@keyframes backgroundChane{
+    from{
+        background-color: #ffffff;
+    }to{
+        background-color: #c9c9ff;
+    }
+}
+@keyframes  headerChane{
+    from{
+        background-color: #ffffff;
+        border-radius: 60px;
+        width: 0;
+    }to{
+        width: 100%;
+        background-color: #8A8AFF;
+        border-radius: 0px;
+    }
+}
+@keyframes  mainChane{
+    from{
+        filter: opacity(0%);
+    }to{
+        filter: opacity(100%);
+    }
+}@keyframes  watermarkChane{
+    from{
+        opacity: 0;
+    }to{
+        opacity: 0.3;
+    }
+}@keyframes linkGroupChane{
+    0%{
+        filter: opacity(0%);
+    }60%{
+        filter: opacity(0%);
+    }
+    100%{
+        filter: opacity(100%);
+    }
+}@keyframes codeChane{
+    0%{
+        filter: opacity(0%);
+        width: 0%;
+    }60%{
+        filter: opacity(0%);
+        width: 0%;
+    }
+    100%{
+        filter: opacity(100%);
+        width: 90%;
+    }
+}
+body{
+    animation-name: backgroundChane;
+    animation-duration: 1s;
+    background-color: #c9c9ff;
+}
+#docs{
+    animation-name: docsChane;
+    animation-duration: 1s;
+    border-radius: 20px;
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    transform: translate(-50%,0);
+    backdrop-filter: blur(2px);
+}
+#main{
+    animation-name: mainChane;
+    animation-duration: 1s;
+    position: relative;
+    z-index:1;
+    padding: 10px;
+}
+#main p,#main ul,#main ol{
+    list-style: none;
+    width: 78vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
+    grid-row-gap: 20px;
+    grid-column-gap: 40px;
+    padding: 20px;
+}
+table,
+td,
+th {
+  text-align: center;
+  border: 1px solid #000;
+  border-collapse: collapse;
+}
+#main table{
+    margin-left: 120px;
+}
+#watermark{
+    animation-name: watermarkChane;
+    animation-duration: 1s;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index:0;
+    opacity: 0.3;
+    filter: blur(20px);
+    width: 40%;
+}
+.code{
+    position: relative;
+    overflow: hidden;
+    animation-name: codeChane;
+    animation-duration: 1.5s;
+    background-color: rgba(255, 0, 0, 0.169);
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+.codeCopy{
+    transition-duration: 0.3s;
+    padding: 0 !important;
+    position: absolute;
+    top: 5px;
+    right: 0px;
+    transform: scale(0.7);
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 26px;
+    color: #9c9c9c;
+    cursor: pointer;
+    overflow: hidden;
+}
+.codeCopy:hover{
+    transform: scale(0.9);
+    color: #ffffff;
+}
+#BGLines{
+    position: fixed;
+    /* width: 100%;
+    height: 100%; */
+    z-index: -1;
+    top: 0;
+    left: 0;
+}
+:-webkit-scrollbar {
+
+    width: 12px;
+
+    height: 12px;
+
+}
+
+::-webkit-scrollbar-track-piece {
+
+    background-color: transparent;
+
+    -webkit-border-radius: 6px;
+
+}
+
+::-webkit-scrollbar-thumb:vertical {
+
+    height: 12px;
+
+    background-color: #BDBDBD;
+
+    -webkit-border-radius: 6px;
+
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+
+    width: 12px;
+
+    background-color: #BDBDBD;
+
+    -webkit-border-radius: 6px;
+
+}
+
+::-webkit-scrollbar-thumb:vertical:hover,
+::-webkit-scrollbar-thumb:horizontal:hover {
+
+    background-color: #808080;
+
+}
+
+code{
+    border-radius: 10px;
+    font-family: auto;
+    position: relative;
+}.download{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    margin: 0;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 2;
+    transition: 0.3s;
+    color: #000000;
+}
+.download:hover{
+    transform: scale(1.2);
+    color: #ff0000;
+}
+
+#main h1 {
+    text-align: left;
+    padding-left: 30px;
+    position: relative;
+    font-size: 36px;
+}
+
+#linkList li {
+    padding: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 8px;
+    background-image: linear-gradient(45deg, #9cc4ff78, #aee6ffb0, #31e2ffa8, #2afaff9c, #a2ffea9e);
+    backdrop-filter: blur(20px);
+    transition: 0.4s;
+    transition-timing-function: cubic-bezier(0.88, -0.24, 0.49, 1.33);
+    line-height: 40px;
+}
+
+#main h1::before {
+    content: "";
+    width: 7px;
+    height: 107%;
+    position: absolute;
+    left: 10px;
+    background: #0000ff;
+    top: 50%;
+    transform: translate(0,-50%);
+}
+
+#linkList li::before {
+    background-image: linear-gradient(45deg, #9cc4ff, #98dfff, #31e2ff, #00f9ff6e, #a2ffea9e);
+}
+
+#linkList li:hover {
+    transform: translate(0,-10px) scale(1.1);
+    backdrop-filter: blur(1px);
+    filter: contrast(1.5);
+    transition-timing-function: cubic-bezier(0.25, -0.2, 0.28, 1.42);
+}

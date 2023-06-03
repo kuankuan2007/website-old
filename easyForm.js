@@ -5,6 +5,7 @@ class Controler {
         this._data = obj
         Object.assign(this.style, this._data.css)
         Object.assign(this.hoverStyle, this._data.hoverStyle)
+        console.log(this.hoverStyle, this._data.hoverStyle)
     }
     update(obj) {
         this._data = obj
@@ -53,6 +54,7 @@ class Frame extends Controler {
     constructor(obj) {
         super(obj)
         Object.assign(this.style, this._data.css)
+        Object.assign(this.hoverStyle, this._data.hoverStyle)
         this._ele = document.createElement("div")
         this._children = []
         for (let i = 0; i < this._data.children.length; i++) {
@@ -92,6 +94,7 @@ class _DialogBoxButtons{
         this._ele=document.createElement("input")
         this._ele.setAttribute("value",name)
         this._ele.setAttribute("type","button")
+        console.log(this.style,style)
         Object.assign(this.style,style)
         for (let i in this.style){
             this._ele.style[i]=this.style[i]
@@ -121,9 +124,11 @@ class DialogBox {
         "maxHeight": "100%",
         "minWidth": "40%"
     }
+    hoverStyle={}
     constructor(obj,onclose=null) {
         this._data = obj
         Object.assign(this.style, this._data.css)
+        Object.assign(this.hoverStyle, this._data.hoverStyle)
         this._frame = new Frame(this._data.content)
         this._ele = document.createElement("div")
         this._ele.style.position = "fixed"
@@ -262,6 +267,7 @@ class TextBox extends Controler {
     constructor(obj) {
         super(obj)
         Object.assign(this.style, this._data.css)
+        Object.assign(this.hoverStyle, this._data.hoverStyle)
         this._ele = document.createElement("p")
         this._data = obj
         this.refresh()
@@ -297,6 +303,7 @@ class EnterBox extends Controler {
             this._ele.value=this._data.value
         }
         Object.assign(this.style, this._data.css)
+        Object.assign(this.hoverStyle, this._data.hoverStyle)
         this.refresh()
     }
     refresh() {
@@ -325,6 +332,7 @@ class GridFrame extends Frame {
         this.style.gridTemplateColumns=`repeat(${this._data.columnsNum}, max-content)`
         this.style.gridTemplateRows=`repeat(${this._data.rowsNum}, max-content)`
         Object.assign(this.style, this._data.css)
+        Object.assign(this.hoverStyle, this._data.hoverStyle)
         this.refresh()
     }
     refresh() {
@@ -347,6 +355,63 @@ function showMessage(msg,onclose=null) {
                 {
                     type:TextBox,
                     text:msg
+                }
+            ]
+        }
+    },onclose)
+}
+function showError(msg,onclose=null) {
+    new DialogBox({
+        title: "错误",
+        parent: this,
+        hiddenTitle:true,
+        buttons: {
+            "确定": {
+                func: function (value) {
+                    return "break"
+                },style:{
+                    background:"red"
+                }
+            }
+        },
+        content: {
+            children: [
+                {   
+
+                    type:Frame,
+                    css:{
+                        "marginBottom":"20px"
+                    },
+                    children: [
+                        {
+                            type: TextBox,
+                            text: "错误",
+                            css: {
+                                fontSize: "24px",
+                                margin: "10px",
+                                fontWeight: "bold",
+                            },
+                            hoverStyle:{
+                                color:"#ff0000"
+                            }
+                        },
+                        {
+                            type: Frame,
+                            children: [],
+                            css: {
+                                "height": "5px",
+                                "background": "linear-gradient(60deg,#ff0000 60%, transparent)",
+                                "borderRadius": "5px",
+                            }
+                        }
+                    ]
+                },
+                {
+                    type:TextBox,
+                    text:msg,
+                    hoverStyle:{
+                        color:"#ff0000"
+                    }
                 }
             ]
         }

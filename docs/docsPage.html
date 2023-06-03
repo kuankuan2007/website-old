@@ -1,12 +1,12 @@
-
 <!DOCTYPE html>
 
 <head>
     <meta charset="utf-8">
     <link href="/logo.ico" rel="icon">
-    <link rel="stylesheet" href="/docsPage.css">
+    <link rel="stylesheet" href="docsPage.css">
     <link rel="stylesheet" href="/font-icos.css">
     <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/header.css">
     <link rel="stylesheet" href="/heighlight/styles/monokai-sublime.min.css">
     <title>宽宽的帮助文档</title>
     <script src="/isPhone.js" type="text/javascript"></script>
@@ -171,14 +171,27 @@
             graph=new Graph()
             graph.draw()
             checkUser()
-            fetch("index.md").then((retsult)=>{
+            fetch(`/data/docs/${getQueryVariable("name")}.md`).then((retsult)=>{
+                if ([4,5,6].includes((retsult.status-retsult.status%100)/100)){
+                    showError("网络连接错误",()=>{
+                        location.href="/docs/"
+                    })
+                    return
+                }
+                console.log((retsult.status-retsult.status%100)/100)
                 retsult.text().then((retsult)=>{
+                    retsult
                     window.docs=retsult
                     document.getElementById("main").innerHTML=converter.makeHtml(retsult)
                     hljs.highlightAll()
                     MathJax.typeset()
                     bindCopyCode()
                 })
+            },(reason)=>{
+                showError("网络连接错误",()=>{
+                        location.href="/docs/"
+                    })
+                return
             })
             
         }
@@ -228,12 +241,12 @@
         </ul>
         <div id="navHoverBackground"></div>
     </div>
-
+    <img src="/logo.png" id="watermark">
     <div id="docs">
         <div id="main">
         </div>
         <p class="demo-icon download" onclick="exportData()">&#xf02e;</p>
-        <img src="/logo.png" id="watermark">
+        
     </div>
     <canvas id="BGLines"></canvas>
 </body>
