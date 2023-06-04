@@ -4,21 +4,6 @@
     font-weight: normal;
     font-style: normal;
 }
-@keyframes  headerChane{
-    0%{
-        background-color: #ffffff;
-        width: 0;
-        opacity:1;
-    }50%{
-        width: 80%;
-        opacity:1;
-        background-color: #9a9afd;
-    }100%{
-        width: 100%;
-        opacity:0;
-        background-color: #9a9afd;
-    }
-}
 @keyframes  backgroundChane{
     0%{
         background-color: #ffc9c9;
@@ -41,7 +26,7 @@
 body{
     animation: backgroundChane 20s infinite;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: hidden;
 }#words{
     font-family: '华文行楷';
     position: absolute;
@@ -81,31 +66,7 @@ body{
     position: fixed;
     bottom: 0;
 }
-header{
-    transform: translate(-50%, 0);
-    animation-name: headerChane;
-    animation-duration: 2s;
-    overflow: hidden;
-    z-index: 2;
-    position: fixed;
-    top: 10px;
-    border-radius: 30px;
-    height: 60px;
-    background-color: #9a9afd;
-    width: 100%;
-    left: 50%;
-    opacity: 0;
-}
-#titleGroup{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
-#title{
-    white-space: nowrap;
-    color: #0000ff;
-}
+
 #playOrPause:hover{
     transform: scale(1.1);
     background-color: rgba(0,0,255,1);

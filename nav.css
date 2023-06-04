@@ -1,296 +1,195 @@
-#nav:hover,#nav:focus,#nav:active{
-    width: 300px;
-    background-color: #ffb9b9;
-    border-radius: 20px;
-}
 #nav{
-    overflow: hidden;
     position: fixed;
-    top: 20%;
-    width: 14px;
-    background-color: rgb(145, 255, 0);
-    background-image: linear-gradient(to right bottom, #ff7049, #ff525e, #ff2e79, #ff009b, #e900c0);
-    z-index: 100;
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    font-size: 24px;
-    border-radius: 7px;
-}#nav li:hover,#nav li:focus,#nav li:active{
-    transform: scale(1.1);
-    background-color: #ffa5a5;
-}
-#nav:hover #navHoverBackground,#nav:focus #navHoverBackground,#nav:active #navHoverBackground{
-    opacity: 1;
-}
-#navHoverBackground{
-    background-image: linear-gradient(to left top, #ff2392, #ff4478, #ff6462, #ff8154, #ff9c4e);
-    position: absolute;
-    top: 0;
+    height: calc(100% - 60px);
+    top: 60px;
     left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 101;
-    opacity: 0;
-    -webkit-transition-duration: 0.5s;
-    transition-duration: 0.5s;
-    transition-timing-function: cubic-bezier(0.34, 0.25, 0.23, 1.03);
+    transition: 0.3s;
+    background: #8484ff80;
+    z-index: 9999;
+    backdrop-filter: blur(5px);
+    overflow-y: scroll;
+    overflow-y: visible;
 }
-#nav li:hover>a{
-    color:#3b3100
-}
-#nav li:hover::before{
-    opacity: 1;
-}
-#nav li::before{
-    background-image: linear-gradient(to right bottom, #ffbd3c, #ffaf3b, #ffa03b, #ff923e, #ff8342, #f38836, #e78c2c, #da9022, #b6a320, #8eb13c, #60bb62, #00c18c);
+
+p.unfold {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    z-index: 0;
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    transition-timing-function: cubic-bezier(0.34, 0.25, 0.23, 1.03);
-    content: "";
-}
-#nav li{
-    position: relative;
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    white-space: nowrap;
-    margin: 10px;
-    background-image: linear-gradient(to right bottom, #f7f2cb, #cdd8a4, #9cbf83, #65a66a, #008e59);
-    padding: 10px;
-    border-radius: 20px;
-    list-style: none;
-    overflow: hidden;
-    z-index: 103;
-}#nav>ul{
-    padding: 20px;
-    z-index: 102;
-    position: relative;
-}
-#nav a{
-    position: relative;
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    color: #0000ff;
-    text-decoration: none;
-    z-index: 120;
-}#nav p{
+    z-index: 9999;
+    font-size: 36px;
+    cursor: pointer;
     margin: 0;
-    text-align: center
-    
-}#nav li:hover #helpSonNav{
-    background-color: #ffa0a0;
-    height: 200px;
-    border-radius: 20px;
+    transition: 0.3s;
+    transition-timing-function: cubic-bezier(0.6, -0.31, 0.81, 1.34);
+    color: #000000;
 }
-#helpSonNav{
-    margin-left: 20px;
-    z-index: 104;
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    height: 8px;
-    border-radius: 6px;
-    margin-top: 10px;
-    background-color: rgb(145, 255, 0);
+
+p.fold {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    margin: 0;
+    font-size: 36px;
+    cursor: pointer;
+    transition: 0.3s;
+    transition-timing-function: cubic-bezier(0.6, -0.31, 0.81, 1.34);
+}
+p.fold:hover{
+    transform: scale(1.1);
+    transition-timing-function: cubic-bezier(0.27, -0.27, 0.25, 1.51);
+    color: #0000ff;
+}
+p.unfold:hover {
+    transform: scale(1.2);
+    transition-timing-function: cubic-bezier(0.4, -0.12, 0.15, 1.68);
+    color: #0000ff;
+}
+#nav ul.list p:hover{
+    transform: scale(1.1);
+    transition-timing-function: cubic-bezier(0.27, -0.27, 0.25, 1.51);
+    color: #0000ff;
+}
+
+#nav ul {
+    height: calc(100% - 80px);
+    list-style: none;
+    padding: 0;
+    top: 40px;
+    margin-left: 30px;
+    margin-right: 30px;
     overflow-x: hidden;
     overflow-y: scroll;
-    padding-left: 0;
-    
+    opacity: 0;
+    width: calc(100% - 60px);
+    position: absolute;
+    transition: 0.3s;
+    pointer-events: none;
 }
-#helpSonNav li{
-    z-index: 106;
+#nav ul.rightMove{
+    transform: translate(100%,0) scale(0.8);
+    filter: opacity(0%) blur(20px);
 }
-#helpSonNav ul{
-    z-index: 105;
+#nav ul.leftMove{
+    transform: translate(-100%,0) scale(1.2);
+    filter: opacity(0%) blur(20px);
 }
-#helpSonNav a{
-    color: #0000ff;
-    font-size: 16px;
-}#helpSonNav li:hover a{
-    color: #3b3100;
-}#helpSonNav ul{
-    padding: 0;
-    margin-left: 0;
-}#helpSonNav li::before{
-    content: "";
-    background-image: linear-gradient(to right bottom, #ffbd3c, #ffaf3b, #ffa03b, #ff923e, #ff8342, #ff783f, #ff6d3c, #ff603b, #ff5230, #ff4226, #ff2d1b, #ff0010);
-}
-#nav li li{
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    opacity:0;
-}#nav li:hover li{
-    opacity:1;
-}
-#helpSonNav::-webkit-scrollbar {
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
+div#nav.fold {
     width: 0px;
-}#nav li:hover div::-webkit-scrollbar{
+}
+
+div#nav.normal {
+    overflow: hidden;
+}
+
+#nav.fold p.unfold {
+    top: -50px;
+    left: 14px;
+}
+
+#nav.normal p.unfold {
+    right: 10px;
+    top: 10px;
+    pointer-events: none;
+    opacity: 0;
+}
+
+#nav.fold p.fold {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#nav.normal p.fold {
+    opacity: 1;
+    pointer-events: all;
+}
+
+#nav>.list>li {
+    display: grid;
+    grid-template-columns: 1fr max-content 1fr;
+    font-size: 25px;
+    margin-top: 20px;
+}
+
+#nav>.list>li>p {
+    margin: 0;
+    cursor: pointer;
+    transition: 0.3s;
+    transition-timing-function: cubic-bezier(0.6, -0.31, 0.81, 1.34);
+}
+
+p.demo-icon.fullButton {
+    pointer-events: none;
+    text-align: right;
+    opacity: 0;
+    padding-right: 5px;
+}
+
+p.demo-icon.fullButton.active {
+    pointer-events: all;
+    opacity: 1;
+    transition: 0.3s;
+    transition-timing-function: cubic-bezier(0.84, -0.32, 0.65, 1.37);
+}
+
+#nav.normal ul {
+    opacity: 1;
+    pointer-events: all;
+    overflow-x: hidden;
+}
+#nav p.title {
+    margin: 0;
+    font-size: 36px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    word-break: keep-all;
+    transition: 0.3s;
+    cursor: default;
+}
+#nav.fold p.title{
+    opacity: 0;
+}
+#nav p.icon{
+    padding-left: 5px;
+}
+::-webkit-scrollbar {
+
     width: 12px;
+
+    height: 12px;
+
 }
-#phonenav:hover,#phonenav:focus,#phonenav:active{
-    width: 300px;
-    height: 70%;
-    left: 0;
+
+::-webkit-scrollbar-track-piece {
+
+    background-color: transparent;
+
+    -webkit-border-radius: 6px;
+
 }
-#phonenav:hover,#phonenav:focus,#phonenav:active{
-    width: 300px;
-    height: 70%;
+
+::-webkit-scrollbar-thumb:vertical {
+
+    height: 12px;
+
+    background-color: #BDBDBD;
+
+    -webkit-border-radius: 6px;
+
 }
-#phonenav:not(.moving):hover,#phonenav:not(.moving):focus,#phonenav:not(.moving):active{
-    top: 20% !important;
+
+::-webkit-scrollbar-thumb:horizontal {
+
+    width: 12px;
+
+    background-color: #BDBDBD;
+
+    -webkit-border-radius: 6px;
+
 }
-#phonenav.unover{
-    transition: 0s;
-    opacity: 0;
-}
-#phonenav.unover ul{
-    opacity: 0;
-}
-#phonenav.moving{
-    opacity: 1;
-    width: 60px;
-    height: 60px;
-    background: rgba(0,0,0,0.5);
-    transition: 100ms;
-}
-#phonenav{
-    overflow-x: hidden;
-    overflow-y: scroll;
-    position: absolute;
-    top: 20%;
-    left: 10px;
-    width: 60px;
-    height: 60px;
-    background-color: rgb(145, 255, 0);
-    background-image: linear-gradient(to left top, #f3507c, #ff7666, #ffa157, #ffcd57, #f9f871);
-    z-index: 100;
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    font-size: 24px;
-    border-radius: 30px;
-    scrollbar-width: none;
-}
-#phonenav::-webkit-scrollbar {
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    width: 0px;
-}
-#phonenav:hover li,#phonenav:focus li,#phonenav:active li{
-    opacity: 1;
-}
-#phonenav li:hover,#phonenav li:focus,#phonenav li:active{
-    transform: scale(1.1);
-    background-color: #ffa5a5;
-}
-#phonenav:hover #navHoverBackground,#phonenav:focus #navHoverBackground,#phonenav:active #navHoverBackground{
-    opacity: 1;
-}
-#phonenav #navHoverBackground{
-    background-image: linear-gradient(to right bottom, #f9f871, #fee05c, #ffc74d, #ffae45, #ff9443, #ff8246, #ff704b, #ff5d52, #ff4d5a, #ff3c64, #ff266f, #ff007c);
-    position: fixed;
-    top: 20%;
-    left: 0;
-    /* box-sizing: content-box; */
-    width: 300px;
-    height: 70%;
-    z-index: 0;
-    opacity: 0;
-    -webkit-transition-duration: 0.5s;
-    transition-duration: 0.5s;
-    transition-timing-function: cubic-bezier(0.34, 0.25, 0.23, 1.03);
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    /* border-radius: 30px; */
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
-    display: none;
-}
-#phonenav li:hover>a{
-    color:#3b3100
-}
-#phonenav li:hover::before{
-    opacity: 1;
-}
-#phonenav li::before{
-    background-image: linear-gradient(to left top, #b97a00, #cf534a, #b44a81, #71599e, #005f92);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    z-index: 0;
-    content: "";
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    transition-timing-function: cubic-bezier(0.34, 0.25, 0.23, 1.03);
-}
-#helpNav:hover {
-    transform: scale(1) !important;
-}
-#phonenav li{
-    opacity: 0;
-    position: relative;
-    z-index: 103;
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    white-space: nowrap;
-    margin: 10px;
-    background-image: linear-gradient(to left top, #ffbd3c, #d2ce44, #a1da64, #6be28d, #00e5ba);
-    padding: 10px;
-    border-radius: 20px;
-    list-style: none;
-    overflow: hidden;
-}#phonenav>ul{
-    padding: 20px;
-    z-index: 102;
-    position: relative;
-}
-#phonenav a{
-    position: relative;
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    color: #0000ff;
-    text-decoration: none;
-    z-index: 120;
-}#phonenav p{
-    margin: 0;
-    text-align: center
-    
-}
-#helpSonPhoneNav{
-    margin-left: 20px;
-    z-index: 104;
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    border-radius: 6px;
-    margin-top: 10px;
-    overflow: hidden;
-    padding-left: 0;
-}
-#helpSonPhoneNav li{
-    z-index: 106;
-    background-image: linear-gradient(to left top, #00c18c, #00bcb8, #00b2e2, #00a4fd, #008dff);
-}
-#helpSonPhoneNav ul{
-    z-index: 105;
-}
-#helpSonPhoneNav a{
-    color: #0000ff;
-    font-size: 16px;
-    z-index: 120;
-}#helpSonPhoneNav li:hover a{
-    color: #3b3100;
-}#helpSonPhoneNav ul{
-    padding: 0;
-    margin-left: 0;
-}#helpSonPhoneNav li::before{
-    background-image: linear-gradient(to left top, #b823e7, #ff00a1, #ff415b, #ff931d, #eece13);
+
+::-webkit-scrollbar-thumb:vertical:hover,
+::-webkit-scrollbar-thumb:horizontal:hover {
+
+    background-color: #808080;
+
 }

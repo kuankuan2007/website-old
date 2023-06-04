@@ -5,17 +5,7 @@
         background-color: #c9c9ff;
     }
 }
-@keyframes  headerChane{
-    from{
-        background-color: #ffffff;
-        border-radius: 60px;
-        width: 0;
-    }to{
-        width: 100%;
-        background-color: #8A8AFF;
-        border-radius: 0px;
-    }
-}
+
 @keyframes  mainChane{
     from{
         filter: opacity(0%);
@@ -27,15 +17,6 @@
         opacity: 0;
     }to{
         opacity: 0.3;
-    }
-}@keyframes linkGroupChane{
-    0%{
-        filter: opacity(0%);
-    }60%{
-        filter: opacity(0%);
-    }
-    100%{
-        filter: opacity(100%);
     }
 }@keyframes codeChane{
     0%{
