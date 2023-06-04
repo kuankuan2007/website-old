@@ -67,7 +67,7 @@
             "word": "Gitee",
             "icon": "\uf053",
             "subNav": {
-                "title": "帮助",
+                "title": "Gitee",
                 "width":330,
                 "struct": {
                     "href": "https://gitee.com/kuankuan2007/%(name)s",
@@ -85,7 +85,7 @@
             "word": "Gitlab",
             "icon": "\ue814",
             "subNav": {
-                "title": "帮助",
+                "title": "Gitlab",
                 "width":330,
                 "struct": {
                     "href": "https://gitlab.com/kuankuan2007/%(name)s",
@@ -103,7 +103,7 @@
             "word": "Github",
             "icon": "\uf056",
             "subNav": {
-                "title": "帮助",
+                "title": "Github",
                 "width":330,
                 "struct": {
                     "href": "https://github.com/kuankuan2007/%(name)s",
