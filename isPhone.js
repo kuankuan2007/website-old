@@ -1,3 +1,1 @@
-function isPhone(){
-
-}
+function isPhone(){}

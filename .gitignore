@@ -1,0 +1,9 @@
+__pycache__
+$RECYCLE.BIN
+System Volume Information
+page.code-workspace
+web.config
+.vscode
+make.py
+webpack.config.js
+dist
