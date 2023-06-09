@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://kuankuan2007.gitee.io/sitemap.xml
