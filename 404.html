@@ -20,7 +20,7 @@
                         buttons:{
                             "确定":{
                                 func:function(value){
-                                    location.href=`/docs/docspage.html?name=${paths[2]}`
+                                    location.href=`/docs/docsPage.html?name=${paths[2]}`
                                     return "break"
                                 },
                             },
@@ -34,7 +34,7 @@
                             children: [
                                 {
                                     type: TextBox, 
-                                    text: `您似乎在访问一个帮助文档的页面，但是很不巧，由于网站结构变化，它的路径可能由\n${location.href}\n迁移到了\n${`/docs/docspage.html?name=${paths[2]}`}\n现在跳转到新的文档位置吗?`
+                                    text: `您似乎在访问一个帮助文档的页面，但是很不巧，由于网站结构变化，它的路径可能由\n${location.href}\n迁移到了\n${`/docs/docsPage.html?name=${paths[2]}`}\n现在跳转到新的文档位置吗?`
                                 }
                             ]
                         }
