@@ -4,6 +4,38 @@
         <meta charset="utf-8">
         <link href="/logo.ico" rel="icon">
         <link href="/404.css" rel="stylesheet" type="text/css">
+        <script src="/easyForm.js"></script>
+        <script src="/nav.js"></script>
+        <script>
+            let paths=(new URL(location.href)).pathname.split("/")
+            if (paths.length === 3 && paths[1].toLocaleLowerCase()==="docs"){
+                new DialogBox({
+                    title:"提示",
+                    hiddenCloseButton:true,
+                    buttons:{
+                        "确定":{
+                            func:function(value){
+                                location.href=`/docs/docspage?name=${paths[2]}`
+                                return "break"
+                            },
+                        },
+                        "取消":{
+                            func:function(value){
+                                return "break"
+                            },
+                        }
+                    },
+                    content: {
+                        children: [
+                            {
+                                type: TextBox, 
+                                text: `您似乎在访问一个帮助文档的页面，但是很不巧，由于网站结构变化，它的路径可能由${location.href}迁移到了${`/docs/docspage?name=${paths[2]}`}。现在跳转到新的文档位置吗?`
+                            }
+                        ]
+                    }
+                })
+            }
+        </script>
     </head>
     <body>
         <div id="statusBox">
@@ -20,7 +52,6 @@
             <ul id="linkBox">
                 <li><a href="https://kuankuan2007.gitee.io/">网站主页</a></li>
                 <li><a href="https://kuankuan2007.gitee.io/blogs/">作者博客</a></li>
-                <li><a href="https://gitee.com/kuankuan2007">作者Gitee</a></li>
                 <li><a href="https://kuankuan2007.gitee.io/docs">帮助中心</a></li>
             </ul>
         </div>

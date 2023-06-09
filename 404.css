@@ -2,11 +2,12 @@ body{
     background-color:#cae1ff;
 }
 #statusCode{
-    font-size: 108px;
+    font-size: 800%;
     background-color: #0000ff;
-    width: 260px;
     border-radius: 100px;
     color: #cae1ff;
+    padding-left: 3%;
+    padding-right: 3%;
     top: 16%;
     left: 50%;
     position: absolute;
@@ -14,13 +15,13 @@ body{
     transform: translate(-50%, -50%);
 }
 #statusReason {
-    font-size: 48px;
+    font-size: 300%;
     position: absolute;
     left: 50%;
     color: #0000ff;
     top: 32%;
     transform: translate(-50%, -50%);
-    width: 500px;
+    word-break: keep-all;
 }
 #tipsBox{
     position: absolute;
@@ -32,20 +33,19 @@ body{
     padding: 20px;
 }
 #wayBox{
-    line-height: 60px;
-    font-size: 20px;
+    font-size: 120%;
     border-radius: 20px;
-    width: 350px;
+    line-height: 150%;
 }
 #linkTitle{
-    font-size: 24px;
+    font-size: 200%;
     color: #0000ff;
     width: 500px;
     text-align: center;
+    margin: 0;
 }
 #linkBox{
-    line-height: 60px;
-    font-size: 20px;
+    font-size: 120%;
     border-radius: 20px;
-    width: 350px;
+    line-height: 150%;
 }

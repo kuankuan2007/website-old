@@ -63,6 +63,11 @@
             "icon": "\ue808"
         },
         {
+            "href": "https://members.opensource.org/user/kuankuan/",
+            "word": "OSI",
+            "icon": "\ue807"
+        },
+        {
             "href": "https://gitee.com/kuankuan2007",
             "word": "Gitee",
             "icon": "\uf053",
@@ -72,7 +77,7 @@
                 "struct": {
                     "href": "https://gitee.com/kuankuan2007/%(name)s",
                     "word": "%(title)s",
-                    "icon": "\ue806"
+                    "icon": "\ue80a"
                 },
                 "data": {
                     "url": "/data/repositories.json",
@@ -90,7 +95,7 @@
                 "struct": {
                     "href": "https://gitlab.com/kuankuan2007/%(name)s",
                     "word": "%(title)s",
-                    "icon": "\ue806"
+                    "icon": "\ue80a"
                 },
                 "data": {
                     "url": "/data/repositories.json",
@@ -108,7 +113,7 @@
                 "struct": {
                     "href": "https://github.com/kuankuan2007/%(name)s",
                     "word": "%(title)s",
-                    "icon": "\ue806"
+                    "icon": "\ue80a"
                 },
                 "data": {
                     "url": "/data/repositories.json",
