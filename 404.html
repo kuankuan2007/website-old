@@ -13,7 +13,7 @@
         <script>
             window.onload=()=>{
                 let paths=(new URL(location.href)).pathname.split("/")
-                if (paths.length === 3 && paths[1].toLocaleLowerCase()==="docs"){
+                if (paths.length >= 3 && paths[1].toLocaleLowerCase()==="docs"){
                     new DialogBox({
                         title:"提示",
                         hiddenCloseButton:true,
